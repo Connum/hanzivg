@@ -12,7 +12,7 @@ To get started, HanziVG will use PHP scripts, but I'll probably switch to node/n
 
 I will first start with simplified characters, because that's what I currently need while learning Mandarin.
 You can read a great (yet short and easy to understand!) article about Simplified and Traditional characters and the Han unification in Unicode here: https://r12a.github.io/scripts/chinese/
-But I definitely want this to be usable for traditional Hanzi just the same. So just like KanjiVG has variants of the same character as different files, so will HanziVG.
+But I definitely want this to be usable for traditional Hanzi just the same. So just like KanjiVG has variants of the same character as different files, so will HanziVG. (Still have to think about a naming convention, probably charcode-trad.svg or charcode-traditional.svg)
 
 ## Why is this needed at all and can not just be added on top of KanjiVG?
 
@@ -25,6 +25,8 @@ The /kanji directory holds all the KanjiVG files as of [1eaef89b17e088f14a13cbb7
 The same appllies to the /animhanzi folder - it currently contains the HSK1-3 sets as provided on the website. I have contacted François regarding the rest, but not yet heard back from him. Those could also be extracted from the demo on the website, but they are served via a PHP script and are missing all the group/radical information.
 
 The file naming convention (the character's unicode encoding in hexadecimal) will be maintained. As will the kvg namespace attributes. However, inside id attributes, hvg: will be used as a prefix instead of kvg:, *except* if the file is absolutely identical with KanjiVG (i.e. it has been copied over without changing anything). This is to ensure that both files could be used in the same document. This also means when using a KanjiVG variant as the default for HanziVG, the filename as well as all ids and the id prefixes must be renamed!
+
+Speaking of variants: The handwriting form should be preferred (xxxxx-Kaisho in KanjiVG), but always check against other dictionaries for the most common form. After all, stroke order is mainly useful for learning handwriting. ;-)
 
 ## Sources
 
@@ -48,7 +50,7 @@ There's a lot to do and my available spare time (ok, I admit it - and motivation
 
   1. Collect all AnimHanzi files, verify and move them to /hanzi, completing meta information where necessary
   2. Verify the AnimHanzi files, make adaptions where needed (component groups seem not to be as complete as for the KanjiVG files)
-     **Be careful:** Some files are not in the ZIP file although they are different from the KanjiVG file and even though they do show the correction in the AnimHanzi demo! For example: 有 has 1st and 2nd strokes swapped compared to Japanese, but 06709.svg is not included in the ZIP files (should be in the HSK1 pack). So *don't just copy the files over, **do** verify and correct them!*
+     ~~**Be careful:** Some files are not in the ZIP file although they are different from the KanjiVG file and even though they do show the correction in the AnimHanzi demo! For example: 有 has 1st and 2nd strokes swapped compared to Japanese, but 06709.svg is not included in the ZIP files (should be in the HSK1 pack).~~  - this seems to be absolete after he [provided the files](https://github.com/parsimonhi/animHanzi/). But still: *Don't just copy the files over, **do** verify and correct them if necessary!* And don't forget to change the ids (not the attributes) to :hvg!
 * Make an adapted version of the [kanji-colorize](https://github.com/cayennes/kanji-colorize) Anki addon
 * Don't forget to add documantation so that this ends up more maintainable by volunteers than KanjiVG ;)
 
