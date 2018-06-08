@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Raw SVG formatter</title>
+  <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      height: 100%;
+      border: 3px solid transparent;
+    }
+
+    html.dropover {
+      border-color: #333388;
+    }
+
+    #preview {
+      width: 50vh;
+      height: 50vh;
+    }
+
+    #preview svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    #preview svg text {
+      font-size: 7px !important;
+    }
+    #preview svg .highlighted {
+      stroke: #ff0000 !important;
+    }
+    #preview svg text.highlighted {
+      stroke: none !important;
+      fill: #ff0000 !important;
+    }
+    #preview svg g.active {
+      stroke: #0000ff;
+    }
+    #preview svg .active {
+      stroke: #00ff00;
+    }
+    #preview svg text.active {
+      stroke: none;
+      fill: #00ff00;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <p><strong>This tool will convert raw SVG files created from the template to final HanziVG SVG files and allow for creating and editing stroke order, groups and group metadata. Editing and exporting is not yet implemented.</strong></p>
+    <p>Drag &amp; drop SVG in this window</p>
+    <template v-if="svg_raw.length">
+      Groups: <template v-for="(group, index) in groups" :v-key="index">
+        <label @mouseover="highlightThis('groups', index, true)" @mouseleave="highlightThis('groups', index, false)"><input name="group" type="radio" @change="activateThis('groups', index)" /> {{ parseInt(index, 10) + 1}}</label>
+      </template><br>
+      Strokes: <template v-for="(stroke, index) in strokes" :v-key="index">
+        <label @mouseover="highlightThis('strokes', index, true)" @mouseleave="highlightThis('strokes', index, false)"><input name="stroke" type="radio" @change="activateThis('strokes', index)" /> {{ parseInt(index, 10) + 1}}</label>
+      </template>
+      <div id="preview" v-html="svg_raw"></div>
+    </template>
+  </div>
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: function() {
+        return {
+          svg_raw: '',
+          strokes: [],
+          numbers: [],
+          groups: []
+        }
+      },
+      computed: {
+      },
+      methods: {
+        onDragLeave: function () {
+          document.documentElement.classList.remove('dropover')
+        },
+        onDragOver: function (ev) {
+          ev.preventDefault()
+          document.documentElement.classList.add('dropover')
+        },
+        onDrop: function (ev) {
+          ev.preventDefault()
+          let file = ev.dataTransfer.files[0]
+          let fileReader = new FileReader()
+
+          fileReader.addEventListener('load', this.onFileLoaded)
+          fileReader.readAsText(file)
+
+          this.onDragLeave()
+        },
+        onFileLoaded: function (ev) {
+          this.svg_raw = ev.target.result
+          this.$nextTick(function() {
+            var svg = document.querySelector('#preview svg')
+            this.strokes = svg.querySelectorAll('path')
+            this.numbers = svg.querySelectorAll('text')
+            this.groups = svg.querySelectorAll('g[kvg\\:element],g[kvg\\:position]')
+          })
+        },
+        highlightThis: function (type, i, b) {
+          this[type][i].classList[b ? 'add' : 'remove']('highlighted')
+          if (type === 'strokes') {
+            this.numbers[i].classList[b ? 'add' : 'remove']('highlighted')
+          }
+        },
+        activateThis: function (type, ai) {
+          if (type === 'strokes') {
+            this.activateThis('numbers', ai )
+            var activeGroup = Array.prototype.indexOf.call(this.groups, this[type][ai].parentNode);
+            this.activateThis('groups', activeGroup )
+            document.querySelectorAll('input[type="radio"][name="group"]')[activeGroup].checked = true
+          }
+          for (var i = 0; i < this[type].length; i++) {
+            this[type][i].classList[parseInt(ai, 10) === i ? 'add' : 'remove']('active')
+          }
+        }
+      },
+      mounted: function () {
+        document.addEventListener('dragover', this.onDragOver)
+        document.addEventListener('dragleave', this.onDragLeave)
+        document.addEventListener('drop', this.onDrop)
+      },
+      beforeDestroy: function () {
+        document.removeEventListener('dragover', this.onDragOver)
+        document.removeEventListener('dragleave', this.onDragLeave)
+        document.removeEventListener('drop', this.onDrop)
+      }
+    }); 
+  </script>
+</body>
+</html>

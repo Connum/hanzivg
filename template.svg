@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:kvg="http://kanjivg.tagaini.net"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg2"
+   viewBox="0 0 109 109"
+   height="109"
+   width="109">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs12" />
+  <g
+     transform="translate(2.6126996,-76.094877)"
+     style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"
+     id="kvg:StrokePaths_XXXXX">
+    <g
+       kvg:radical="general"
+       kvg:element=""
+       id="kvg:XXXXX">
+      <path
+         d="m 11,54.25 c 3.19,0.62 6.25,0.75 9.73,0.5 20.64,-1.5 50.39,-5.12 68.58,-5.24 3.6,-0.02 5.77,0.24 7.57,0.49"
+         kvg:type=""
+         id="kvg:XXXXX-s1" />
+    </g>
+  </g>
+  <g
+     transform="translate(-1.6329373,-73.808765)"
+     style="font-size:8px;fill:#808080"
+     id="kvg:StrokeNumbers_XXXXX">
+    <text
+       id="text8"
+       transform="translate(4.25,54.13)">1</text>
+  </g>
+  <flowRoot
+     style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:CNstrokeorder;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:CNstrokeorder;font-stretch:normal;font-variant:normal;"
+     id="flowRoot8084"
+     xml:space="preserve"><flowRegion
+       id="flowRegion8086"><rect
+         style="-inkscape-font-specification:CNstrokeorder;font-family:CNstrokeorder;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;"
+         y="-0.080209672"
+         x="-0.32658747"
+         height="109.08021"
+         width="109.4068"
+         id="rect8088" /></flowRegion><flowPara
+       id="flowPara8090"></flowPara></flowRoot>  <flowRoot
+     transform="matrix(2.5741545,0,0,2.5741545,110.82715,-90.847648)"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     id="flowRoot8096"
+     xml:space="preserve"><flowRegion
+       id="flowRegion8098"><rect
+         style="fill:#ffcc00;"
+         y="28.006311"
+         x="-56.173042"
+         height="64.664314"
+         width="69.236542"
+         id="rect8100" /></flowRegion><flowPara
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:CNstrokeorder;-inkscape-font-specification:CNstrokeorder;text-align:center;text-anchor:middle;fill:#ffcc00;"
+       id="flowPara8102">镇</flowPara></flowRoot></svg>
