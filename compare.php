@@ -1,0 +1,98 @@
+<?php
+	/*
+	 * compare SVGs from different directories
+	 * and the Hanzi in Simplified / Traditonal / Japanese fonts
+	 * Links to Arch Chinese, Yellow Bridge and LINE Dict to compare their representation and stroke order
+	 */
+
+	// the following two functions have been taken from
+	// https://stackoverflow.com/questions/9361303/can-i-get-the-unicode-value-of-a-character-or-vise-versa-with-php#answer-27444149
+
+	// code point to UTF-8 string
+	function unichr($i) {
+	    return iconv('UCS-4LE', 'UTF-8', pack('V', $i));
+	}
+
+	// UTF-8 string to code point
+	function uniord($s) {
+	    return unpack('V', iconv('UTF-8', 'UCS-4LE', $s))[1];
+	}
+
+	$h = $_GET['hanzi'];
+	$d = substr("00000" . dechex(uniord($h)),-5);
+
+	if (isset($_GET['movefrom'])) {+
+		$moveFile = $_GET['movefrom'] . '/' . $d . '.svg';
+		if (is_file($moveFile)) {
+			rename($moveFile, 'hanzi/' . $d . '.svg');
+		}
+	}
+
+	if (empty($h)) {
+		header("Location:status.php"); exit;
+	}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Compare Hanzi</title>
+	<style type="text/css">
+		.char {
+			font-size: 109px;
+			line-height: 109px;
+			display: block;
+			overflow: hidden;
+			margin: 0;
+		}
+		.traditional {
+			font-family: "apple lisong", "Microsoft JhengHei", sans-serif;
+		}
+		.simplified {
+			font-family: stheiti, simhei, sans-serif;
+		}
+		.japanese {
+			font-family: "hiragino kaku gothic pro", "ms gothic", sans-serif;
+		}
+	</style>
+</head>
+<body>
+<?php
+
+$lineData = file_get_contents('http://dict-channelgw.naver.com/stroke.dict?entry=' . urlencode($h));
+if ($lineData) {
+	$lineData = json_decode( $lineData );
+	if (isset($lineData->data) && count($lineData->data)) {
+		$firstChar = $lineData->data[0];
+		$lineID = $firstChar->a;
+	}
+}
+
+print '<p><a href="http://www.archchinese.com/chinese_english_dictionary.html?find=' . $h . '" target="_blank">Arch Chinese</a> | <a href="https://www.yellowbridge.com/chinese/character-stroke-order.php?word=' . $h .'" target="_blank">Yellow Bridge</a>' . (isset($lineID) ? ' | <a href="http://ce.linedict.com/#/cnen/entry/' . $lineID . '" target="_blank">LINE Dict</a>' : ''). '</p>';
+
+print '<p>' . $d . '</p>';
+
+if (is_file('hanzi/' . $d . '.svg')) {
+	print '<h1>HanziVG</h1>';
+	print '<img src="hanzi/' . $d . '.svg" />';
+}
+
+if (is_file('animhanzi/' . $d . '.svg')) {
+	print '<h1>AnimHanzi</h1>';
+	print '<img src="animhanzi/' . $d . '.svg" />';
+}
+
+if (is_file('kanji/' . $d . '.svg')) {
+	print '<h1>KanjiVG</h1>';
+	print '<img src="kanji/' . $d . '.svg" />';
+	print '<br><a href="?movefrom=kanji&hanzi=' . $h . '">copy to HanziVG</a>';
+}
+
+print '<h2>Simplified</h2><p class="char simplified">' . $h . '</p>';
+print '<h2>Traditional</h2><p class="char traditional">' . $h . '</p>';
+print '<h2>Japanese</h2><p class="char japanese">' . $h . '</p>';
+
+?>
+
+</body>
+</html>
