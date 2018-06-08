@@ -12,7 +12,11 @@ To get started, HanziVG will use PHP scripts, but I'll probably switch to node/n
 
 I will first start with simplified characters, because that's what I currently need while learning Mandarin.
 You can read a great (yet short and easy to understand!) article about Simplified and Traditional characters and the Han unification in Unicode here: https://r12a.github.io/scripts/chinese/
-But I definitely want this to be usable for traditional Hanzi just the same. So just like KanjiVG has variants of the same character as different files, so will HanziVG. 
+But I definitely want this to be usable for traditional Hanzi just the same. So just like KanjiVG has variants of the same character as different files, so will HanziVG.
+
+## Why is this needed at all and can not just be added on top of KanjiVG?
+
+Seriously, read the article I mentioned above - it's not that long! :) There are some differences in the way Chinese characters are written, even if they look exactly or almost the same. Stroke order or direction might be different, for example. And from what I found while researching if it's worth to start this at all, the people behind KanjiVG have made it clear that they want to stick with Kanji only and won't have any extensions to Hanzi. That's also the reason why I didn't just fork it, but chose to start from scratch (well, not completely) instead.
 
 # Project structure and work process
 
