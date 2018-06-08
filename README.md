@@ -54,6 +54,9 @@ There's a lot to do and my available spare time (ok, I admit it - and motivation
 * Make an adapted version of the [kanji-colorize](https://github.com/cayennes/kanji-colorize) Anki addon
 * Don't forget to add documantation so that this ends up more maintainable by volunteers than KanjiVG ;)
 
+### HSK1-6 characters known to be different from KanjiVG but not included in animHanzi:
+* 都 - strokes 9+10 should be combined, thus resulting in 10 strokes total for Chinese as opposed to 11 in Japanese
+
 # Licence
 
 HanziVG is licenced under [Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)](http://creativecommons.org/licenses/by-sa/3.0/).
