@@ -59,6 +59,7 @@
 <body>
 <?php
 
+// get LINE Dict data
 $lineData = file_get_contents('http://dict-channelgw.naver.com/stroke.dict?entry=' . urlencode($h));
 if ($lineData) {
 	$lineData = json_decode( $lineData );
@@ -68,7 +69,47 @@ if ($lineData) {
 	}
 }
 
-print '<p><a href="http://www.archchinese.com/chinese_english_dictionary.html?find=' . $h . '" target="_blank">Arch Chinese</a> | <a href="https://www.yellowbridge.com/chinese/character-stroke-order.php?word=' . $h .'" target="_blank">Yellow Bridge</a>' . (isset($lineID) ? ' | <a href="http://ce.linedict.com/#/cnen/entry/' . $lineID . '" target="_blank">LINE Dict</a>' : ''). '</p>';
+// get writtenchinese data 
+$url = 'https://dictionary.writtenchinese.com/ajaxsearch/simsearch.action';
+$fields = array(
+	'searchKey' => $h
+);
+
+//url-ify the data for the POST
+foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+rtrim($fields_string, '&');
+
+//open connection
+$ch = curl_init();
+
+//set the url, number of POST vars, POST data
+curl_setopt($ch,CURLOPT_URL, $url);
+curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch,CURLOPT_POST, count($fields));
+curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+	'Accept: application/json, text/javascript, */*; q=0.01',
+	'Accept-Encoding: gzip, deflate, br',
+	'Accept-Language: de,en-US;q=0.7,en;q=0.3',
+	'Cache-Control: no-cache',
+	'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
+	'Pragma: no-cache',
+	'Referer: https://dictionary.writtenchinese.com/',
+	'User-Agent: Mozilla/5.0 (Windows NT 10.0; …) Gecko/20100101 Firefox/60.0',
+	'X-Requested-With: XMLHttpRequest',
+));
+
+//execute post
+$result = json_decode(curl_exec($ch));
+
+//close connection
+curl_close($ch);
+if (count($result->signCh)) {
+	$wcId = $result->signCh[0]->id;
+}
+
+
+print '<p><a href="http://www.archchinese.com/chinese_english_dictionary.html?find=' . $h . '" target="_blank">Arch Chinese</a> | <a href="https://www.yellowbridge.com/chinese/character-stroke-order.php?word=' . $h .'" target="_blank">Yellow Bridge</a>' . (isset($lineID) ? ' | <a href="http://ce.linedict.com/#/cnen/entry/' . $lineID . '" target="_blank">LINE Dict</a>' : '') . (isset($wcId) ? ' | <a href="https://dictionary.writtenchinese.com/worddetail/zhen/' . $wcId . '/1/1" target="_blank">writtenchinese</a>' : '') . '</p>';
 
 print '<p>' . $d . '</p>';
 
