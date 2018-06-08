@@ -24,7 +24,7 @@ The /kanji directory holds all the KanjiVG files as of [1eaef89b17e088f14a13cbb7
 
 The same appllies to the /animhanzi folder - it currently contains the HSK1-3 sets as provided on the website. I have contacted François regarding the rest, but not yet heard back from him. Those could also be extracted from the demo on the website, but they are served via a PHP script and are missing all the group/radical information.
 
-The file naming convention (the character's unicode encoding in hexadecimal) will be maintained.
+The file naming convention (the character's unicode encoding in hexadecimal) will be maintained. As will the kvg namespace attributes. However, inside id attributes, hvg: will be used as a prefix instead of kvg:, *except* if the file is absolutely identical with KanjiVG (i.e. it has been copied over without changing anything). This is to ensure that both files could be used in the same document. This also means when using a KanjiVG variant as the default for HanziVG, the filename as well as all ids and the id prefixes must be renamed!
 
 ## Sources
 
