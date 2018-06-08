@@ -39,6 +39,7 @@ There's a lot to do and my available spare time (ok, I admit it - and motivation
 
   1. Write scripts to make it easier to check which Kanji can be used
   2. Verify and move Kanji files to /hanzi, making adaptions where necessary
+  3. Find out what KanjiVG's /kanji_mismatch directory is all about and whether those files are of any use for this project
 * AnimHanzi
 
   1. Collect all AnimHanzi files, verify and move them to /hanzi, completing meta information where necessary
@@ -48,4 +49,4 @@ There's a lot to do and my available spare time (ok, I admit it - and motivation
 
 # Licence
 
-HanziVG is licenced under [Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) ](http://creativecommons.org/licenses/by-sa/3.0/).
+HanziVG is licenced under [Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)](http://creativecommons.org/licenses/by-sa/3.0/).
