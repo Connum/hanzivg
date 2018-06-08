@@ -48,6 +48,7 @@ There's a lot to do and my available spare time (ok, I admit it - and motivation
 
   1. Collect all AnimHanzi files, verify and move them to /hanzi, completing meta information where necessary
   2. Verify the AnimHanzi files, make adaptions where needed (component groups seem not to be as complete as for the KanjiVG files)
+     **Be careful:** Some files are not in the ZIP file although they are different from the KanjiVG file and even though they do show the correction in the AnimHanzi demo! For example: 有 has 1st and 2nd strokes swapped compared to Japanese, but 06709.svg is not included in the ZIP files (should be in the HSK1 pack). So *don't just copy the files over, **do** verify and correct them!*
 * Make an adapted version of the [kanji-colorize](https://github.com/cayennes/kanji-colorize) Anki addon
 * Don't forget to add documantation so that this ends up more maintainable by volunteers than KanjiVG ;)
 
