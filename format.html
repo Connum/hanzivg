@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8" />
   <title>Raw SVG formatter</title>
   <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>  
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/jstree@3.3.5/dist/themes/default/style.min.css">
+  <script src="https://unpkg.com/jstree@3.3.5/dist/jstree.js"></script>
   <style type="text/css">
     * {
       box-sizing: border-box;
+    }
+
+    #app p,
+    fieldset legend,
+    #config {
+      font-family: sans-serif;
     }
 
     html {
@@ -18,61 +28,227 @@
       border-color: #333388;
     }
 
-    #preview {
+    #svg-holder {
       width: 50vh;
       height: 50vh;
     }
 
-    #preview svg {
+    #svg-holder svg {
       width: 100%;
       height: 100%;
     }
 
-    #preview svg text {
+    #svg-holder svg text {
       font-size: 7px !important;
     }
-    #preview svg .highlighted {
+
+    #svg-holder svg .active,
+    #svg-holder svg .active path {
       stroke: #ff0000 !important;
     }
-    #preview svg text.highlighted {
-      stroke: none !important;
+    #svg-holder svg text.active,
+    #svg-holder svg .active text {
       fill: #ff0000 !important;
+      stroke: none !important;
     }
-    #preview svg g.active {
-      stroke: #0000ff;
+
+    #svg-holder svg .highlighted,
+    #svg-holder svg .highlighted path,
+    #svg-holder svg .active.highlighted path,
+    #svg-holder svg .active.highlighted,
+    #svg-holder svg .active *.highlighted {
+      stroke: #00ff00 !important;
     }
-    #preview svg .active {
-      stroke: #00ff00;
+    #svg-holder svg text.highlighted,
+    #svg-holder svg .active.highlighted text,
+    #svg-holder svg text.active.highlighted,
+    #svg-holder svg .highlighted text,
+    #svg-holder svg .active text.highlighted,
+    #svg-holder svg .active.highlighted text {
+      fill: #00ff00 !important;
+      stroke: none !important;
     }
-    #preview svg text.active {
-      stroke: none;
-      fill: #00ff00;
+
+    .flex {
+      display: flex;
     }
+    .flex-half {
+      width: 50%;
+      flex-grow: 1;
+      flex-shrink: 1;
+    }
+
+    #panel {
+      background-color: #eee;
+      padding: 5px 10px;
+    }
+
+    #config dl {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    #config dt {
+      width: 30%;
+    }
+
+    #config dd {
+      width: 70%;
+      margin: 0;
+    }
+
+    #config dt, #config dd {
+      margin-bottom: 7px;
+    }
+
+    #config dd input[type="text"],
+    #config dd input[type="number"],
+    #config dd select {
+      width: 100%;
+    }
+
+    #tree .tree-icon-group {
+      background-image: url('./ico/ico_group.svg');
+      background-size: contain;
+    }
+
+    #tree .tree-icon-stroke {
+      background-image: url('./ico/ico_stroke.svg');
+      background-size: contain;
+    }
+
+    #tree .tree-icon-group-num {
+      background-image: url('./ico/ico_group_num.svg');
+      background-size: contain;
+    }
+
+    #tree .tree-icon-number {
+      background-image: url('./ico/ico_number.svg');
+      background-size: contain;
+    }
+
   </style>
 </head>
 <body>
   <div id="app">
-    <p><strong>This tool will convert raw SVG files created from the template to final HanziVG SVG files and allow for creating and editing stroke order, groups and group metadata. Editing and exporting is not yet implemented.</strong></p>
+    <p><strong>This tool will convert raw SVG files created from the template to final HanziVG SVG files and allow for creating and editing stroke order, groups and group metadata.<br>Exporting is not yet implemented.</strong></p>
     <p>Drag &amp; drop SVG in this window</p>
-    <template v-if="svg_raw.length">
-      Groups: <template v-for="(group, index) in groups" :v-key="index">
-        <label @mouseover="highlightThis('groups', index, true)" @mouseleave="highlightThis('groups', index, false)"><input name="group" type="radio" @change="activateThis('groups', index)" /> {{ parseInt(index, 10) + 1}}</label>
-      </template><br>
-      Strokes: <template v-for="(stroke, index) in strokes" :v-key="index">
-        <label @mouseover="highlightThis('strokes', index, true)" @mouseleave="highlightThis('strokes', index, false)"><input name="stroke" type="radio" @change="activateThis('strokes', index)" /> {{ parseInt(index, 10) + 1}}</label>
-      </template>
-      <div id="preview" v-html="svg_raw"></div>
-    </template>
+    <div class="flex">
+      <fieldset id="preview" class="flex-half">
+        <legend>Preview</legend>
+        <div id="svg-holder"></div>
+      </fieldset>
+      <fieldset id="config" class="flex-half">
+        <legend>Config</legend>
+        <div class="flex">
+          <div id="tree" class="flex-half">
+          </div>
+          <div id="panel" class="flex-half" v-if="selected_node">
+            <button @click="addGroup" v-if="selected_node.tree.type==='path' || selected_node.tree.type==='g'">add group</button> 
+            <button @click="removeGroup" v-if="selected_node.tree.type==='g' && selected_node.preview.parentNode.parentNode.tagName !== 'svg'">remove group</button>
+            <dl>
+              <template v-if="selected_node.preview.id">
+                <dt>ID:</dt>
+                <dd>{{selected_node.preview.id}}</dd>
+              </template>
+              <template v-if="selected_node.tree.type == 'g'">
+                <dt>Element:</dt>
+                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:element')" @input="updateElAttr(selected_node, 'kvg:element', $event)"/></dd>
+                <dt>Original:</dt>
+                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:original')" @input="updateElAttr(selected_node, 'kvg:original', $event)"/></dd>
+                <dt>Position:</dt>
+                <dd><select :value="selected_node.preview.getAttribute('kvg:position')" @change="updateElAttr(selected_node, 'kvg:position', $event)">
+                  <option></option>
+                  <option>left</option>
+                  <option>right</option>
+                  <option>top</option>
+                  <option>bottom</option>
+                  <option>nyo</option>
+                  <option>tare</option>
+                  <option>kamae</option>
+                  <option>kamae1</option>
+                  <option>kamae2</option>
+                </select></dd>
+                <dt>Variant:</dt>
+                <dd><input type="checkbox" :checked="selected_node.preview.getAttribute('kvg:variant')" @input="updateElAttr(selected_node, 'kvg:variant', $event)"/></dd>
+                <dt>Partial:</dt>
+                <dd><input type="checkbox" :checked="selected_node.preview.getAttribute('kvg:partial')" @input="updateElAttr(selected_node, 'kvg:partial', $event)"/></dd>
+                <template v-if="selected_node.preview.getAttribute('kvg:part')">
+                <dt>Part:</dt>
+                <dd><input type="number" :value="selected_node.preview.getAttribute('kvg:part')" @input="updateElAttr(selected_node, 'kvg:part', $event)"/></dd>
+                </template>
+                <dt>Number:</dt>
+                <dd><input type="number" :value="selected_node.preview.getAttribute('kvg:number')" @input="updateElAttr(selected_node, 'kvg:number', $event)"/></dd>
+                <dt>Radical:</dt>
+                <dd><select :value="selected_node.preview.getAttribute('kvg:radical')" @change="updateElAttr(selected_node, 'kvg:radical', $event)">
+                  <option></option>
+                  <option>general</option>
+                  <option>nelson</option>
+                  <option>tradit</option>
+                </select></dd>
+                <dt>Phon:</dt>
+                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:phon')" @input="updateElAttr(selected_node, 'kvg:phon', $event)"/></dd>
+                <dt>tradForm:</dt>
+                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:tradForm')" @input="updateElAttr(selected_node, 'kvg:tradForm', $event)"/></dd>
+                <dt>radicalForm:</dt>
+                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:radicalForm')" @input="updateElAttr(selected_node, 'kvg:radicalForm', $event)"/></dd>
+              </template>
+              <template v-if="selected_node.tree.type == 'path'">
+                <dt>Type:</dt>
+                <dd>
+                  <select :value="selected_node.preview.getAttribute('kvg:type') ? selected_node.preview.getAttribute('kvg:type')[0] : ''" @change="updateElAttr(selected_node, 'kvg:type', $event), $event.target.nextElementSibling.value = $event.target.value">
+                    <option v-for="s in strokeTypes">{{ s }}</option>
+                  </select>
+                  <input type="text" :value="selected_node.preview.getAttribute('kvg:type')" @input="updateElAttr(selected_node, 'kvg:type', $event)"/></dd>
+              </template>
+            </dl>
+          </div>
+        </div>
+      </fieldset>
+    </div>
   </div>
   <script type="text/javascript">
+    /*
+     * the following two functions have been taken from
+     * https://stackoverflow.com/questions/21647928/javascript-unicode-string-to-hex/26375459#answer-21648161
+     */
+    String.prototype.hexEncode = function(){
+        var hex, i;
+
+        var result = "";
+        for (i=0; i<this.length; i++) {
+            hex = this.charCodeAt(i).toString(16);
+            result += ("000"+hex).slice(-4);
+        }
+
+        return result
+    }
+    String.prototype.hexDecode = function(){
+        var j;
+        var hexes = this.match(/.{1,4}/g) || [];
+        var back = "";
+        for(j = 0; j<hexes.length; j++) {
+            back += String.fromCharCode(parseInt(hexes[j], 16));
+        }
+
+        return back;
+    }
+
     new Vue({
       el: '#app',
       data: function() {
         return {
-          svg_raw: '',
-          strokes: [],
-          numbers: [],
-          groups: []
+          isDirty: false,
+          charId: 'XXXXX',
+          node_data: null,
+          selected_node: null,
+          nodeCounts: {
+            group: 0,
+            stroke: 0
+          },
+          strokeTypes: [
+            '㇔', '㇐', '㇑', '㇒', '㇏', '㇀', '㇖', '㇚', '㇂', '㇙', '㇕', '㇗', '㇛', '㇜', '㇇', '㇄', '㇆', '㇟', '㇊', '㇉', '㇋', '㇌', '㇈', '㇅', '㇞', ']'
+          ]
         }
       },
       computed: {
@@ -86,40 +262,341 @@
           document.documentElement.classList.add('dropover')
         },
         onDrop: function (ev) {
-          ev.preventDefault()
+          ev.preventDefault();
+
           let file = ev.dataTransfer.files[0]
           let fileReader = new FileReader()
+
+          if (this.isDirty && !confirm('Unsaved changes will be lost! Continue?')) {
+            this.onDragLeave();
+            return;
+          }
 
           fileReader.addEventListener('load', this.onFileLoaded)
           fileReader.readAsText(file)
 
+          var fileNameMatch = file.name.match(/^[0-9a-f]{5}/i);
+          if (fileNameMatch) {
+            this.charId = fileNameMatch;
+          }
+
           this.onDragLeave()
         },
         onFileLoaded: function (ev) {
-          this.svg_raw = ev.target.result
-          this.$nextTick(function() {
-            var svg = document.querySelector('#preview svg')
-            this.strokes = svg.querySelectorAll('path')
-            this.numbers = svg.querySelectorAll('text')
-            this.groups = svg.querySelectorAll('g[kvg\\:element],g[kvg\\:position]')
-          })
+          var xml = (new DOMParser()).parseFromString(ev.target.result,'image/svg+xml');
+          var $tree = $('#tree')
+          var that = this;
+
+          var holder = document.getElementById('svg-holder'),
+              $holder = $(holder);
+
+          if (holder.firstChild) {
+            holder.removeChild(holder.firstChild)
+          }
+          holder.appendChild(xml.children[0])
+
+          if (!$holder.find('g').length) {
+            $holder.find('path').wrapAll(
+              $(this.svgEl('g'))
+                .attr('id', 'hvg:StrokePaths_' + this.charId)
+                .attr('style', 'fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;')
+            );
+            $holder.find('path').wrapAll(
+              $(this.svgEl('g'))
+                .attr('id', 'hvg:' + this.charId)
+                .attr('kvg:element', String.fromCharCode(parseInt(this.charId, 16)))
+            );
+            $holder.find('text').wrapAll(
+              $(this.svgEl('g'))
+                .attr('id', 'hvg:StrokeNumbers_' + this.charId)
+                .attr('style', 'font-size:8;fill:#808080')
+            );
+          }
+
+          this.node_data = this.xmlToJsTree($holder.find('svg')[0]);
+          this.selected_node = null;
+          this.nodeCounts = {
+            group: 0,
+            stroke: 0
+          };
+
+          if($tree.hasClass('jstree')) {
+            $tree.jstree("destroy")
+          }
+          $tree.jstree({
+            plugins: ["dnd", "types"],
+            core: {
+              check_callback: true,
+              multiple: false,
+              data: this.node_data.children
+            },
+            types: {
+              '#': {
+                max_children: 2,
+                valid_children: ['g']
+              },
+              'g': {
+                valid_children: ['g', 'path'],
+                icon: 'tree-icon-group'
+              },
+              'path': {
+                max_children: 0,
+                valid_children: [],
+                icon: 'tree-icon-stroke'
+              },
+              'text': {
+                max_children: 0,
+                valid_children: [],
+                icon: 'tree-icon-number'
+              },
+              '_strokes': {
+                max_children: 1,
+                valid_children: ['g'],
+                icon: 'tree-icon-group'
+              },
+              '_numbers': {
+                valid_children: ['text'],
+                icon: 'tree-icon-group-num'
+              }
+            }
+          }).on('hover_node.jstree', function(e, data) {
+            data.node.original.node.classList.add('highlighted');
+          }).on('dehover_node.jstree', function(e, data) {
+            data.node.original.node.classList.remove('highlighted');
+          }).on('select_node.jstree', function(e, data) {
+            $('#svg-holder .active').removeClass('active');
+            data.node.original.node.classList.add('active');
+            that.selected_node = {
+              preview: data.node.original.node,
+              tree: data.node
+            };
+          }).on('deselect_node.jstree', function(e, data) {
+            data.node.original.node.classList.remove('active');
+            that.selected_node = null;
+          }).on('move_node.jstree', function(e, data) {
+            var $jstree = $tree.jstree();
+            // $(data.parent.original.node)
+            // $(data.node.original.node).insertAfter()
+            var parent = $jstree.get_node(data.parent),
+                p_parent = parent.original.node,
+                p_node = data.node.original.node;
+            if (data.position === 0) {
+              p_parent.prepend(p_node);
+            } else {
+              $('#preview .highlighted').removeClass('highlighted');
+              $(p_node).insertAfter(p_parent.children[data.position > data.old_position ? data.position : data.position-1]);
+            }
+
+            $jstree.open_node(parent);
+            
+            if (data.node.type !== 'text') {
+              that.reorderGroups();
+              that.reorderStrokes();
+            } else {
+              that.reorderNumbers();
+            }
+          });
+          /*$(document).on('dnd_start.jstree', function(data, element, helper, event) {
+            console.log("start", data, element, helper, event);
+          }).on('dnd_stop.jstree', function(data, element, helper, event) {
+            console.log("start", data, element, helper, event);
+          });*/
         },
-        highlightThis: function (type, i, b) {
-          this[type][i].classList[b ? 'add' : 'remove']('highlighted')
-          if (type === 'strokes') {
-            this.numbers[i].classList[b ? 'add' : 'remove']('highlighted')
+        xmlToJsTree(xmlNode) {
+          if (xmlNode.tagName == 'text') {
+            xmlNode.removeAttribute('tagName');
+          } else if (!/^[kh]vg:/.test(xmlNode.id)) {
+            if (xmlNode.tagName == 'g') {
+              this.nodeCounts.group++;
+              var typeCountId = '-g' + this.nodeCounts.group;
+            } else if (xmlNode.tagName == 'path') {
+              this.nodeCounts.stroke++;
+              var typeCountId = '-s' + this.nodeCounts.stroke;
+            }
+            if (typeCountId) {
+              xmlNode.id = 'hvg:' + this.charId + typeCountId;
+            }
+          }
+
+          var label = xmlNode.id;
+          var firstChild = xmlNode.children[0] || xmlNode.firstChild;
+
+          label += this.getLabelSuffix(xmlNode)
+
+          return {
+            text: firstChild && firstChild.nodeType === 3 ? 
+                    firstChild.textContent : label,
+            node: xmlNode,
+            type: /^[kh]vg:StrokeNumbers/.test(xmlNode.id) ? '_numbers' : (/^[kh]vg:StrokePaths/.test(xmlNode.id) ? '_strokes' : xmlNode.tagName),
+            children: [...xmlNode.children].filter(function (childNode) {
+              var isSupportedElement = ['g', 'path', 'text'].includes(childNode.tagName);
+              if (!isSupportedElement) {
+                childNode.parentNode.removeChild(childNode)
+              }
+              return isSupportedElement
+            }).map(childNode => this.xmlToJsTree(childNode))
+          };
+        },
+        makeDirty() {
+          this.isDirty = true;
+          var kvgIds = $('#preview svg [id^="kvg:"]');
+          if (kvgIds.length) {
+            kvgIds.each(function() {
+              this.id = this.id.replace(/^kvg:/, 'hvg:');
+            });
+            var $jstree = $('#tree').jstree();
+            this.getFlatJsTree().each(function(index, value) {
+              if (this.type == 'text' || !/^kvg:/.test(this.text)) return true;
+              $jstree.rename_node(this, this.text.replace(/^kvg:/, 'hvg:'));
+            });
           }
         },
-        activateThis: function (type, ai) {
-          if (type === 'strokes') {
-            this.activateThis('numbers', ai )
-            var activeGroup = Array.prototype.indexOf.call(this.groups, this[type][ai].parentNode);
-            this.activateThis('groups', activeGroup )
-            document.querySelectorAll('input[type="radio"][name="group"]')[activeGroup].checked = true
+        updateElAttr(el, attr, ev) {
+          this.makeDirty();
+          var val = $(ev.target).val();
+          if (ev.target.type === 'checkbox') {
+            val = ev.target.checked;
           }
-          for (var i = 0; i < this[type].length; i++) {
-            this[type][i].classList[parseInt(ai, 10) === i ? 'add' : 'remove']('active')
+          if (!val) {
+            el.preview.removeAttribute(attr, val);
+          } else {
+            el.preview.setAttribute(attr, val);            
           }
+
+          if (attr === 'kvg:element' || attr === 'kvg:type') {
+            $('#tree').jstree('rename_node', el.tree, el.preview.id + this.getLabelSuffix(el.preview));
+          }
+        },
+        svgEl(tag) {
+          return document.createElementNS('http://www.w3.org/2000/svg', tag);
+        },
+        addGroup() {
+          this.makeDirty();
+          var $tree = $('#tree'),
+              t_node = this.selected_node.tree,
+              p_node = this.selected_node.preview,
+              $jstree = $tree.jstree();
+          
+          var newPreviewGroup = this.svgEl('g');
+
+          if (t_node.type == 'g') {
+            var t_parent = t_node;
+            var p_parent = p_node;
+            var this_index = 'first';
+            p_node.prepend(newPreviewGroup);
+          } else {
+            var t_parent = $jstree.get_node($jstree.get_parent(t_node));
+            var p_parent = p_node.parentNode;
+            var this_index = $.inArray(t_node.id, t_parent.children);
+            $(p_node).wrapAll(newPreviewGroup);
+          }
+
+          var newTreeGroup = $jstree.create_node(t_parent, {
+            type: 'g',
+            node: t_node.type == 'g' ? p_node.children[0] : p_node.parentNode
+          }, this_index > 0 ? this_index : 0);
+
+          // p_node.parentNode._treeNode = 
+
+          $jstree.move_node(t_node, newTreeGroup);
+          $jstree.open_node([t_node, newTreeGroup]);
+          $jstree.deselect_node(t_node);
+          $jstree.select_node(newTreeGroup);
+          
+          this.reorderGroups();
+        },
+        removeGroup() {
+          this.makeDirty();
+          var $tree = $('#tree'),
+              $jstree = $tree.jstree(),
+              t_node = this.selected_node.tree,
+              t_parent = $jstree.get_node(t_node.parent),
+              p_node = this.selected_node.preview,
+              $p_node = $(p_node);
+          
+          $p_node.children().insertAfter($p_node);
+          $p_node.remove();
+          this.selected_node = null;
+          if (t_node.children.length) {
+            var firstChild = $jstree.get_node(t_node.children[0]);
+            $jstree.move_node(t_node.children.slice(0), t_parent, $.inArray(t_node.id, t_parent.children));            
+            $jstree.select_node(firstChild);
+          }
+          $jstree.delete_node(t_node);
+
+          this.reorderGroups();
+        },
+        getFlatJsTree() {
+          var $tree = $('#tree'),
+              $jstree = $tree.jstree();
+          return $($jstree.get_json($tree, {
+            flat: true
+          }));
+        },
+        reorderGroups() {
+          this.makeDirty();
+          var $tree = $('#tree'),
+              $jstree = $tree.jstree(),
+              groupIndex = 0,
+              that = this;
+
+          this.getFlatJsTree().each(function(index, value) {
+            var node = $jstree.get_node(this.id),
+                p_node = node.original.node;
+            if (node.type != 'g' || p_node.parentNode.tagName === 'svg' || p_node.id === 'hvg:' + that.charId) {
+              return true;
+            }
+            groupIndex++;
+            var newId = 'hvg:' + that.charId + '-g' + groupIndex;
+            $jstree.rename_node(node, newId + that.getLabelSuffix(p_node));
+            p_node.id = newId;
+          });
+        },
+        reorderStrokes() {
+          this.makeDirty();
+          var $tree = $('#tree'),
+              $jstree = $tree.jstree(),
+              strokeIndex = 0,
+              that = this;
+
+          this.getFlatJsTree().each(function(index, value) {
+            var node = $jstree.get_node(this.id),
+                p_node = node.original.node;
+            if (node.type != 'path') {
+              return true;
+            }
+            strokeIndex++;
+            var newId = 'hvg:' + that.charId + '-s' + strokeIndex;
+            $jstree.rename_node(node, newId + that.getLabelSuffix(p_node));
+            p_node.id = newId;
+          });
+        },
+        reorderNumbers() {
+          this.makeDirty();
+          var $tree = $('#tree'),
+              $jstree = $tree.jstree(),
+              numberIndex = 0,
+              that = this;
+
+          this.getFlatJsTree().each(function(index, value) {
+            var node = $jstree.get_node(this.id),
+                p_node = node.original.node;
+            if (node.type != 'text') {
+              return true;
+            }
+            numberIndex++;
+            $jstree.rename_node(node, numberIndex);
+            p_node.textContent = numberIndex;
+          });
+        },
+        getLabelSuffix(node) {
+          var suffix = (node.tagName === 'path' ? node.getAttribute('kvg:type') : node.getAttribute('kvg:element')) || '';
+
+          if (suffix) {
+            suffix = ' (' + suffix + ')';
+          }
+
+          return suffix;
         }
       },
       mounted: function () {
