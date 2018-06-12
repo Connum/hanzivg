@@ -66,7 +66,7 @@ There's a lot to do and my available spare time (ok, I admit it - and motivation
 6. Save the file with the correct file name (unicode of the char as 5 digit hex number, padded with 0 if necessary), e.g. *09547.svg*. If you only want to contribute the stroke order for this char without the grouping/radical information, that's totally fine! Just save it in the */hanzi_wip* folder with .raw.svg as the extension, e.g. *09547.raw.svg* and add it to the list inside the *README.md* in that folder. Create a pull request! Otherwise, proceed:
 
 7. Open *format.html* in your browser (modern browsers like Chrome and Firefox are required). Drag and drop your file into the browser window.
-8. You will see a tree structure of the strokes and numbers and you can add new groups and meta information. Try to make the information as complete as possible. You can also change the order of numbers and strokes via drag&drop. Make sure that the order of strokes and numbers is correct.
+8. You will see a tree structure of the strokes and numbers and you can add new groups and meta information. Try to make the information as complete as possible. You can also change the order of numbers and strokes via drag&drop. Make sure that the order of strokes and numbers is correct. You can hover over the strokes/numbers in the tree structure to have them highlighted as a visual aid.
 9. Then you can hit the **Export** button and save the new file to the */hanzi* folder. Delete the raw file from the */hanzi_wip* if you created it or got it from there.
 10. Create a pull request!
 
