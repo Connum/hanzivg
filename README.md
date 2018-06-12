@@ -34,7 +34,7 @@ Speaking of variants: The handwriting form should be preferred (xxxxx-Kaisho in 
   released under [Creative Commons Attribution-Share Alike 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
 * AnimHanzi by François Mizessyn http://gooo.free.fr/animHanzi/
   released under [Creative Commons Attribution-Share Alike 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
-* Any (online) dictionaries with stroke order diagrams
+* Any (online) dictionaries with stroke order diagrams, especially [MDBG](https://www.mdbg.net/chinese/dictionary?cdqchi=), which offers decomposition of characters as a reference.
 
 ## TODO
 
