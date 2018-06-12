@@ -117,19 +117,22 @@ print '<p>' . $d . '</p>';
 echo preg_replace('@href="@', 'target="_blank" href="https://www.mdbg.net/chinese/', file_get_contents('https://www.mdbg.net/chinese/dictionary-ajax?c=cdcd&i=' . $h));
 print '</div>';
 */
-if (is_file('hanzi/' . $d . '.svg')) {
-	print '<h1>HanziVG</h1>';
-	print '<img src="hanzi/' . $d . '.svg" />';
+$filename = 'hanzi/' . $d . '.svg';
+if (is_file($filename)) {
+	print '<h1><a href="format.html?#' . $filename . '" target="_blank">HanziVG</a></h1>';
+	print '<img src="' . $filename . '" />';
 }
 
-if (is_file('animhanzi/' . $d . '.svg')) {
-	print '<h1>AnimHanzi</h1>';
-	print '<img src="animhanzi/' . $d . '.svg" />';
+$filename = 'animhanzi/' . $d . '.svg';
+if (is_file($filename)) {
+	print '<h1><a href="format.html?#' . $filename . '" target="_blank">AnimHanzi</a></h1>';
+	print '<img src="' . $filename . '" />';
 }
 
-if (is_file('kanji/' . $d . '.svg')) {
-	print '<h1>KanjiVG</h1>';
-	print '<img src="kanji/' . $d . '.svg" />';
+$filename = 'kanji/' . $d . '.svg';
+if (is_file($filename)) {
+	print '<h1><a href="format.html?#' . $filename . '" target="_blank">KanjiVG</a></h1>';
+	print '<img src="' . $filename . '" />';
 	print '<br><a href="?movefrom=kanji&hanzi=' . $h . '">copy to HanziVG</a>';
 }
 

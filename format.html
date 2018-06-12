@@ -302,7 +302,9 @@
           this.onDragLeave()
         },
         onFileLoaded: function (ev) {
-          var xml = (new DOMParser()).parseFromString(ev.target.result,'image/svg+xml');
+          this.handleInput((new DOMParser()).parseFromString(ev.target.result,'image/svg+xml'));
+        },
+        handleInput: function (xml) {
           var $tree = $('#tree')
           var that = this;
 
@@ -747,6 +749,13 @@ kvg:type CDATA #IMPLIED >
         document.addEventListener('dragover', this.onDragOver)
         document.addEventListener('dragleave', this.onDragLeave)
         document.addEventListener('drop', this.onDrop)
+
+        if (location.hash && location.hash.length) {
+          var filename = location.hash.replace('#','');
+          $.get(filename).done((res) => {
+            this.handleInput(res);
+          });
+        }
       },
       beforeDestroy: function () {
         document.removeEventListener('dragover', this.onDragOver)
