@@ -109,10 +109,14 @@ if (count($result->signCh)) {
 }
 
 
-print '<p><a href="http://www.archchinese.com/chinese_english_dictionary.html?find=' . $h . '" target="_blank">Arch Chinese</a> | <a href="https://www.yellowbridge.com/chinese/character-stroke-order.php?word=' . $h .'" target="_blank">Yellow Bridge</a>' . (isset($lineID) ? ' | <a href="http://ce.linedict.com/#/cnen/entry/' . $lineID . '" target="_blank">LINE Dict</a>' : '') . (isset($wcId) ? ' | <a href="https://dictionary.writtenchinese.com/worddetail/zhen/' . $wcId . '/1/1" target="_blank">writtenchinese</a>' : '') . '</p>';
+print '<p><a href="http://www.archchinese.com/chinese_english_dictionary.html?find=' . $h . '" target="_blank">Arch Chinese</a> | <a href="https://www.yellowbridge.com/chinese/character-stroke-order.php?word=' . $h .'" target="_blank">Yellow Bridge</a>' . (isset($lineID) ? ' | <a href="http://ce.linedict.com/#/cnen/entry/' . $lineID . '" target="_blank">LINE Dict</a>' : '') . (isset($wcId) ? ' | <a href="https://dictionary.writtenchinese.com/worddetail/zhen/' . $wcId . '/1/1" target="_blank">writtenchinese</a>' : '') . ' | <a target="_blank" href="https://www.mdbg.net/chinese/dictionary?cdqchi='. $h . '">MDBG</a></p>';
 
 print '<p>' . $d . '</p>';
 
+/*print '<div class="mdbg"><h2>MDBG</h2>';
+echo preg_replace('@href="@', 'target="_blank" href="https://www.mdbg.net/chinese/', file_get_contents('https://www.mdbg.net/chinese/dictionary-ajax?c=cdcd&i=' . $h));
+print '</div>';
+*/
 if (is_file('hanzi/' . $d . '.svg')) {
 	print '<h1>HanziVG</h1>';
 	print '<img src="hanzi/' . $d . '.svg" />';
