@@ -128,6 +128,21 @@
       background-size: contain;
     }
 
+    .infolink {
+      background-color: #000088;
+      color: #fff;
+      border-radius: 50%;
+      display: inline-block;
+      float: right;
+      text-decoration: none;
+      text-align: center;
+      font-size: 0.8em;
+      font-weight: 700;
+      width: 1.4em;
+      height: 1.4em;
+      line-height: 1.5em;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body>
@@ -148,6 +163,7 @@
           <div id="panel" class="flex-half" v-if="selected_node">
             <button @click="addGroup" v-if="selected_node.tree.type==='path' || selected_node.tree.type==='g'">add group</button> 
             <button @click="removeGroup" v-if="selected_node.tree.type==='g' && selected_node.preview.parentNode.parentNode.tagName !== 'svg'">remove group</button>
+            <a class="infolink" href="http://kanjivg.tagaini.net/format.html" target="_blank" title="format information">?</a>
             <dl>
               <template v-if="selected_node.preview.id">
                 <dt>ID:</dt>

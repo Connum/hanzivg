@@ -57,6 +57,19 @@ There's a lot to do and my available spare time (ok, I admit it - and motivation
 ### HSK1-6 characters known to be different from KanjiVG but not included in animHanzi:
 * 都 - strokes 9+10 should be combined, thus resulting in 10 strokes total for Chinese as opposed to 11 in Japanese
 
+## How to create a new character
+1. Open the *template.svg* in your favoured SVG editor
+2. Change the orange character of the background layer to the character you want to create. This layer uses the font [CNstrokeorder](http://rtega.be/chmn/index.php?subpage=68). Please try to use this font, and if it doesn't contain the character, use a similiar handwritten-looking font instead, trying to match the same character size. This layer is only used as a template for drawing upon and can be deleted before saving.
+3. Use the bezier tool to draw the lines. Use the correct stroke direction (important!) and order (will save time later because you don't have to rearrange them). You CAN use a stroke width of 3px and round joins and caps in order to see what the final result will look like, but you don't have to. The styles will be corrected later anyway.
+4. Copy and paste the number that is placed as a reference on the top outside of the viewbox. Again, if you do this in the correct order of the numbers, you won't have to spend much time to correct the order later.
+5. Delete the reference number and stroke as well es the orange template character.
+6. Save the file with the correct file name (unicode of the char as 5 digit hex number, padded with 0 if necessary), e.g. *09547.svg*. If you only want to contribute the stroke order for this char without the grouping/radical information, that's totally fine! Just save it in the */hanzi_wip* folder with .raw.svg as the extension, e.g. *09547.raw.svg* and add it to the list inside the *README.md* in that folder. Create a pull request! Otherwise, proceed:
+
+7. Open *format.html* in your browser (modern browsers like Chrome and Firefox are required). Drag and drop your file into the browser window.
+8. You will see a tree structure of the strokes and numbers and you can add new groups and meta information. Try to make the information as complete as possible. You can also change the order of numbers and strokes via drag&drop. Make sure that the order of strokes and numbers is correct.
+9. Then you can hit the **Export** button and save the new file to the */hanzi* folder. Delete the raw file from the */hanzi_wip* if you created it or got it from there.
+10. Create a pull request!
+
 # Licence
 
 HanziVG is licenced under [Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)](http://creativecommons.org/licenses/by-sa/3.0/).
