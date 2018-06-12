@@ -431,7 +431,7 @@
               p_parent.prepend(p_node);
             } else {
               $('#preview .highlighted').removeClass('highlighted');
-              $(p_node).insertAfter(p_parent.children[data.position > data.old_position ? data.position : data.position-1]);
+              $(p_node).insertAfter(p_parent.children[data.position-1]);
             }
 
             $jstree.open_node(parent);
