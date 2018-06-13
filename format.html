@@ -30,6 +30,7 @@
     }
 
     #svg-holder {
+      position: relative;
       width: 50vh;
       height: 50vh;
     }
@@ -37,6 +38,17 @@
     #svg-holder svg {
       width: 100%;
       height: 100%;
+    }
+
+    #svg-holder #strokeStarts {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: none;
+    }
+
+    #svg-holder.show-starting-points #strokeStarts {
+      display: inline-block;
     }
 
     #svg-holder svg text {
@@ -149,17 +161,23 @@
       pointer-events: none;
       cursor: not-allowed;
     }
+
+    .jstree-anchor,
+    #panel input,
+    #panel select {
+      font-family: stheiti, simhei, sans-serif, sans-serif;
+    }
   </style>
 </head>
 <body>
   <div id="app">
     <p><strong>This tool will convert raw SVG files created from the template to final HanziVG SVG files and allow for creating and editing stroke order, groups and group metadata.<br>Exporting is not yet implemented.</strong></p>
     <p v-if="!node_data">Drag &amp; drop SVG in this window</p>
-    <p v-else><button @click="!preview ? playPreview() : stopPreview()">{{ !preview ? 'Play Preview' : 'Stop Preview'}}</button> <button @click="exportSVG" :disabled="preview">Export</button></p>
+    <p v-else><button @click="!preview ? playPreview() : stopPreview()">{{ !preview ? 'Play Preview' : 'Stop Preview'}}</button> <label><input type="checkbox" v-model="showStartingPoints"> show starting points</label> <button @click="exportSVG" :disabled="preview">Export</button></p>
     <div class="flex" v-show="node_data">
       <fieldset id="preview" class="flex-half">
         <legend>Preview</legend>
-        <div id="svg-holder"></div>
+        <div id="svg-holder" :class="{'show-starting-points': showStartingPoints}"></div>
       </fieldset>
       <fieldset id="config" class="flex-half" :class="{disabled: preview}">
         <legend>Config</legend>
@@ -274,7 +292,8 @@
             '㇔', '㇐', '㇑', '㇒', '㇏', '㇀', '㇖', '㇚', '㇂', '㇙', '㇕', '㇗', '㇛', '㇜', '㇇', '㇄', '㇆', '㇟', '㇊', '㇉', '㇋', '㇌', '㇈', '㇅', '㇞', ']'
           ],
           preview: false,
-          previewTimeouts: []
+          previewTimeouts: [],
+          showStartingPoints: true
         }
       },
       computed: {
@@ -319,33 +338,39 @@
           var holder = document.getElementById('svg-holder'),
               $holder = $(holder);
 
-          if (holder.firstChild) {
-            holder.removeChild(holder.firstChild)
-          }
+          $holder.find('svg').remove();
           holder.appendChild(xml.children[0])
 
-          if (!$holder.find('g').length) {
-            $holder.find('path').wrapAll(
+          var $svg = $holder.find('svg').first();
+
+          if (!$svg.find('g').length) {
+            $svg.find('path').wrapAll(
               $(this.svgEl('g'))
                 .attr('id', 'hvg:StrokePaths_' + this.charId)
                 .attr('style', 'fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;')
             );
-            $holder.find('path').wrapAll(
+            $svg.find('path').wrapAll(
               $(this.svgEl('g'))
                 .attr('id', 'hvg:' + this.charId)
                 .attr('kvg:element', String.fromCharCode(parseInt(this.charId, 16)))
             );
-            $holder.find('text').wrapAll(
+            $svg.find('text').wrapAll(
               $(this.svgEl('g'))
                 .attr('id', 'hvg:StrokeNumbers_' + this.charId)
                 .attr('style', 'font-size:8;fill:#808080')
             );
           }
 
+          strokeStarts = this.svgEl('svg');
+          strokeStarts.setAttribute('width', '109');
+          strokeStarts.setAttribute('height', '109');
+          strokeStarts.setAttribute('viewBox', '0 0 109 109');
+          strokeStarts.id = 'strokeStarts';
+          holder.appendChild(strokeStarts);
+
           // clean styles
-          var $svg = $holder.find('svg'),
-              fixed = false;
-          $('svg').find('text, path').each(function() {
+          var fixed = false;
+          $svg.find('text, path').each(function() {
             var svgNode = this;
             if (svgNode.hasAttribute('style')) {
               svgNode.removeAttribute('style');
@@ -363,6 +388,16 @@
                 }
               }
             });
+            if (svgNode.tagName === 'path') {
+              var pathStart = svgNode.getAttribute('d').match(/^[M]([\d\.]+)[ ,]([\d\.]+)[a-z]/i),
+                startPoint = that.svgEl('circle');
+                startPoint.setAttribute('cx', pathStart[1]);
+                startPoint.setAttribute('cy', pathStart[2]);
+                startPoint.setAttribute('r', '1.5');
+                startPoint.setAttribute('fill', '#ff00ff');
+                startPoint.setAttribute('stroke', 'none');
+              strokeStarts.appendChild(startPoint);
+            }
           });
           if (fixed) {
             this.makeDirty();
@@ -662,7 +697,7 @@
         },
         playPreview() {
           this.preview = true;
-          var $svg = $('#svg-holder svg'),
+          var $svg = $('#svg-holder svg').first(),
               $nums = $svg.find('[id="kvg:StrokeNumbers_' + this.charId +'"], [id="hvg:StrokeNumbers_' + this.charId + '"]').find('text');
           $svg.find('.active, .highlighted').removeClass('active highlighted');
           for (var i = 0; i <= $nums.length; i++) {
@@ -674,7 +709,7 @@
                   return;
                 }
                 $svg.find('.highlighted').removeClass('highlighted');
-                $nums.eq(i).add('[id="kvg:' + this.charId + '-s' + (i+1) + '"], [id="hvg:' + this.charId + '-s' + (i+1) + '"]').addClass('highlighted');
+                $nums.eq(i).add($svg.find('path').eq(i)).addClass('highlighted');
               }})(i),
               i*800)
             );
@@ -685,7 +720,7 @@
           $(this.previewTimeouts).each(function() {
             window.clearTimeout(this);
           });
-          var $svg = $('#svg-holder svg');
+          var $svg = $('#svg-holder svg').first();
           $svg.find('.highlighted').removeClass('highlighted');
         },
         exportSVG() {
@@ -696,7 +731,7 @@
               lastWasStrokes = false,
               openTags = [],
               output = '',
-              $svg = $('#svg-holder svg'),
+              $svg = $('#svg-holder svg').first(),
               $activeEl = $svg.find('.active');
           $svg.find('g,path,text').removeAttr('xmlns:kvg class').each(function() {
             var line = '',
