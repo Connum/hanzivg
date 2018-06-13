@@ -659,8 +659,10 @@
               lastIndent = 0,
               lastWasStrokes = false,
               openTags = [],
-              output = '';
-          $('#svg-holder svg').find('g,path,text').removeAttr('xmlns:kvg class').each(function() {
+              output = '',
+              $svg = $('#svg-holder svg'),
+              $activeEl = $svg.find('.active');
+          $svg.find('g,path,text').removeAttr('xmlns:kvg class').each(function() {
             var line = '',
                 isStrokes = !!$(this).parents('[id^="kvg:StrokePaths_"],[id^="hvg:StrokePaths_"]').length;
             indent = $(this).parentsUntil('svg').length;
@@ -750,6 +752,8 @@ kvg:type CDATA #IMPLIED >
           + output + '</svg>\r\n';
 
           saveAs(new Blob([output], {type: 'image/svg+xml'}), this.charId + '.svg');
+
+          $activeEl.addClass('active');
         }
       },
       mounted: function () {
