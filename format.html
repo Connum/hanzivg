@@ -377,6 +377,9 @@
               multiple: false,
               data: this.node_data.children
             },
+            dnd: {
+              inside_pos: 'last'
+            },
             types: {
               '#': {
                 max_children: 2,
@@ -443,11 +446,15 @@
               that.reorderNumbers();
             }
           });
-          /*$(document).on('dnd_start.jstree', function(data, element, helper, event) {
-            console.log("start", data, element, helper, event);
-          }).on('dnd_stop.jstree', function(data, element, helper, event) {
-            console.log("start", data, element, helper, event);
-          });*/
+
+          // open and select main character node
+          var $jstree = $tree.jstree(),
+              $treenodes = $jstree.get_json();
+          $jstree.open_node($treenodes[0]);
+          if ($treenodes[0].children.length) {
+              $jstree.open_node($treenodes[0].children[0]);
+              $jstree.select_node($treenodes[0].children[0]);
+          }
         },
         xmlToJsTree(xmlNode) {
           if (xmlNode.tagName == 'text') {
