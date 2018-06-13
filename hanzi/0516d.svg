@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (C) 2009/2010/2011 Ulrich Apel.
+Copyright (C) 2018 HanziVG repository contributors
+This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
+and AnimHanzi Copyright (C) 2016 François Mizessyn.
 This work is distributed under the conditions of the Creative Commons
 Attribution-Share Alike 3.0 Licence. This means you are free:
 * to Share - to copy, distribute and transmit the work
 * to Remix - to adapt the work
 
 Under the following conditions:
+* Attribution. You must attribute the work by stating your use of HanziVG in
+  your own copyright header and linking to animHanzi's website
+  (https://github.com/Connum/HanziVG)
+* Attribution. You must attribute the work by stating your use of animHanzi in
+  your own copyright header and linking to animHanzi's website
+  (http://gooo.free.fr/animHanzi/)
 * Attribution. You must attribute the work by stating your use of KanjiVG in
   your own copyright header and linking to KanjiVG's website
   (http://kanjivg.tagaini.net)
@@ -35,20 +43,20 @@ xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
 kvg:type CDATA #IMPLIED >
 ]>
 <svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
-<g id="kvg:StrokePaths_0516d" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<g id="kvg:0516d" kvg:element="六">
-	<g id="kvg:0516d-g1" kvg:element="亠" kvg:position="top" kvg:radical="nelson">
-		<path id="kvg:0516d-s1" kvg:type="㇑a" d="M51.87,17.5c1.78,1.78,2.71,3.48,2.71,6.5c0,6.46,0.12,9.16,0.12,14.35"/>
-		<path id="kvg:0516d-s2" kvg:type="㇐" d="M13.5,42.13c3.27,0.74,7.11,0.89,9.93,0.64c21.56-1.9,41.78-5.02,61.41-5.47c4.8-0.11,7.49,0.31,11.06,1.07"/>
+<g id="hvg:StrokePaths_0516d" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
+<g id="hvg:0516d" kvg:element="六">
+	<g id="hvg:0516d-g1" kvg:element="亠" kvg:position="top" kvg:radical="nelson">
+		<path id="hvg:0516d-s1" kvg:type="㇑a" d="M46.28,18c5.15,2.19,12.71,10.64,13.58,14.94"/>
+		<path id="hvg:0516d-s2" kvg:type="㇐" d="M14.75,43.13c1.35,0.12,4.44,0.76,5.76,0.64c14.23-1.27,52.73-7.02,69.35-6.22c2.24,0.11,3.38,0.06,5.04,0.82"/>
 	</g>
-	<g id="kvg:0516d-g2" kvg:element="八" kvg:position="bottom" kvg:radical="tradit">
-		<path id="kvg:0516d-s3" kvg:type="㇒" d="M38.11,58.6c0.51,1.37,0.42,3.67-0.49,5.29C33.38,71.38,24,82.38,15.41,88.75"/>
-		<path id="kvg:0516d-s4" kvg:type="㇔/㇏" d="M70.16,59.92c9.96,8.61,18.18,18.54,23.16,28.99"/>
+	<g id="hvg:0516d-g2" kvg:element="八" kvg:position="bottom" kvg:radical="tradit">
+		<path id="hvg:0516d-s3" kvg:type="㇒" d="M37.11,58.35c0.51,1.37,1.14,4.15,0.26,5.79c-4.77,8.87-12.09,16.9-21.96,24.62"/>
+		<path id="hvg:0516d-s4" kvg:type="㇏" d="M70.16,59.42c9.96,8.61,18.18,18.54,23.16,28.99"/>
 	</g>
 </g>
 </g>
-<g id="kvg:StrokeNumbers_0516d" style="font-size:8;fill:#808080">
-	<text transform="matrix(1 0 0 1 42.25 17.63)">1</text>
+<g id="hvg:StrokeNumbers_0516d" style="font-size:8;fill:#808080">
+	<text transform="matrix(1 0 0 1 40.75 17.63)">1</text>
 	<text transform="matrix(1 0 0 1 5.50 43.63)">2</text>
 	<text transform="matrix(1 0 0 1 27.50 58.63)">3</text>
 	<text transform="matrix(1 0 0 1 60.50 58.63)">4</text>
