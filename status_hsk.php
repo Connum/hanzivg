@@ -35,6 +35,13 @@
 			box-sizing: border-box;
 			padding: 0 7px;
 		}
+		.char.clickable {
+			cursor: pointer;
+			text-decoration: none;
+		}
+		.char.clickable:hover {
+			text-decoration: underline;
+		}
 	</style>
 </head>
 <body>
@@ -117,9 +124,25 @@ $body = ob_get_clean();
 ?>
 <span class="legend char ok"><?= $count->hanzivg ?></span> = implemented in HanziVG | <span class="legend char animhanzi"><?= $count->animhanzi ?></span> = TODO: check from AnimHanzi | <span class="legend char kanji"><?= $count->kanjivg ?></span> = TODO: check from KanjiVG | <span class="legend char"><?= $count->missing ?></span> = TODO: missing / from scratch
 
-<?
+<?php
 print $body;
-
+?>
+<script type="text/javascript">
+	if (!/(github\.io|htmlpreview\.rawgit\.com)/.test(window.location.host)) {
+		var chars = document.getElementsByClassName('char');
+		for (var i = 0; i < chars.length; i++) {
+			var char = chars[i];
+			if(char.classList.contains('legend')) continue;
+			char.classList.add('clickable');
+			char.addEventListener('click', function(ev) {
+				window.open('compare.php?hanzi=' + ev.target.textContent);
+			});
+		}
+	}
+</script>
+</body>
+</html>
+<?php
 // write to HTML file which we can link to in the README
 $content = ob_get_flush();
 file_put_contents('status_hsk.html', $content);
