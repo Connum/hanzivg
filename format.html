@@ -143,19 +143,25 @@
       line-height: 1.5em;
       vertical-align: middle;
     }
+
+    .disabled {
+      opacity: 0.2;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
   </style>
 </head>
 <body>
   <div id="app">
     <p><strong>This tool will convert raw SVG files created from the template to final HanziVG SVG files and allow for creating and editing stroke order, groups and group metadata.<br>Exporting is not yet implemented.</strong></p>
     <p v-if="!node_data">Drag &amp; drop SVG in this window</p>
-    <p v-else><button @click="exportSVG">Export</button></p>
+    <p v-else><button @click="!preview ? playPreview() : stopPreview()">{{ !preview ? 'Play Preview' : 'Stop Preview'}}</button> <button @click="exportSVG" :disabled="preview">Export</button></p>
     <div class="flex" v-show="node_data">
       <fieldset id="preview" class="flex-half">
         <legend>Preview</legend>
         <div id="svg-holder"></div>
       </fieldset>
-      <fieldset id="config" class="flex-half">
+      <fieldset id="config" class="flex-half" :class="{disabled: preview}">
         <legend>Config</legend>
         <div class="flex">
           <div id="tree" class="flex-half">
@@ -266,7 +272,9 @@
           },
           strokeTypes: [
             '㇔', '㇐', '㇑', '㇒', '㇏', '㇀', '㇖', '㇚', '㇂', '㇙', '㇕', '㇗', '㇛', '㇜', '㇇', '㇄', '㇆', '㇟', '㇊', '㇉', '㇋', '㇌', '㇈', '㇅', '㇞', ']'
-          ]
+          ],
+          preview: false,
+          previewTimeouts: []
         }
       },
       computed: {
@@ -652,6 +660,34 @@
 
           return suffix;
         },
+        playPreview() {
+          this.preview = true;
+          var $svg = $('#svg-holder svg'),
+              $nums = $svg.find('[id="kvg:StrokeNumbers_' + this.charId +'"], [id="hvg:StrokeNumbers_' + this.charId + '"]').find('text');
+          $svg.find('.active, .highlighted').removeClass('active highlighted');
+          for (var i = 0; i <= $nums.length; i++) {
+            this.previewTimeouts.push(
+              window.setTimeout(((i) => {return () => {
+                if (!this.preview) return;
+                if (i >= $nums.length) {
+                  this.stopPreview();
+                  return;
+                }
+                $svg.find('.highlighted').removeClass('highlighted');
+                $nums.eq(i).add('[id="kvg:' + this.charId + '-s' + (i+1) + '"], [id="hvg:' + this.charId + '-s' + (i+1) + '"]').addClass('highlighted');
+              }})(i),
+              i*800)
+            );
+          }
+        },
+        stopPreview() {
+          this.preview = false;
+          $(this.previewTimeouts).each(function() {
+            window.clearTimeout(this);
+          });
+          var $svg = $('#svg-holder svg');
+          $svg.find('.highlighted').removeClass('highlighted');
+        },
         exportSVG() {
           var padding = '\t',
               indent = 0,
@@ -761,10 +797,15 @@ kvg:type CDATA #IMPLIED >
         document.addEventListener('dragleave', this.onDragLeave)
         document.addEventListener('drop', this.onDrop)
 
+        // load file from hash via ajax
         if (location.hash && location.hash.length) {
           var filename = location.hash.replace('#','');
           $.get(filename).done((res) => {
-            this.handleInput(res);
+            var fileNameMatch = filename.match(/(?:^|\/)([0-9a-f]{5}).*\.svg$/i);
+            if (fileNameMatch.length === 2) {
+              this.charId = fileNameMatch[1];
+              this.handleInput(res);
+            }
           });
         }
       },
