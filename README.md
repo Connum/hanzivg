@@ -49,13 +49,15 @@ There's a lot to do and my available spare time (ok, I admit it - and motivation
 * AnimHanzi
 
   1. Collect all AnimHanzi files, verify and move them to /hanzi, completing meta information where necessary
-  2. Verify the AnimHanzi files, make adaptions where needed (component groups seem not to be as complete as for the KanjiVG files)
-     ~~**Be careful:** Some files are not in the ZIP file although they are different from the KanjiVG file and even though they do show the correction in the AnimHanzi demo! For example: 有 has 1st and 2nd strokes swapped compared to Japanese, but 06709.svg is not included in the ZIP files (should be in the HSK1 pack).~~  - this seems to be absolete after he [provided the files](https://github.com/parsimonhi/animHanzi/). But still: *Don't just copy the files over, **do** verify and correct them if necessary!* And don't forget to change the ids (not the attributes) to :hvg!
+  2. Verify the AnimHanzi files, make adaptions where needed. Component groups seem not to be as complete as for the KanjiVG files, and there are some other errors regarding stroke count or order, so: *Don't just copy the files over, **do** verify and correct them if necessary!* And don't forget to change the ids (not the attributes) to :hvg (the format.html tool will do that automatically)!
 * Make an adapted version of the [kanji-colorize](https://github.com/cayennes/kanji-colorize) Anki addon
 * Don't forget to add documantation so that this ends up more maintainable by volunteers than KanjiVG ;)
 
+See status.php to get startet and klick on any of the listed characters. Or see the status by HSK level in status_hsk.php.
+[The HSK level status page is also available online here](https://rawgit.com/Connum/hanzivg/master/status_hsk.html)
+
 ### HSK1-6 characters known to be different from KanjiVG but not included in animHanzi:
-* 都 - strokes 9+10 should be combined, thus resulting in 10 strokes total for Chinese as opposed to 11 in Japanese
+-
 
 ## How to create a new character
 1. Open the *template.svg* in your favoured SVG editor
