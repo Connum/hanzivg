@@ -105,11 +105,11 @@ $result = json_decode(curl_exec($ch));
 //close connection
 curl_close($ch);
 if (count($result->signCh)) {
-	$wcId = $result->signCh[0]->id;
+	$wcId = $result->signCh[0]->pinyinsort . '/' . $result->signCh[0]->id;
 }
 
 
-print '<p><a href="http://www.archchinese.com/chinese_english_dictionary.html?find=' . $h . '" target="_blank">Arch Chinese</a> | <a href="https://www.yellowbridge.com/chinese/character-stroke-order.php?word=' . $h .'" target="_blank">Yellow Bridge</a>' . (isset($lineID) ? ' | <a href="http://ce.linedict.com/#/cnen/entry/' . $lineID . '" target="_blank">LINE Dict</a>' : '') . (isset($wcId) ? ' | <a href="https://dictionary.writtenchinese.com/worddetail/zhen/' . $wcId . '/1/1" target="_blank">writtenchinese</a>' : '') . ' | <a target="_blank" href="https://www.mdbg.net/chinese/dictionary?cdqchi='. $h . '">MDBG</a></p>';
+print '<p><a href="http://www.archchinese.com/chinese_english_dictionary.html?find=' . $h . '" target="_blank">Arch Chinese</a> | <a href="https://www.yellowbridge.com/chinese/character-stroke-order.php?word=' . $h .'" target="_blank">Yellow Bridge</a>' . (isset($lineID) ? ' | <a href="http://ce.linedict.com/#/cnen/entry/' . $lineID . '" target="_blank">LINE Dict</a>' : '') . (isset($wcId) ? ' | <a href="https://dictionary.writtenchinese.com/worddetail/' . $wcId . '/1/1" target="_blank">writtenchinese</a>' : '') . ' | <a target="_blank" href="https://www.mdbg.net/chinese/dictionary?cdqchi='. $h . '">MDBG</a></p>';
 
 print '<p>' . $d . '</p>';
 
