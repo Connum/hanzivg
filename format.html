@@ -193,6 +193,10 @@
                 <dt>ID:</dt>
                 <dd>{{selected_node.preview.id}}</dd>
               </template>
+              <template v-if="/^[kh]vg:StrokePaths_/.test(selected_node.tree.text)">
+                <dt>character code:</dt>
+                <dd>{{charId}}</dd>
+              </template>
               <template v-if="selected_node.tree.type == 'g'">
                 <dt>Element:</dt>
                 <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:element')" @input="updateElAttr(selected_node, 'kvg:element', $event)"/></dd>
@@ -536,15 +540,22 @@
         },
         makeDirty() {
           this.isDirty = true;
-          var kvgIds = $('#preview svg [id^="kvg:"]');
+          var that = this,
+              kvgIds = $('#preview svg [id^="kvg:"]');
           if (kvgIds.length) {
             kvgIds.each(function() {
-              this.id = this.id.replace(/^kvg:/, 'hvg:');
+              this.id = this.id
+                .replace(/^kvg:/, 'hvg:')
+                .replace(new RegExp(that.charId + '-(VtLst|HyougaiKaisho|KaishoVt3|HzFst|Insatsu|MidFst|KaishoVtLst|Kaisho|Jinmei|Hyougai|KaishoVt4)'), that.charId);
             });
             var $jstree = $('#tree').jstree();
             this.getFlatJsTree().each(function(index, value) {
               if (this.type == 'text' || !/^kvg:/.test(this.text)) return true;
-              $jstree.rename_node(this, this.text.replace(/^kvg:/, 'hvg:'));
+              $jstree.rename_node(this,
+                this.text
+                  .replace(/^kvg:/, 'hvg:')
+                  .replace(new RegExp(that.charId + '-(VtLst|HyougaiKaisho|KaishoVt3|HzFst|Insatsu|MidFst|KaishoVtLst|Kaisho|Jinmei|Hyougai|KaishoVt4)'), that.charId)
+              );
             });
           }
         },
