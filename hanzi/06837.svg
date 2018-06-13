@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (C) 2016 François Mizessyn.
-This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel.
+Copyright (C) 2018 HanziVG repository contributors
+This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
+and AnimHanzi Copyright (C) 2016 François Mizessyn.
 This work is distributed under the conditions of the Creative Commons
 Attribution-Share Alike 3.0 Licence. This means you are free:
 * to Share - to copy, distribute and transmit the work
 * to Remix - to adapt the work
 
 Under the following conditions:
-* Attribution. You must attribute the work by stating your use of HanjiVG in
-  your own copyright header and linking to HanjiVG's website
-  (http://gooo.free.fr/hanziVG/)
+* Attribution. You must attribute the work by stating your use of HanziVG in
+  your own copyright header and linking to animHanzi's website
+  (https://github.com/Connum/HanziVG)
+* Attribution. You must attribute the work by stating your use of animHanzi in
+  your own copyright header and linking to animHanzi's website
+  (http://gooo.free.fr/animHanzi/)
 * Attribution. You must attribute the work by stating your use of KanjiVG in
   your own copyright header and linking to KanjiVG's website
   (http://kanjivg.tagaini.net)
@@ -48,12 +52,12 @@ kvg:type CDATA #IMPLIED >
 		<path id="kvg:06837-s4" kvg:type="㇔/㇏" d="M33.97,44.65c3.23,1.59,7.15,5.6,10.78,11.35"/>
 	</g>
 	<g id="kvg:06837-g2" kvg:element="羊" kvg:position="right" kvg:phon="羊">
-<path id="kvg:06837-s5" kvg:type="㇔" d="m54.13 13.25c2.45 1.94 6.33 7.96 6.94 10.97"/>
-<path id="kvg:06837-s6" kvg:type="㇒" d="m85.37 10.75c0.04 0.44 0.15 1.17 -0.07 1.78c-1.44 3.97 -4.25 8.6 -9.32 14.04"/>
-<path id="kvg:06837-s7" kvg:type="㇐" d="m49.9 31.89c2.03 0.49 4.67 0.2 6.5 0.01c7.7 -0.8 20.59 -2.48 28.01 -3.06c2.13 -0.17 4.58 -0.57 6.66 0.17"/>
-<path id="kvg:06837-s8" kvg:type="㇐" d="m54.49 49.89c2.28 0.49 4.45 0.35 6.25 0.24c6.56 -0.44 14.67 -1.75 21.01 -2.56c1.88 -0.24 3.85 -0.64 5.74 -0.3"/>
-<path id="kvg:06837-s9" kvg:type="㇐" d="m45.44 71.45c2.2 0.55 4.66 0.53 6.81 0.19c9.47 -1.51 26.67 -3.45 37.52 -4.38c2.14 -0.18 5.02 -0.1 7.15 0.25"/>
-<path id="kvg:06837-s10" kvg:type="㇑" d="m69.43 33.25c0.82 0.93 1.28 2.23 1.28 3.25c0 2.83 -0.11 37.06 -0.15 53.5c-0.01 3.86 -0.02 6.74 -0.02 8"/>
+		<path id="kvg:06837-s5" kvg:type="㇔" d="m54.13 13.25c2.45 1.94 6.33 7.96 6.94 10.97"/>
+		<path id="kvg:06837-s6" kvg:type="㇒" d="m85.37 10.75c0.04 0.44 0.15 1.17 -0.07 1.78c-1.44 3.97 -4.25 8.6 -9.32 14.04"/>
+		<path id="kvg:06837-s7" kvg:type="㇐" d="m49.9 31.89c2.03 0.49 4.67 0.2 6.5 0.01c7.7 -0.8 20.59 -2.48 28.01 -3.06c2.13 -0.17 4.58 -0.57 6.66 0.17"/>
+		<path id="kvg:06837-s8" kvg:type="㇐" d="m54.49 49.89c2.28 0.49 4.45 0.35 6.25 0.24c6.56 -0.44 14.67 -1.75 21.01 -2.56c1.88 -0.24 3.85 -0.64 5.74 -0.3"/>
+		<path id="kvg:06837-s9" kvg:type="㇐" d="m45.44 71.45c2.2 0.55 4.66 0.53 6.81 0.19c9.47 -1.51 26.67 -3.45 37.52 -4.38c2.14 -0.18 5.02 -0.1 7.15 0.25"/>
+		<path id="kvg:06837-s10" kvg:type="㇑" d="m69.43 33.25c0.82 0.93 1.28 2.23 1.28 3.25c0 2.83 -0.11 37.06 -0.15 53.5c-0.01 3.86 -0.02 6.74 -0.02 8"/>
 	</g>
 </g>
 </g>
