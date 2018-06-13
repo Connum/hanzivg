@@ -128,7 +128,7 @@ $body = ob_get_clean();
 print $body;
 ?>
 <script type="text/javascript">
-	if (!/(github\.io|htmlpreview\.rawgit\.com)/.test(window.location.host)) {
+	if (!/(htmlpreview\.github\.io|rawgit\.com)/.test(window.location.host)) {
 		var chars = document.getElementsByClassName('char');
 		for (var i = 0; i < chars.length; i++) {
 			var char = chars[i];
