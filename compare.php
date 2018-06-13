@@ -132,8 +132,21 @@ if (is_file($filename)) {
 $filename = 'kanji/' . $d . '.svg';
 if (is_file($filename)) {
 	print '<h1><a href="format.html?#' . $filename . '" target="_blank">KanjiVG</a></h1>';
+	print '<table border="0" cellspacing="0" cellpadding="0"><tr><td>';
 	print '<img src="' . $filename . '" />';
 	print '<br><a href="?movefrom=kanji&hanzi=' . $h . '">copy to HanziVG</a>';
+
+	$variants = glob('kanji/' . $d . '-*.svg');
+	if(count($variants)) {
+		foreach ($variants as $variantFile) {
+			print '<td>&nbsp;&nbsp;&nbsp;</td><td>';
+			print '<img src="' . $variantFile . '" />';
+			print '<br><a href="format.html?#' . $variantFile . '">edit variant</a>';
+			print '</td>';
+		}
+	}
+
+	print '</tr></table>';
 }
 
 print '<h2>Simplified</h2><p class="char simplified">' . $h . '</p>';
