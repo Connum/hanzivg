@@ -393,7 +393,7 @@
               }
             });
             if (svgNode.tagName === 'path') {
-              var pathStart = svgNode.getAttribute('d').match(/^[M]([\d\.]+)[ ,]([\d\.]+)[a-z]/i),
+              var pathStart = svgNode.getAttribute('d').match(/^[M]\s*([\d\.]+)[ ,]([\d\.]+)[a-z\s]/i),
                 startPoint = that.svgEl('circle');
                 startPoint.setAttribute('cx', pathStart[1]);
                 startPoint.setAttribute('cy', pathStart[2]);
