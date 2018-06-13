@@ -106,6 +106,19 @@ foreach ($hsk as $n => $charstring) {
 		if (is_file('hanzi/' . $d . '.svg')) {
 			$class.= ' ok';
 			$count->hanzivg++;
+			// delete files from kanji and animhanzi if they exist in hanzivg (including variants)
+			if(is_file('kanji/' . $d . '.svg')) {
+				unlink('kanji/' . $d . '.svg');
+			}
+			$variants = glob('kanji/' . $d . '-*.svg');
+			if(count($variants)) {
+				foreach ($variants as $variantFile) {
+					unlink($variantFile);
+				}
+			}
+			if(is_file('animhanzi/' . $d . '.svg')) {
+				unlink('animhanzi/' . $d . '.svg');
+			}
 		} else if (is_file('animhanzi/' . $d . '.svg')) {
 			$class.= ' animhanzi';
 			$count->animhanzi++;
