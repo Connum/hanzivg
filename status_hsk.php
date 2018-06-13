@@ -97,15 +97,28 @@ function uniord($s) {
     return unpack('V', iconv('UTF-8', 'UCS-4LE', $s))[1];
 }
 
+$totalchars = 0;
+
 foreach ($hsk as $n => $charstring) {
-	print '<h2>HSK ' . ($n+1) . '</h2>';
 	$chars = preg_split('//u', $charstring, -1, PREG_SPLIT_NO_EMPTY);
+	$charcount = count($chars);
+
+	$thisCount = (object)array(
+		'hanzivg' => 0,
+		'animhanzi' => 0,
+		'kanjivg' => 0,
+		'missing' => 0,
+	);
+	$thisTodoCount = 0;
+
+	print '<hr><h2>HSK ' . ($n+1) . ' (' . $charcount . ')</h2>';
 	foreach ($chars as $char) {
 		$d = substr("00000" . dechex(uniord($char)),-5);
 		$class = '';
 		if (is_file('hanzi/' . $d . '.svg')) {
 			$class.= ' ok';
 			$count->hanzivg++;
+			$thisCount->hanzivg++;
 			// delete files from kanji and animhanzi if they exist in hanzivg (including variants)
 			if(is_file('kanji/' . $d . '.svg')) {
 				unlink('kanji/' . $d . '.svg');
@@ -122,15 +135,26 @@ foreach ($hsk as $n => $charstring) {
 		} else if (is_file('animhanzi/' . $d . '.svg')) {
 			$class.= ' animhanzi';
 			$count->animhanzi++;
+			$thisCount->animhanzi++;
+			$thisTodoCount++;
 		} else if (is_file('kanji/' . $d . '.svg')) {
 			$class.= ' kanji';
 			$count->kanjivg++;
+			$thisCount->kanjivg++;
+			$thisTodoCount++;
 		} else {
 			$count->missing++;
+			$thisCount->missing++;
+			$thisTodoCount++;
 		}
 
 		print '<span class="char' . ($class) . '">' . $char .'</span>';
 	}
+	?>
+<p>
+<span class="legend char ok"><?= $thisCount->hanzivg ?></span> <span class="legend char animhanzi"><?= $thisCount->animhanzi ?></span> <span class="legend char kanji"><?= $thisCount->kanjivg ?></span> <span class="legend char"><?= $thisCount->missing ?></span> | TODO: <?= $thisTodoCount ?>
+</p>
+<?php
 }
 $body = ob_get_clean();
 
