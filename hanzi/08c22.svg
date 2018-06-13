@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 HanziVG repository contributors
+This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
+and AnimHanzi Copyright (C) 2016 François Mizessyn.
+This work is distributed under the conditions of the Creative Commons
+Attribution-Share Alike 3.0 Licence. This means you are free:
+* to Share - to copy, distribute and transmit the work
+* to Remix - to adapt the work
+
+Under the following conditions:
+* Attribution. You must attribute the work by stating your use of HanziVG in
+  your own copyright header and linking to animHanzi's website
+  (https://github.com/Connum/HanziVG)
+* Attribution. You must attribute the work by stating your use of animHanzi in
+  your own copyright header and linking to animHanzi's website
+  (http://gooo.free.fr/animHanzi/)
+* Attribution. You must attribute the work by stating your use of KanjiVG in
+  your own copyright header and linking to KanjiVG's website
+  (http://kanjivg.tagaini.net)
+* Share Alike. If you alter, transform, or build upon this work, you may
+  distribute the resulting work only under the same or similar license to this
+  one.
+
+See http://creativecommons.org/licenses/by-sa/3.0/ for more details.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+<!ATTLIST g
+xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
+kvg:element CDATA #IMPLIED
+kvg:variant CDATA #IMPLIED
+kvg:partial CDATA #IMPLIED
+kvg:original CDATA #IMPLIED
+kvg:part CDATA #IMPLIED
+kvg:number CDATA #IMPLIED
+kvg:tradForm CDATA #IMPLIED
+kvg:radicalForm CDATA #IMPLIED
+kvg:position CDATA #IMPLIED
+kvg:radical CDATA #IMPLIED
+kvg:phon CDATA #IMPLIED >
+<!ATTLIST path
+xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
+kvg:type CDATA #IMPLIED >
+]>
+<svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
+<g style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;" id="hvg:StrokePaths_08c22">
+<g kvg:element="谢" id="hvg:08c22">
+	<g kvg:radical="general" kvg:position="left" kvg:element="讠" id="hvg:08c22-g1">
+		<path id="hvg:08c22-s1" d="m 18.012712,19.398305 c 0,0 8.544491,3.925847 10.622881,8.313559" kvg:type="㇔"/>
+		<path id="hvg:08c22-s2" d="m 10.391949,48.26483 c 0,0 15.472458,-5.31144 18.243644,-6.466101 0,0 -4.156779,40.413135 -0.692796,39.258474 0,0 6.697034,-9.237288 10.622881,-12.008474" kvg:type="㇊"/>
+	</g>
+	<g kvg:position="right" kvg:element="射" id="hvg:08c22-g2">
+		<g kvg:position="left" kvg:element="身" id="hvg:08c22-g3">
+			<path id="hvg:08c22-s3" d="m 57.040254,12.470339 c 0,0 -0.923729,6.004237 -9.930084,17.78178" kvg:type="㇒"/>
+			<path id="hvg:08c22-s4" d="m 44.338983,28.173729 c 0,0 2.309322,4.387712 1.847458,32.330508" kvg:type="㇑a"/>
+			<path id="hvg:08c22-s5" d="m 46.186441,31.175847 c 0,0 13.625,-6.466101 16.165254,-4.156779 0,0 4.387712,22.169491 -0.461864,64.661017 -0.09779,0.01505 -4.733511,1.065749 -8.31356,-3.925848" kvg:type="㇆a"/>
+			<path id="hvg:08c22-s6" d="m 46.417373,41.567797 c 0,0 5.542373,-3.002119 11.315678,-3.694916" kvg:type="㇐a"/>
+			<path id="hvg:08c22-s7" d="m 46.186441,50.34322 c 0,0 7.851694,-2.540254 11.315678,-3.002119" kvg:type="㇐a"/>
+			<path id="hvg:08c22-s8" d="m 39.720339,63.044492 c 0,0 18.474576,-6.466102 24.016949,-6.004238" kvg:type="㇀"/>
+			<path id="hvg:08c22-s9" d="m 62.120763,57.040254 c 0,0 -6.004238,15.010593 -23.555085,25.633475" kvg:type="㇀"/>
+		</g>
+		<g kvg:position="right" kvg:element="寸" id="hvg:08c22-g4">
+			<path id="hvg:08c22-s10" d="M 70.20339,45.724576 95.836864,39.720339" kvg:type="㇐"/>
+			<path id="hvg:08c22-s11" d="m 85.444915,19.167373 c 0,0 2.309322,20.322034 1.385594,74.360169 -0.262539,0.179004 -7.908873,-1.441081 -9.006356,-6.23517" kvg:type="㇚"/>
+			<path id="hvg:08c22-s12" d="m 70.896186,55.423729 c 0,0 7.620763,4.618644 8.082628,8.544491" kvg:type="㇔"/>
+		</g>
+	</g>
+</g>
+</g>
+<g style="font-size:8;fill:#808080" id="hvg:StrokeNumbers_08c22">
+	<text y="22.545252" x="11.009767">1</text>
+	<text y="44.02195" x="8.469511">2</text>
+	<text y="15.899304" x="47.842525">3</text>
+	<text x="39.359097" y="26.211739">4</text>
+	<text y="35.09935" x="38.223835">5</text>
+	<text x="39.269608" y="44.802292">6</text>
+	<text y="54.191681" x="39.596195">7</text>
+	<text y="66.075974" x="32.255527">8</text>
+	<text x="58.004467" y="55.453094">9</text>
+	<text x="65.7407" y="42.520889">10</text>
+	<text y="24.970041" x="72.206802">11</text>
+	<text y="53.95203" x="66.087097">12</text>
+</g>
+</svg>
