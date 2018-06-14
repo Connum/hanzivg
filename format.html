@@ -756,7 +756,7 @@
         playPreview() {
           this.preview = true;
           var $svg = $('#svg-holder svg').first(),
-              $nums = $svg.find('[id="kvg:StrokeNumbers_' + this.charId +'"], [id="hvg:StrokeNumbers_' + this.charId + '"]').find('text');
+              $nums = $svg.find('[id^="kvg:StrokeNumbers_' + this.charId +'"], [id^="hvg:StrokeNumbers_' + this.charId + '"]').find('text');
           $svg.find('.active, .highlighted').removeClass('active highlighted');
           for (var i = 0; i <= $nums.length; i++) {
             this.previewTimeouts.push(
