@@ -2,6 +2,7 @@
 <!--
 Copyright (C) 2018 HanziVG repository contributors
 This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
+and AnimHanzi Copyright (C) 2016 François Mizessyn.
 This work is distributed under the conditions of the Creative Commons
 Attribution-Share Alike 3.0 Licence. This means you are free:
 * to Share - to copy, distribute and transmit the work
@@ -11,6 +12,9 @@ Under the following conditions:
 * Attribution. You must attribute the work by stating your use of HanziVG in
   your own copyright header and linking to animHanzi's website
   (https://github.com/Connum/HanziVG)
+* Attribution. You must attribute the work by stating your use of animHanzi in
+  your own copyright header and linking to animHanzi's website
+  (http://gooo.free.fr/animHanzi/)
 * Attribution. You must attribute the work by stating your use of KanjiVG in
   your own copyright header and linking to KanjiVG's website
   (http://kanjivg.tagaini.net)
@@ -41,7 +45,7 @@ kvg:type CDATA #IMPLIED >
 <svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
 <g id="hvg:StrokePaths_09547" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <g id="hvg:09547" kvg:element="镇">
-	<g id="hvg:09547-g1" kvg:position="left" kvg:element="钅">
+	<g id="hvg:09547-g1" kvg:position="left" kvg:element="钅" kvg:radical="general">
 		<path d="m 37.23097,17.555513 c 0.373059,1.233152 0.363479,2.766765 0.03423,4.522492 -1.992441,10.624821 -15.691347,29.383653 -27.140992,38.913639" id="hvg:09547-s1" kvg:type="㇒"/>
 		<path d="m 31.352396,37.477348 c 0,0 14.369848,-1.30635 17.309135,-3.91905" id="hvg:09547-s2" kvg:type="㇐"/>
 		<path d="m 25.473821,53.480133 c 0,0 14.696435,-2.286112 19.595247,-5.878574" id="hvg:09547-s3" kvg:type="㇐"/>
