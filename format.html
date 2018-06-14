@@ -187,7 +187,7 @@
           <div id="panel" class="flex-half" v-if="selected_node">
             <button @click="addGroup" v-if="selected_node.tree.type==='path' || selected_node.tree.type==='g'">add group</button> 
             <button @click="removeGroup" v-if="selected_node.tree.type==='g' && selected_node.preview.parentNode.parentNode.tagName !== 'svg'">remove group</button>
-            <a class="infolink" href="http://kanjivg.tagaini.net/format.html" target="_blank" title="format information">?</a>
+            <a class="infolink" href="http://kanjivg.tagaini.net/format.html" target="_blank" title="format information" v-if="selected_node.preview.parentNode.tagName !== 'svg' && selected_node.tree.type !== 'text'">?</a>
             <dl>
               <template v-if="selected_node.preview.id">
                 <dt>ID:</dt>
