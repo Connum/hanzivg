@@ -51,12 +51,12 @@ kvg:type CDATA #IMPLIED >
 		<path d="M66.75,8.58c1.65,1.01,1.29,2.61,1,4.17c-0.83,4.5-2,10.33-3.92,16.67" kvg:type="㇑a" id="hvg:082f9-s3"/>
 	</g>
 	<g kvg:position="bottom" kvg:variant="true" kvg:element="平" id="hvg:082f9-g2">
-		<g kvg:part="1" kvg:element="干" id="hvg:082f9-g3">
+		<g kvg:element="干" id="hvg:082f9-g3" kvg:number="1">
 			<path d="M26.42,35.58c3.08,0.67,5.83,0.67,9.17,0.67c6.83,0,30.19-1.6,41.83-2.17c1.64-0.08,6.51-0.15,7.33,0" kvg:type="㇐" id="hvg:082f9-s4"/>
 		</g>
 		<path d="m 28.197671,44.35 c 2.226325,4.414289 15.029378,14.682581 17.78,16.23" kvg:type="㇒" id="hvg:082f9-s5"/>
 		<path d="m 77.65,42.380491 c -3.038335,4.524677 -10.143491,11.78852 -16.5,16.92" kvg:type="㇔" id="hvg:082f9-s6"/>
-		<g kvg:part="2" kvg:element="干" id="hvg:082f9-g4">
+		<g kvg:element="干" id="hvg:082f9-g4" kvg:number="1">
 			<g kvg:element="十" id="hvg:082f9-g5">
 				<path d="M14.08,65.92c2.92,1.33,6.42,1.08,10,0.83c18.3-1.28,38.93-2.44,61.67-3.33C90,63.25,93,63.5,94.92,64.25" kvg:type="㇐" id="hvg:082f9-s7"/>
 				<path d="M53.25,36.58c0.85,0.37,0.94,4.62,1.11,5.36c0.17,0.74-0.11,54.02-0.28,58.64" kvg:type="㇑" id="hvg:082f9-s8"/>
