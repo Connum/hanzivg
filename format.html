@@ -366,7 +366,7 @@
 
           var fileNameMatch = file.name.match(/^[0-9a-f]{5}/i);
           if (fileNameMatch) {
-            this.charId = fileNameMatch;
+            this.charId = fileNameMatch[0];
           }
 
           this.onDragLeave()
