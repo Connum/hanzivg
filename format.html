@@ -538,6 +538,8 @@
             } else {
               that.reorderNumbers();
             }
+          }).on('delete_node.jstree', function (e, data) {
+              e, data.node.original.node.remove();
           });
 
           // open and select main character node
@@ -668,8 +670,6 @@
               p_node = this.selected_node.preview,
               $p_node = $(p_node);
           
-          $p_node.children().insertAfter($p_node);
-          $p_node.remove();
           this.selected_node = null;
           if (t_node.children.length) {
             var firstChild = $jstree.get_node(t_node.children[0]);
