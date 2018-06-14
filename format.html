@@ -193,9 +193,11 @@
                 <dt>ID:</dt>
                 <dd>{{selected_node.preview.id}}</dd>
               </template>
-              <template v-if="/^[kh]vg:StrokePaths_/.test(selected_node.tree.text)">
+              <template v-if="/^[kh]vg:Stroke(Paths|Numbers)_/.test(selected_node.tree.text) || selected_node.tree.type === 'text'">
                 <dt>character code:</dt>
                 <dd>{{charId}}</dd>
+                <dt>radical + strokes:</dt>
+                <dd>{{calcRadicalStrokes()}}</dd>
               </template>
               <template v-if="selected_node.tree.type == 'g'">
                 <dt>Element:</dt>
@@ -303,6 +305,42 @@
       computed: {
       },
       methods: {
+        calcRadicalStrokes: function() {
+          var $svg = $('#svg-holder svg').first(),
+            radicalsByType = {
+              _other: []
+            },
+            totalStrokes = $svg.find('path').length,
+            radicals = $svg.find('g').filter(function() {
+              var isRadical = this.hasAttribute('kvg:radical');
+              if (isRadical) {
+                var radicalType = this.getAttribute('kvg:radical');
+                if (radicalType) {
+                  if (typeof radicalsByType[radicalType] === 'undefined') {
+                    radicalsByType[radicalType] = [];
+                  }
+                  radicalsByType[radicalType].push(this);
+                  if (radicalType != 'general') {
+                    radicalsByType['_other'].push(this);
+                  }
+                }
+              }
+              return this.hasAttribute('kvg:radical');
+          });
+          var radicalGroup = (radicalsByType.general && radicalsByType.general.length ? radicalsByType.general[0] : (radicalsByType.tradit && radicalsByType.tradit.length ? radicalsByType.tradit[0] : (radicalsByType._other && radicalsByType._other.length ? radicalsByType._other[0]: null)));
+          if (radicalGroup) {
+            var radical = radicalGroup.getAttribute('kvg:element'),
+                radicalOriginal = radicalGroup.getAttribute('kvg:original'),
+                radicalStrokes = $(radicalGroup).find('path').length;
+            if (radicalGroup.hasAttribute('kvg:number') || radicalGroup.hasAttribute('kvg:part')) {
+              var additionalGroups = radicals.filter(function() {
+                return this != radicalGroup && this.getAttribute('kvg:element') === radical && this.getAttribute('kvg:number') === radicalGroup.getAttribute('kvg:number');
+              });
+              radicalStrokes += (additionalGroups.find('path').length);
+            }
+          }
+          return (radicalOriginal ? radicalOriginal + '/' : '') +(radical || '?') + ' + ' + (totalStrokes - (radicalStrokes || 0));
+        },
         onDragLeave: function () {
           document.documentElement.classList.remove('dropover')
         },
