@@ -446,7 +446,7 @@
           $svg.find('[id]').each(function() {
             if (!(new RegExp('^[hk]vg:(StrokePaths_|StrokeNumbers_)?' + that.charId)).test(this.id)) {
               fixed = true; // trigger renaming
-              this.id = this.id.replace(/^[hk]vg:(StrokePaths_|StrokeNumbers_)?[0-9a-f]{5}/, 'hvg:$1' + that.charId);
+              this.id = this.id.replace(/^[hk]vg:(StrokePaths_|StrokeNumbers_)?[0-9a-fX]{5}/, 'hvg:$1' + that.charId);
             }
           });
 
