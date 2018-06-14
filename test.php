@@ -142,6 +142,11 @@ foreach(glob('hanzi/*.svg') as $file) {
 		);
 
 		testElements(svg,
+			'[id$="-' + ['VtLst', 'HyougaiKaisho', 'KaishoVt3', 'HzFst', 'Insatsu', 'MidFst', 'KaishoVtLst', 'Kaisho', 'Jinmei', 'Hyougai', 'KaishoVt4'].join('"], [id$="-') + '"]',
+			'KanjiVG variant contained in ID string'
+		);
+
+		testElements(svg,
 			'[kvg\\:type="一"]',
 			'char "一" is used in <code>kvg:type</code> but should only be used as <code>kvg:element</code>. Should use "㇐" instead'
 		);
@@ -176,7 +181,7 @@ foreach(glob('hanzi/*.svg') as $file) {
 	s.classList.add('status');
 	if (totalErrors === 0) {
 		s.classList.add('ok');
-		s.textContent = 'Yippie, no errors found! :-)';
+		s.textContent = 'Yippee, no errors found! :-)';
 		document.body.appendChild(s);
 	} else {
 		s.classList.add('error');
