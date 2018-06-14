@@ -141,7 +141,7 @@ if (is_file($filename)) {
 		foreach ($variants as $variantFile) {
 			print '<td>&nbsp;&nbsp;&nbsp;</td><td>';
 			print '<img src="' . $variantFile . '" />';
-			print '<br><a href="format.html?#' . $variantFile . '">edit variant</a>';
+			print '<br><a href="format.html?#' . $variantFile . '" target="_blank">edit variant</a>';
 			print '</td>';
 		}
 	}
