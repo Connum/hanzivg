@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/jstree@3.3.5/dist/themes/default/style.min.css">
   <script src="https://unpkg.com/jstree@3.3.5/dist/jstree.js"></script>
   <script src="https://unpkg.com/filesaver.js@1.3.4/FileSaver.js"></script>
+  <script src="test.js"></script>
   <style type="text/css">
     * {
       box-sizing: border-box;
@@ -303,7 +304,7 @@
     </main>
     <fieldset id="eventlog" v-show="node_data"><legend>Event Log</legend>
       <ol>
-        <li v-for="event in eventLog" :class="event.type || 'warn'">{{event.message}}</li>
+        <li v-for="event in eventLog" :class="event.type || 'warn'" v-html="event.message"></li>
       </ol>
     </fieldset>
   </div>
@@ -358,6 +359,20 @@
       computed: {
       },
       methods: {
+        runTests: window.HANZIVG_runTests
+          ?
+            function() {
+              var svg = $('#svg-holder svg').first()[0];
+              window.HANZIVG_runTests(svg);
+            }
+          :
+            function() {
+              this.logEvent({
+                message: 'Global function runTests() not available! Automatic testing not possible.',
+                type: 'error'
+              });
+            }
+          ,
         logEvent: function(data) {
           this.eventLog.push(data);
           this.$nextTick(function() {
@@ -513,7 +528,6 @@
             }
           });
 
-          var idIndex = {};
           $svg.find('[id]').each(function() {
             if (!(new RegExp('^[hk]vg:(StrokePaths_|StrokeNumbers_)?' + that.charId)).test(this.id)) {
               var newId = this.id.replace(/^[hk]vg:(StrokePaths_|StrokeNumbers_)?[0-9a-fX]{5}/, 'hvg:$1' + that.charId);
@@ -522,17 +536,15 @@
               this.id = newId;
             }
 
-            if (typeof idIndex[this.id] !== 'undefined') {
-              var elIdx = Array.from($svg.find(this.tagName + ':not(svg > g, svg > g > g)')).indexOf(this);
-              if (elIdx >= 0) {
-                var oldId = this.id,
-                    newId = this.id.replace(/-([^\d]+)\d+$/, '-$1' + (elIdx+1));
-                this.id = newId;
-                that.logEvent({message: 'FIX: renamed duplicate id "' + oldId + '" to "' + newId + '"', element: this});
-                fixed = true;
-              }
+            var allEls = Array.from($svg.find(this.tagName + ':not(svg > g, svg > g > g)')),
+                elIdx = allEls.indexOf(this);
+            if (elIdx >= 0 && !(new RegExp('-[^d]+' + (elIdx + 1) + '$')).test(this.getAttribute('id'))) {
+              var oldId = this.id,
+                  newId = this.id.replace(/-([^\d]+)\d+$/, '-$1' + (elIdx+1));
+              this.id = newId;
+              that.logEvent({message: 'FIX: id did not match node position, renamed id "' + oldId + '" to "' + newId + '"', element: this});
+              fixed = true
             }
-            idIndex[this.id] = true;
           });
 
           if (fixed) {
@@ -637,12 +649,21 @@
               $jstree.select_node($treenodes[0].children[0]);
           }
 
-          if (!this.isDirty) {
-            this.logEvent({
-              message: 'Processed input SVG withot any issues.',
-              type: 'success'
-            })
-          }
+          this.$nextTick(function() {
+            this.runTests();
+            var testErrors = $svg[0].errorCount && $svg[0].errorCount > 0;
+            if (!this.isDirty && !testErrors) {
+              this.logEvent({
+                message: 'Processed input SVG without any issues.',
+                type: 'success'
+              })
+            } else if (testErrors) {
+              this.logEvent({
+                message: '<strong>There are errors in this SVG that could not be fixed automatically. Please edit the SVG file and load it again.</strong>',
+                type: 'error'
+              })
+            }
+          });
         },
         xmlToJsTree(xmlNode) {
           if (xmlNode.tagName == 'text') {
