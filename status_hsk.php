@@ -42,6 +42,10 @@
 		.char.clickable:hover {
 			text-decoration: underline;
 		}
+
+		.active {
+			outline: dashed blue 2px;
+		}
 	</style>
 </head>
 <body>
@@ -172,6 +176,11 @@ print $body;
 			if(char.classList.contains('legend')) continue;
 			char.classList.add('clickable');
 			char.addEventListener('click', function(ev) {
+				var active = document.querySelector('.active');
+				if (active) {
+					active.classList.remove('active');					
+				}
+				ev.target.classList.add('active');
 				window.open('compare.php?hanzi=' + ev.target.textContent);
 			});
 		}
