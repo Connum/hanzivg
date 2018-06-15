@@ -13,6 +13,20 @@
       box-sizing: border-box;
     }
 
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #app {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+    }
+
     #app p,
     fieldset legend,
     #config {
@@ -172,6 +186,8 @@
 
     #eventlog {
       width: 100%;
+      flex-grow: 1;
+      overflow: auto;
     }
 
     #eventlog ol {
@@ -188,6 +204,9 @@
 
     #eventlog ol li.warn {
       background: #fffbd5;
+    }
+    #eventlog ol li.success {
+      background: #dbffc5;
     }
     #eventlog ol li.info {
       background: #d5dbff;
@@ -341,6 +360,12 @@
       methods: {
         logEvent: function(data) {
           this.eventLog.push(data);
+          this.$nextTick(function() {
+            var lastLog = document.querySelector('#eventlog li:last-child');
+            if (lastLog) {
+              lastLog.scrollIntoView();
+            }
+          });
         },
         calcRadicalStrokes: function() {
           var $svg = $('#svg-holder svg').first(),
@@ -610,6 +635,13 @@
           if ($treenodes[0].children.length) {
               $jstree.open_node($treenodes[0].children[0]);
               $jstree.select_node($treenodes[0].children[0]);
+          }
+
+          if (!this.isDirty) {
+            this.logEvent({
+              message: 'Processed input SVG withot any issues.',
+              type: 'success'
+            })
           }
         },
         xmlToJsTree(xmlNode) {
@@ -958,12 +990,17 @@ kvg:type CDATA #IMPLIED >
         if (location.hash && location.hash.length) {
           var filename = location.hash.replace('#','');
           $.get(filename).done((res) => {
+            this.logEvent({
+              message: 'Loaded file "' + filename + '"',
+              type: 'info'
+            });
             var fileNameMatch = filename.match(/(?:^|\/)([0-9a-f]{5}).*\.svg$/i);
             if (fileNameMatch.length === 2) {
               this.charId = fileNameMatch[1];
               this.handleInput(res);
             }
           });
+          window.logEvent = this.logEvent;
         }
       },
       beforeDestroy: function () {
