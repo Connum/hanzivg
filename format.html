@@ -246,6 +246,8 @@
                 <dd>{{charId}}</dd>
                 <dt>radical + strokes:</dt>
                 <dd>{{calcRadicalStrokes()}}</dd>
+                <dt>run tests again:</dt>
+                <dd><button @click="runTests">run</button></dd>
               </template>
               <template v-if="selected_node.tree.type == 'g'">
                 <dt>Element:</dt>
@@ -361,9 +363,28 @@
       methods: {
         runTests: window.HANZIVG_runTests
           ?
-            () => {
+            (ev) => {
+              if (ev) {
+                this.logEvent({
+                  message: 'running tests...',
+                  type: 'info'
+                })
+              }
               var svg = $('#svg-holder svg').first()[0];
               window.HANZIVG_runTests(svg, app);
+              if (ev) {
+                if (svg.errorCount === 0) {
+                  this.logEvent({
+                    message: 'Tests finished without any issues.',
+                    type: 'success'
+                  })
+                } else {
+                  this.logEvent({
+                    message: 'There are still ' + svg.errorCount + ' issues',
+                    type: 'error'
+                  })
+                }
+              }
             }
           :
             function() {
@@ -1000,34 +1021,50 @@ kvg:type CDATA #IMPLIED >
           saveAs(new Blob([output], {type: 'image/svg+xml'}), this.charId + '.svg');
 
           $activeEl.addClass('active');
+        },
+        loadFromHash: function() {
+          // load file from hash via ajax
+          if (location.hash && location.hash.length && (!this.isDirty || confirm('Unsaved changes will be lost! Continue?'))) {
+            var filename = location.hash.replace('#','');
+            $.get(filename).done((res) => {
+              this.isDirty = false;
+              this.eventLog = [];
+              this.logEvent({
+                message: 'Loaded file "' + filename + '"',
+                type: 'info'
+              });
+              var fileNameMatch = filename.match(/(?:^|\/)([0-9a-f]{5}).*\.svg$/i);
+              if (fileNameMatch.length === 2) {
+                this.charId = fileNameMatch[1];
+                this.handleInput(res);
+              }
+            });
+            window.logEvent = this.logEvent;
+          }
         }
       },
       mounted: function () {
         document.addEventListener('dragover', this.onDragOver)
         document.addEventListener('dragleave', this.onDragLeave)
         document.addEventListener('drop', this.onDrop)
+        
+        window.addEventListener('hashchange', this.loadFromHash)
 
-        // load file from hash via ajax
-        if (location.hash && location.hash.length) {
-          var filename = location.hash.replace('#','');
-          $.get(filename).done((res) => {
-            this.logEvent({
-              message: 'Loaded file "' + filename + '"',
-              type: 'info'
-            });
-            var fileNameMatch = filename.match(/(?:^|\/)([0-9a-f]{5}).*\.svg$/i);
-            if (fileNameMatch.length === 2) {
-              this.charId = fileNameMatch[1];
-              this.handleInput(res);
-            }
-          });
-          window.logEvent = this.logEvent;
-        }
+        var that = this;
+        window.onbeforeunload = function() {
+          if (that.isDirty) {
+            return 'Unsaved changes will be lost! Continue?';
+          }
+          return;
+        };
+        this.loadFromHash();
       },
       beforeDestroy: function () {
         document.removeEventListener('dragover', this.onDragOver)
         document.removeEventListener('dragleave', this.onDragLeave)
         document.removeEventListener('drop', this.onDrop)
+
+        window.removeEventListener('hashchange', this.loadFromHash)
       },
       watch: {
         isDirty: function(val, oldVal) {
