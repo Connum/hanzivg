@@ -66,6 +66,19 @@ foreach(glob('hanzi/*.svg') as $file) {
 		}
 	}
 
+	function testDuplicateAttribute(svg, attribute, errorMessage) {
+		var elements = svg.querySelectorAll('[' + attribute + ']'),
+			exists = {};
+		for (var i = 0; i < elements.length; i++) {
+			var el = elements[i],
+				att = el.getAttribute(attribute);
+			if (typeof exists[att] !== 'undefined') {
+				addError(svg, errorMessage.replace('%att', att), el);
+			}
+			exists[att] = true;
+		}
+	}
+
 	function testNoElements(svg, selector, errorMessage) {
 		var elements = svg.querySelectorAll(selector);
 		if (!elements.length) {
@@ -135,6 +148,11 @@ foreach(glob('hanzi/*.svg') as $file) {
 			'text',
 			'No numbers defined'
 		);
+
+		testDuplicateAttribute(svg,
+			'id',
+			'Duplicate id %att'
+		);
 		
 		testElements(svg,
 			'[kvg\\:element="㇐"]',
@@ -147,8 +165,8 @@ foreach(glob('hanzi/*.svg') as $file) {
 		);
 
 		testElements(svg,
-			'[kvg\\:type="一"]',
-			'char "一" is used in <code>kvg:type</code> but should only be used as <code>kvg:element</code>. Should use "㇐" instead'
+			'path:not([kvg\\:type])',
+			'path missing <code>kvg:type</code> attribute'
 		);
 
 		testElements(svg,
