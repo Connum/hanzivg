@@ -165,8 +165,35 @@
 
     .jstree-anchor,
     #panel input,
-    #panel select {
+    #panel select,
+    #eventlog {
       font-family: stheiti, simhei, sans-serif, sans-serif;
+    }
+
+    #eventlog {
+      width: 100%;
+    }
+
+    #eventlog ol {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #eventlog ol li {
+      padding: 3px 6px;
+      margin: 3px 0px;
+      background: #eee;
+    }
+
+    #eventlog ol li.warn {
+      background: #fffbd5;
+    }
+    #eventlog ol li.info {
+      background: #d5dbff;
+    }
+    #eventlog ol li.error {
+      background: #ffc5c5;
     }
   </style>
 </head>
@@ -175,7 +202,7 @@
     <p><strong>This tool will convert raw SVG files created from the template to final HanziVG SVG files and allow for creating and editing stroke order, groups and group metadata.<br>Exporting is not yet implemented.</strong></p>
     <p v-if="!node_data">Drag &amp; drop SVG in this window</p>
     <p v-else><button @click="!preview ? playPreview() : stopPreview()">{{ !preview ? 'Play Preview' : 'Stop Preview'}}</button> <label><input type="checkbox" v-model="showStartingPoints"> show starting points</label> <button @click="exportSVG" :disabled="preview">Export</button></p>
-    <div class="flex" v-show="node_data">
+    <main class="flex" v-show="node_data">
       <fieldset id="preview" class="flex-half">
         <legend>Preview</legend>
         <div id="svg-holder" :class="{'show-starting-points': showStartingPoints}"></div>
@@ -254,7 +281,12 @@
           </div>
         </div>
       </fieldset>
-    </div>
+    </main>
+    <fieldset id="eventlog" v-show="node_data"><legend>Event Log</legend>
+      <ol>
+        <li v-for="event in eventLog" :class="event.type || 'warn'">{{event.message}}</li>
+      </ol>
+    </fieldset>
   </div>
   <script type="text/javascript">
     /*
@@ -300,12 +332,16 @@
           ],
           preview: false,
           previewTimeouts: [],
-          showStartingPoints: true
+          showStartingPoints: true,
+          eventLog: []
         }
       },
       computed: {
       },
       methods: {
+        logEvent: function(data) {
+          this.eventLog.push(data);
+        },
         calcRadicalStrokes: function() {
           var $svg = $('#svg-holder svg').first(),
             radicalsByType = {
@@ -360,6 +396,12 @@
             return;
           }
           this.isDirty = false;
+
+          this.eventLog = [];
+          this.logEvent({
+            message: 'File "' + file.name + '" dropped.',
+            type: 'info'
+          })
 
           fileReader.addEventListener('load', this.onFileLoaded)
           fileReader.readAsText(file)
@@ -417,16 +459,19 @@
             var svgNode = this;
             if (svgNode.hasAttribute('style')) {
               svgNode.removeAttribute('style');
+              that.logEvent({message: 'FIX: removed style attribute', element: svgNode});
               fixed = true;
             }
             if (svgNode.tagName === 'text' && svgNode.hasAttribute('id')) {
               svgNode.removeAttribute('id')
+              that.logEvent({message: 'FIX: removed id attribute', element: svgNode});
               fixed = true;
             }
             $(svgNode.attributes).each(function(k, attr) {
               if (/:/.test(attr.name) && !/^kvg:/.test(attr.name)) {
                 svgNode.removeAttribute(attr.name);
                 if (attr.name != 'xmlns:kvg') {
+                  that.logEvent({message: 'FIX: removed ' + attr.name + ' attribute', element: svgNode});
                   fixed = true;
                 }
               }
@@ -443,11 +488,26 @@
             }
           });
 
+          var idIndex = {};
           $svg.find('[id]').each(function() {
             if (!(new RegExp('^[hk]vg:(StrokePaths_|StrokeNumbers_)?' + that.charId)).test(this.id)) {
+              var newId = this.id.replace(/^[hk]vg:(StrokePaths_|StrokeNumbers_)?[0-9a-fX]{5}/, 'hvg:$1' + that.charId);
+              that.logEvent({message: 'FIX: id "' + this.id + '" did not match character code, renamed to "' + newId + '"', element: this});
               fixed = true; // trigger renaming
-              this.id = this.id.replace(/^[hk]vg:(StrokePaths_|StrokeNumbers_)?[0-9a-fX]{5}/, 'hvg:$1' + that.charId);
+              this.id = newId;
             }
+
+            if (typeof idIndex[this.id] !== 'undefined') {
+              var elIdx = Array.from($svg.find(this.tagName + ':not(svg > g, svg > g > g)')).indexOf(this);
+              if (elIdx >= 0) {
+                var oldId = this.id,
+                    newId = this.id.replace(/-([^\d]+)\d+$/, '-$1' + (elIdx+1));
+                this.id = newId;
+                that.logEvent({message: 'FIX: renamed duplicate id "' + oldId + '" to "' + newId + '"', element: this});
+                fixed = true;
+              }
+            }
+            idIndex[this.id] = true;
           });
 
           if (fixed) {
@@ -910,6 +970,16 @@ kvg:type CDATA #IMPLIED >
         document.removeEventListener('dragover', this.onDragOver)
         document.removeEventListener('dragleave', this.onDragLeave)
         document.removeEventListener('drop', this.onDrop)
+      },
+      watch: {
+        isDirty: function(val, oldVal) {
+          if (!oldVal && !!val) {
+            this.logEvent({
+              message: 'Changes have been made to the input SVG. You should export this file to apply the fixes.',
+              type: 'info'
+            })
+          }
+        }
       }
     }); 
   </script>
