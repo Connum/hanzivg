@@ -24,7 +24,7 @@ foreach(glob('hanzi/*.svg') as $file) {
 	$svg = file_get_contents($file);
 	$errors = array();
 
-	echo '<section class="unit" data-file="' . $file . '">';
+	echo '<section class="unit" data-file="' . $file . '" data-charid="' . basename($file, '.svg') . '">';
 	echo '<strong>' . basename($file) . '</strong>';
 	echo '<div class="svg">' . $svg . '</div>';
 	echo '<ul class="status"></ul>';

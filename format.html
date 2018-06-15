@@ -335,7 +335,7 @@
         return back;
     }
 
-    new Vue({
+    var app = new Vue({
       el: '#app',
       data: function() {
         return {
@@ -361,9 +361,9 @@
       methods: {
         runTests: window.HANZIVG_runTests
           ?
-            function() {
+            () => {
               var svg = $('#svg-holder svg').first()[0];
-              window.HANZIVG_runTests(svg);
+              window.HANZIVG_runTests(svg, app);
             }
           :
             function() {
@@ -649,7 +649,7 @@
               $jstree.select_node($treenodes[0].children[0]);
           }
 
-          this.$nextTick(function() {
+          this.$nextTick(() => {
             this.runTests();
             var testErrors = $svg[0].errorCount && $svg[0].errorCount > 0;
             if (!this.isDirty && !testErrors) {

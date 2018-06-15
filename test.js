@@ -75,8 +75,9 @@
 		}
 	}
 
-	function runTests(svg) {
+	function runTests(svg, ctx) {
 		svg.errorCount = 0;
+		var charId = ctx ? ctx.charId : svg.parentNode.parentNode.dataset.charid;
 
 		testIf(
 			svg,
@@ -154,6 +155,14 @@
 				return !(new RegExp('-[^d]+' + (elIdx + 1) + '$')).test(el.getAttribute('id'))
 			},
 			'ID does not match node position!'
+		);
+
+		testElements(svg,
+			function(el) {
+				if (!el.hasAttribute('id')) return false;
+				return !(new RegExp('^[hk]vg:(StrokePaths_|StrokeNumbers_)?' + charId)).test(el.getAttribute('id'))
+			},
+			'ID does not match character code!'
 		);
 		
 		testElements(svg,
