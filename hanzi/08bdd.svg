@@ -47,7 +47,7 @@ kvg:type CDATA #IMPLIED >
 <g id="hvg:08bdd" kvg:element="话">
 	<g id="hvg:08bdd-g1" kvg:element="讠" kvg:position="left" kvg:radical="general">
 		<path id="hvg:08bdd-s1" kvg:type="㇔" d="M21.42,13.75c2.51,1.37,8.97,9.11,9.5,11.67"/>
-		<path id="hvg:08bdd-s2" d="M12.99,41.54c1.33,0.32,2.63,0.07,3.92-0.24c3.04-0.74,9.44-2.27,12.21-3.06c1.65-0.47,3.45,0.54,3.19,2.55c-0.57,4.49-3.19,24.21-4.99,52.01c1.33,0.32,2.63,-5.07,12.92-15.24"/>
+		<path id="hvg:08bdd-s2" d="M12.99,41.54c1.33,0.32,2.63,0.07,3.92-0.24c3.04-0.74,9.44-2.27,12.21-3.06c1.65-0.47,3.45,0.54,3.19,2.55c-0.57,4.49-3.19,24.21-4.99,52.01c1.33,0.32,2.63,-5.07,12.92-15.24" kvg:type="㇊"/>
 	</g>
 	<g id="hvg:08bdd-g2" kvg:element="舌" kvg:position="right" kvg:phon="舌">
 		<g id="hvg:08bdd-g3" kvg:position="top" kvg:element="千">

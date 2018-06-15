@@ -47,7 +47,7 @@ kvg:type CDATA #IMPLIED >
 <g id="hvg:08bf4" kvg:element="说">
 	<g id="hvg:08bf4-g1" kvg:element="讠" kvg:position="left" kvg:radical="general">
 		<path id="hvg:08bf4-s1" kvg:type="㇔" d="M21.42,13.75c2.51,1.37,8.97,9.11,9.5,11.67"/>
-		<path id="hvg:08bf4-s2" d="M12.99,41.54c1.33,0.32,2.63,0.07,3.92-0.24c3.04-0.74,9.44-2.27,12.21-3.06c1.65-0.47,3.45,0.54,3.19,2.55c-0.57,4.49-3.19,24.21-4.99,52.01c1.33,0.32,2.63,-5.07,12.92-15.24"/>
+		<path id="hvg:08bf4-s2" d="M12.99,41.54c1.33,0.32,2.63,0.07,3.92-0.24c3.04-0.74,9.44-2.27,12.21-3.06c1.65-0.47,3.45,0.54,3.19,2.55c-0.57,4.49-3.19,24.21-4.99,52.01c1.33,0.32,2.63,-5.07,12.92-15.24" kvg:type="㇊"/>
 	</g>
 	<g id="hvg:08bf4-g2" kvg:element="兌" kvg:position="right" kvg:phon="兌">
 		<g id="hvg:08bf4-g3" kvg:element="八" kvg:variant="true" kvg:position="top">
@@ -65,7 +65,7 @@ kvg:type CDATA #IMPLIED >
 				<path id="hvg:08bf4-s7" kvg:type="㇐b" d="M55.36,58.97c5.24-0.34,16.66-1.33,25.14-2.03c1.41-0.12,2.74-0.22,3.95-0.32"/>
 			</g>
 			<g id="hvg:08bf4-g8" kvg:element="儿" kvg:original="八" kvg:position="bottom">
-				<g id="hvg:08bf4-g10" kvg:element="丿">
+				<g id="hvg:08bf4-g9" kvg:element="丿">
 					<path id="hvg:08bf4-s8" kvg:type="㇒" d="m60.96 64.66c0.06 0.74 0.15 1.93 -0.11 2.99c-1.73 6.85 -8.85 20.23 -20.21 28.57"/>
 				</g>
 				<path id="hvg:08bf4-s9" kvg:type="㇟" d="M71.14,60.29c1.03,1.03,1.29,2.12,1.31,3.99c0.07,5.13-0.24,12.35-0.24,18.71c0,10.25,1.29,11.76,12.16,11.76c9.87,0,10.62-2,10.62-7.99"/>
