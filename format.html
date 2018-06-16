@@ -68,7 +68,7 @@
     }
 
     #svg-holder svg text {
-      font-size: 7px !important;
+      font-size: 8px !important;
     }
 
     #svg-holder svg .active,
@@ -215,6 +215,11 @@
     #eventlog ol li.error {
       background: #ffc5c5;
     }
+
+    #eventlog .highlighter:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -306,7 +311,9 @@
     </main>
     <fieldset id="eventlog" v-show="node_data"><legend>Event Log</legend>
       <ol>
-        <li v-for="event in eventLog" :class="event.type || 'warn'" v-html="event.message"></li>
+        <li v-for="(event, eix) in eventLog" :class="event.type || 'warn'" v-html="" :key="eix">
+          <template v-if="event.context === 'test' && event.type === 'error'">TEST FAILED: </template><template v-if="event.elements">[</template><template v-for="(el, elix) in event.elements" v-if="el"><span class="highlighter" @click="logClick(el)" @mouseover="logHoverStart(el)" @mouseout="logHoverEnd(el)">#{{el.id}}</span><template v-if="elix < event.elements.length - 1">, </template></template><template v-if="event.elements">]:<br></template>
+          <span v-html="event.message"></span></li>
       </ol>
     </fieldset>
   </div>
@@ -402,6 +409,27 @@
               lastLog.scrollIntoView();
             }
           });
+        },
+        logHoverStart :function(node) {
+          node.classList.add('highlighted');
+        },
+        logHoverEnd :function(node) {
+          node.classList.remove('highlighted');
+        },
+        logClick :function(node) {
+          var $jstree = $('#tree').jstree();
+          var that = this;
+          this.getFlatJsTree().each(function() {
+            if (this.data.svgNode === node) {
+              $jstree.open_node(this);
+              that.$nextTick(() => {
+                $jstree.select_node(this);
+              })
+            } else {
+              $jstree.deselect_node(this);
+            }
+          });
+
         },
         calcRadicalStrokes: function() {
           var $svg = $('#svg-holder svg').first(),
@@ -622,26 +650,26 @@
               }
             }
           }).on('hover_node.jstree', function(e, data) {
-            data.node.original.node.classList.add('highlighted');
+            data.node.data.svgNode.classList.add('highlighted');
           }).on('dehover_node.jstree', function(e, data) {
-            data.node.original.node.classList.remove('highlighted');
+            data.node.data.svgNode.classList.remove('highlighted');
           }).on('select_node.jstree', function(e, data) {
             $('#svg-holder .active').removeClass('active');
-            data.node.original.node.classList.add('active');
+            data.node.data.svgNode.classList.add('active');
             that.selected_node = {
-              preview: data.node.original.node,
+              preview: data.node.data.svgNode,
               tree: data.node
             };
           }).on('deselect_node.jstree', function(e, data) {
-            data.node.original.node.classList.remove('active');
+            data.node.data.svgNode.classList.remove('active');
             that.selected_node = null;
           }).on('move_node.jstree', function(e, data) {
             var $jstree = $tree.jstree();
-            // $(data.parent.original.node)
-            // $(data.node.original.node).insertAfter()
+            // $(data.parent.data.svgNode)
+            // $(data.node.data.svgNode).insertAfter()
             var parent = $jstree.get_node(data.parent),
-                p_parent = parent.original.node,
-                p_node = data.node.original.node;
+                p_parent = parent.data.svgNode,
+                p_node = data.node.data.svgNode;
             if (data.position === 0) {
               p_parent.prepend(p_node);
             } else {
@@ -658,7 +686,7 @@
               that.reorderNumbers();
             }
           }).on('delete_node.jstree', function (e, data) {
-              e, data.node.original.node.remove();
+              e, data.node.data.svgNode.remove();
           });
 
           // open and select main character node
@@ -707,10 +735,10 @@
 
           label += this.getLabelSuffix(xmlNode)
 
-          return {
+          var treeNode = {
             text: firstChild && firstChild.nodeType === 3 ? 
                     firstChild.textContent : label,
-            node: xmlNode,
+            data: { svgNode: xmlNode },
             type: /^[kh]vg:StrokeNumbers/.test(xmlNode.id) ? '_numbers' : (/^[kh]vg:StrokePaths/.test(xmlNode.id) ? '_strokes' : xmlNode.tagName),
             children: [...xmlNode.children].filter(function (childNode) {
               var isSupportedElement = ['g', 'path', 'text'].includes(childNode.tagName);
@@ -720,6 +748,8 @@
               return isSupportedElement
             }).map(childNode => this.xmlToJsTree(childNode))
           };
+
+          return treeNode;
         },
         makeDirty() {
           this.isDirty = true;
@@ -784,7 +814,9 @@
 
           var newTreeGroup = $jstree.create_node(t_parent, {
             type: 'g',
-            node: t_node.type == 'g' ? p_node.children[0] : p_node.parentNode
+            data: {
+              svgNode: t_node.type == 'g' ? p_node.children[0] : p_node.parentNode
+            },
           }, this_index > 0 ? this_index : 0);
 
           // p_node.parentNode._treeNode = 
@@ -831,7 +863,7 @@
 
           this.getFlatJsTree().each(function(index, value) {
             var node = $jstree.get_node(this.id),
-                p_node = node.original.node;
+                p_node = node.data.svgNode;
             if (node.type != 'g' || p_node.parentNode.tagName === 'svg' || p_node.id === 'hvg:' + that.charId) {
               return true;
             }
@@ -850,7 +882,7 @@
 
           this.getFlatJsTree().each(function(index, value) {
             var node = $jstree.get_node(this.id),
-                p_node = node.original.node;
+                p_node = node.data.svgNode;
             if (node.type != 'path') {
               return true;
             }
@@ -869,7 +901,7 @@
 
           this.getFlatJsTree().each(function(index, value) {
             var node = $jstree.get_node(this.id),
-                p_node = node.original.node;
+                p_node = node.data.svgNode;
             if (node.type != 'text') {
               return true;
             }

@@ -7,12 +7,12 @@
 
 	function addError(svg, errorMessage, elements) {
 		svg.errorCount++;
-		if (elements && elements.length) {
-			errorMessage = '[' + Array.from(elements).map(function(n) {
-				return '#' + n.id;
-			}).join(', ') + ']:<br>' + errorMessage;
-		}
 		if (STANDALONE) {
+			if (elements && elements.length) {
+				errorMessage = '[<span class="highlighter">' + Array.from(elements).map(function(n) {
+					return '#' + n.id;
+				}).join('</span>, <span class="highlighter">') + '</span>]:<br>' + errorMessage;
+			}
 			var li = document.createElement('li');
 			
 			li.innerHTML = errorMessage;
@@ -23,9 +23,10 @@
 
 		} else {
 			window.logEvent && window.logEvent({
-				message: 'TEST FAILED: ' + errorMessage,
+				message: errorMessage,
 				type: 'error',
-				elements: elements
+				elements: elements,
+				context: 'test'
 			});
 		}
 	}
