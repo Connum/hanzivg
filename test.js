@@ -174,10 +174,13 @@
 			'char "一" is used in <code>kvg:type</code> but should only be used as <code>kvg:element</code>. Should use "㇐" instead'
 		);
 
-		testElements(svg,
-			'[id$="-' + ['VtLst', 'HyougaiKaisho', 'KaishoVt3', 'HzFst', 'Insatsu', 'MidFst', 'KaishoVtLst', 'Kaisho', 'Jinmei', 'Hyougai', 'KaishoVt4'].join('"], [id$="-') + '"]',
-			'KanjiVG variant contained in ID string'
-		);
+		// don't test this in format.html, as it will be fixed when making changes and exporting, anyway
+		if (STANDALONE) {
+			testElements(svg,
+				'[id$="-' + ['VtLst', 'HyougaiKaisho', 'KaishoVt3', 'HzFst', 'Insatsu', 'MidFst', 'KaishoVtLst', 'Kaisho', 'Jinmei', 'Hyougai', 'KaishoVt4'].join('"], [id$="-') + '"]',
+				'KanjiVG variant contained in ID string'
+			);			
+		}
 
 		testElements(svg,
 			function(el) {
