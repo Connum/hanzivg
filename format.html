@@ -1060,6 +1060,16 @@ kvg:type CDATA #IMPLIED >
             var filename = location.hash.replace('#','');
             $.get(filename).done((res) => {
               this.isDirty = false;
+              // mark animHanzi files as dirty in order to force namespace renaming
+              if (/^animhanzi\//.test(filename)) {
+                this.$nextTick(function() {
+                  this.logEvent({
+                    message:'Renaming <code>kvg:</code> namespace in id attributes to <code>hvg:</code> in files imported from AnimHanzi',
+                    type: 'warn'
+                  });
+                  this.makeDirty();
+                })
+              }
               this.eventLog = [];
               this.logEvent({
                 message: 'Loaded file "' + filename + '"',
