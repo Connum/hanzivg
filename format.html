@@ -312,7 +312,7 @@
     <fieldset id="eventlog" v-show="node_data"><legend>Event Log</legend>
       <ol>
         <li v-for="(event, eix) in eventLog" :class="event.type || 'warn'" v-html="" :key="eix">
-          <template v-if="event.context === 'test' && event.type === 'error'">TEST FAILED: </template><template v-if="event.elements">[</template><template v-for="(el, elix) in event.elements" v-if="el"><span class="highlighter" @click="logClick(el)" @mouseover="logHoverStart(el)" @mouseout="logHoverEnd(el)">#{{el.id}}</span><template v-if="elix < event.elements.length - 1">, </template></template><template v-if="event.elements">]:<br></template>
+          <template v-if="event.context === 'test' && event.type === 'error'">TEST FAILED: </template><template v-if="event.elements && event.elements.length">[</template><template v-for="(el, elix) in event.elements" v-if="el"><span class="highlighter" @click="logClick(el)" @mouseover="logHoverStart(el)" @mouseout="logHoverEnd(el)">#{{el.id}}</span><template v-if="elix < event.elements.length - 1">, </template></template><template v-if="event.elements && event.elements.length">]:<br></template>
           <span v-html="event.message"></span></li>
       </ol>
     </fieldset>
