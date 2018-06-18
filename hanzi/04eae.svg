@@ -43,7 +43,7 @@ xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
 kvg:type CDATA #IMPLIED >
 ]>
 <svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
-<g style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;" id="hvg:StrokePaths_04eae">
+<g id="hvg:StrokePaths_04eae" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <g kvg:element="亮" id="hvg:04eae">
 	<g kvg:radical="general" kvg:position="top" kvg:element="亠" id="hvg:04eae-g1">
 		<path d="M48.84,9.75c2.83,1.18,6.12,4.31,7.48,8.11" kvg:type="㇔" id="hvg:04eae-s1"/>
