@@ -32,6 +32,10 @@
 	}
 
 	function testIf(svg, assumption, errorMessage) {
+		if (typeof assumption === 'function') {
+			assumption = assumption();
+		}
+
 		if (!assumption) {
 			addError(svg, errorMessage);
 		}		
@@ -113,6 +117,22 @@
 			'Missing StrokePaths root group'
 		);
 
+		testIf(svg,
+			function() {
+				var sn = svg.querySelector('g[id^="hvg:StrokeNumbers_"], g[id^="kvg:StrokeNumbers_"]');
+				return sn && /font-size:8;/.test(sn.getAttribute('style'));
+			},
+			'Number group using wrong font size'
+		);
+
+		testIf(svg,
+			function() {
+				var sn = svg.querySelector('g[id^="hvg:StrokeNumbers_"], g[id^="kvg:StrokeNumbers_"]');
+				return sn && /fill:#808080$/.test(sn.getAttribute('style'));
+			},
+			'Number group using wrong fill style'
+		);
+
 		testNoElements(svg,
 			function(el) {
 				return el.matches('g[id^="hvg:StrokePaths_"] > g:first-child:last-child,g[id^="kvg:StrokePaths_"] > g:first-child:last-child')
@@ -137,11 +157,49 @@
 		);
 		
 		testElements(svg,
+			'path[transform], g[transform]',
+			'path or group using transform attribute'
+		);
+
+		testElements(svg,
 			function(el) {
 				var att = el.getAttribute('kvg:element');
 				return att && att.indexOf('㇐') >= 0
 			},
 			'char "㇐" is used in <code>kvg:element</code> but should only be used as <code>kvg:type</code>. Should use "一" instead'
+		);
+		
+		testElements(svg,
+			function(el) {
+				var att = el.getAttribute('kvg:element');
+				return att && att.indexOf('㇐') >= 0
+			},
+			'char "㇐" is used in <code>kvg:element</code> but should only be used as <code>kvg:type</code>. Should use "一" instead'
+		);
+		
+		testElements(svg,
+			function(el) {
+				var att = el.getAttribute('kvg:type');
+				return att && att.indexOf('一') >= 0
+			},
+			'char "一" is used in <code>kvg:type</code> but should only be used as <code>kvg:element</code>. Should use "㇐" instead'
+		);
+
+		
+		testElements(svg,
+			function(el) {
+				var att = el.getAttribute('kvg:element');
+				return att && att.indexOf('㇚') >= 0
+			},
+			'char "㇚" is used in <code>kvg:element</code> but should only be used as <code>kvg:type</code>. Should use "亅" instead'
+		);
+		
+		testElements(svg,
+			function(el) {
+				var att = el.getAttribute('kvg:type');
+				return att && att.indexOf('亅') >= 0
+			},
+			'char "亅" is used in <code>kvg:type</code> but should only be used as <code>kvg:element</code>. Should use "㇚" instead'
 		);
 
 		testElements(svg,
@@ -164,14 +222,6 @@
 				return !(new RegExp('^[hk]vg:(StrokePaths_|StrokeNumbers_)?' + charId)).test(el.getAttribute('id'))
 			},
 			'ID does not match character code!'
-		);
-		
-		testElements(svg,
-			function(el) {
-				var att = el.getAttribute('kvg:type');
-				return att && att.indexOf('一') >= 0
-			},
-			'char "一" is used in <code>kvg:type</code> but should only be used as <code>kvg:element</code>. Should use "㇐" instead'
 		);
 
 		// don't test this in format.html, as it will be fixed when making changes and exporting, anyway
@@ -208,6 +258,14 @@
 			},
 			'No radical defined'
 		);
+
+		/*testElements(svg,
+			function(el) {
+				if (!el.hasAttribute('id')) return false;
+				return el.attributes[0].name != 'id';
+			},
+			'id attribute is not the first attribute'
+		);*/
 	}
 
 	// when run in test.php
