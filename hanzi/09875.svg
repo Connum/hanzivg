@@ -43,24 +43,32 @@ xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
 kvg:type CDATA #IMPLIED >
 ]>
 <svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
-<g id="hvg:StrokePaths_05317" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<g id="hvg:05317" kvg:element="北">
-	<g id="hvg:05317-g1" kvg:position="left">
-		<path id="hvg:05317-s1" kvg:type="㇑a" d="m 37.25,21.5 c 1.19,1.19 2,3.25 2,4.75 0,1 0.957107,59.667262 0.957107,62.417262"/>
-		<path id="hvg:05317-s2" kvg:type="㇐c" d="m 15.37132,54.583631 c 2.61,0.5 3.52,-0.02033 6.12,-0.28033 4.82066,-0.733554 11.301573,-2.31934 16.03901,-3.396447"/>
-		<path id="hvg:05317-s3" kvg:type="㇀" d="m 11.335786,91.457107 c 1.88,1.12 4.29,0.87 6.5,-0.25 13.25,-6.75 14.421573,-7.262563 21.421573,-11.012563"/>
+<g id="hvg:StrokePaths_09875" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round">
+<g id="hvg:09875" kvg:element="页" kvg:radical="general">
+	<g kvg:position="top" kvg:element="丆" id="hvg:09875-g1">
+		<path id="hvg:09875-s1" kvg:type="㇐" d="m 24.418686,19.627265 c 3.19,0.62 6.25,0.75 9.73,0.5 20.64,-1.5 28.335974,-4.080805 46.525981,-4.200805 3.6,-0.02 5.77,0.24 7.57,0.49"/>
+		<g kvg:element="丿" id="hvg:09875-g2">
+			<path kvg:type="㇒" id="hvg:09875-s2" d="m 53.070461,20.984682 c 0,0 -0.163294,5.715279 -5.225399,12.573619"/>
+		</g>
 	</g>
-	<g id="hvg:05317-g2" kvg:element="匕" kvg:position="right" kvg:radical="general">
-		<path id="hvg:05317-s4" kvg:type="㇒" d="m 89.366117,38.656854 c -0.25,1.75 -1.13,3.26 -2.19,4.07 -5.94,4.55 -14.31,9.43 -23.06,12.68"/>
-		<path id="hvg:05317-s5" kvg:type="㇟" d="m 59.486117,15.080583 c 1.38,1.5 1.91,3.25 1.91,5.3 C 61.396117,21.500583 62,58.51 62,72.5 c 0,14 2,15.75 17.25,15.75 15.5,0 16.5,-1.5 16.5,-12.49"/>
+	<g kvg:element="贝" id="hvg:09875-g3">
+		<g kvg:element="冂" id="hvg:09875-g4">
+			<path kvg:type="㇑" id="hvg:09875-s3" d="m 38.210732,34.701354 c 0,0 2.286112,10.124211 -0.653175,37.884145"/>
+			<path kvg:type="㇆" id="hvg:09875-s4" d="m 39.027201,36.497585 c 0,0 23.67759,-3.102581 28.576402,-5.225399 0,0 4.408931,25.637115 0.979762,37.884145"/>
+		</g>
+		<g kvg:element="人" id="hvg:09875-g5">
+			<path kvg:type="㇒" id="hvg:09875-s5" d="m 54.961864,47.802966 c 0,0 3.694916,39.720339 -28.173728,45.955509"/>
+			<path kvg:type="㇏" id="hvg:09875-s6" d="m 59.349576,76.669492 c 0,0 16.396187,7.620762 19.398305,19.398305"/>
+		</g>
 	</g>
 </g>
 </g>
-<g id="hvg:StrokeNumbers_05317" style="font-size:8;fill:#808080">
-	<text x="32.346195" y="18.787689">1</text>
-	<text x="6.4393396" y="56.096195">2</text>
-	<text x="3.3232231" y="89.616119">3</text>
-	<text x="86.096191" y="35.68198">4</text>
-	<text x="51.969669" y="13.428932">5</text>
+<g id="hvg:StrokeNumbers_09875" style="font-size:8;fill:#808080">
+	<text y="21.961136" x="17.803379">1</text>
+	<text x="51.105446" y="15.435597">2</text>
+	<text y="36.796833" x="30.437012">3</text>
+	<text x="40.482563" y="33.332844">4</text>
+	<text y="48.259396" x="47.108559">5</text>
+	<text x="56.540554" y="73.574501">6</text>
 </g>
 </svg>

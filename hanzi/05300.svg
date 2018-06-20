@@ -43,24 +43,30 @@ xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
 kvg:type CDATA #IMPLIED >
 ]>
 <svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
-<g id="hvg:StrokePaths_05317" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<g id="hvg:05317" kvg:element="北">
-	<g id="hvg:05317-g1" kvg:position="left">
-		<path id="hvg:05317-s1" kvg:type="㇑a" d="m 37.25,21.5 c 1.19,1.19 2,3.25 2,4.75 0,1 0.957107,59.667262 0.957107,62.417262"/>
-		<path id="hvg:05317-s2" kvg:type="㇐c" d="m 15.37132,54.583631 c 2.61,0.5 3.52,-0.02033 6.12,-0.28033 4.82066,-0.733554 11.301573,-2.31934 16.03901,-3.396447"/>
-		<path id="hvg:05317-s3" kvg:type="㇀" d="m 11.335786,91.457107 c 1.88,1.12 4.29,0.87 6.5,-0.25 13.25,-6.75 14.421573,-7.262563 21.421573,-11.012563"/>
+<g id="hvg:StrokePaths_05300" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
+<g id="hvg:05300" kvg:element="匀">
+	<g id="hvg:05300-g1" kvg:element="勹" kvg:radical="general">
+		<g id="hvg:05300-g2" kvg:element="丿">
+			<path id="hvg:05300-s1" kvg:type="㇒" d="M39.347137,4.4573948C39.427372,5.4742637,39.363184,6.8222064,38.785487,8.2292693C34.260199,19.237467,25.434283,33.568226,10.799308,46.882115"/>
+		</g>
+		<path id="hvg:05300-s2" kvg:type="㇆" d="M32.52711,29.193324C35.271168,29.725407,37.501718,29.630814,39.908786,29.441629C45.894362,28.980491,79.288421,25.705227,85.065384,25.433274C90.842348,25.16132,95.447872,26.130893,94.34062,31.865561C90.633735,51.008711,85.418421,74.964253,72.291876,94.225643C68.954075,99.120803,63.546195,98.316767,58.635776,93.445255"/>
 	</g>
-	<g id="hvg:05317-g2" kvg:element="匕" kvg:position="right" kvg:radical="general">
-		<path id="hvg:05317-s4" kvg:type="㇒" d="m 89.366117,38.656854 c -0.25,1.75 -1.13,3.26 -2.19,4.07 -5.94,4.55 -14.31,9.43 -23.06,12.68"/>
-		<path id="hvg:05317-s5" kvg:type="㇟" d="m 59.486117,15.080583 c 1.38,1.5 1.91,3.25 1.91,5.3 C 61.396117,21.500583 62,58.51 62,72.5 c 0,14 2,15.75 17.25,15.75 15.5,0 16.5,-1.5 16.5,-12.49"/>
+	<g id="hvg:05300-g3" kvg:element="冫">
+		<g id="hvg:05300-g4" kvg:element="二" kvg:variant="true">
+			<g id="hvg:05300-g5" kvg:position="top">
+				<path id="hvg:05300-s3" kvg:type="㇔" d="M31.291482,43.275777C37.82266,45.238571,46.712765,50.275619,49.809859,54.366744"/>
+			</g>
+			<g id="hvg:05300-g6" kvg:position="bottom">
+				<path id="hvg:05300-s4" kvg:type="㇀" d="M27.263654,76.891574C28.900461,77.411833,31.740801,77.435481,33.634362,76.371316C41.304885,72.04371,56.854546,64.062471,64.862059,60.054115"/>
+			</g>
+		</g>
 	</g>
 </g>
 </g>
-<g id="hvg:StrokeNumbers_05317" style="font-size:8;fill:#808080">
-	<text x="32.346195" y="18.787689">1</text>
-	<text x="6.4393396" y="56.096195">2</text>
-	<text x="3.3232231" y="89.616119">3</text>
-	<text x="86.096191" y="35.68198">4</text>
-	<text x="51.969669" y="13.428932">5</text>
+<g id="hvg:StrokeNumbers_05300" style="font-size:8;fill:#808080">
+	<text transform="matrix(1 0 0 1 29.8 9.15)">1</text>
+	<text transform="matrix(1 0 0 1 36 26.15)">2</text>
+	<text transform="matrix(1 0 0 1 24.56 48.85)">3</text>
+	<text transform="matrix(1 0 0 1 20.2 79.75)">4</text>
 </g>
 </svg>
