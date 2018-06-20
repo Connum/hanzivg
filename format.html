@@ -596,6 +596,16 @@
             }
           });
 
+          $svg.find('[id^="kvg:StrokeNumbers_"], [id^="hvg:StrokeNumbers_"]').each(function() {
+            var sa = this.getAttribute('style');
+            newStyle = sa.replace(/(font-size:)([^;]+)/, '$18');
+            if (newStyle != sa) {
+              this.setAttribute('style', newStyle);
+              fixed = true;
+              that.logEvent({message: 'FIX: corrected font-size property on StrokeNumbers group', element: this});
+            }
+          });
+
           if (fixed) {
             this.makeDirty();
           }
