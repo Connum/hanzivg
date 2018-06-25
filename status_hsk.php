@@ -22,6 +22,10 @@
 			background-color: #008800;
 			color: #fff;
 		}
+		.char.wip {
+			background-color: #ff00ff;
+			color: #fff;
+		}
 		.char.animhanzi {
 			background-color: orange;
 		}
@@ -86,6 +90,7 @@ $count = (object)array(
 	'animhanzi' => 0,
 	'kanjivg' => 0,
 	'missing' => 0,
+	'wip' => 0,
 );
 
 // the following two functions have been taken from
@@ -112,6 +117,7 @@ foreach ($hsk as $n => $charstring) {
 		'animhanzi' => 0,
 		'kanjivg' => 0,
 		'missing' => 0,
+		'wip' => 0,
 	);
 	$thisTodoCount = 0;
 
@@ -136,6 +142,11 @@ foreach ($hsk as $n => $charstring) {
 			if(is_file('animhanzi/' . $d . '.svg')) {
 				unlink('animhanzi/' . $d . '.svg');
 			}
+		} else if (is_file('hanzi_wip/' . $d . '.svg') || is_file('hanzi_wip/' . $d . '.raw.svg')) {
+			$class.= ' wip';
+			$count->wip++;
+			$thisCount->wip++;
+			$thisTodoCount++;
 		} else if (is_file('animhanzi/' . $d . '.svg')) {
 			$class.= ' animhanzi';
 			$count->animhanzi++;
@@ -156,14 +167,14 @@ foreach ($hsk as $n => $charstring) {
 	}
 	?>
 <p>
-<span class="legend char ok"><?= $thisCount->hanzivg ?></span> <span class="legend char animhanzi"><?= $thisCount->animhanzi ?></span> <span class="legend char kanji"><?= $thisCount->kanjivg ?></span> <span class="legend char"><?= $thisCount->missing ?></span> | TODO: <?= $thisTodoCount ?>
+<span class="legend char ok"><?= $thisCount->hanzivg ?></span> <span class="legend char animhanzi"><?= $thisCount->animhanzi ?></span> <span class="legend char kanji"><?= $thisCount->kanjivg ?></span> <span class="legend char"><?= $thisCount->missing ?></span> <span class="legend char wip"><?= $thisCount->wip ?></span> | TODO: <?= $thisTodoCount ?>
 </p>
 <?php
 }
 $body = ob_get_clean();
 
 ?>
-<span class="legend char ok"><?= $count->hanzivg ?></span> = implemented in HanziVG | <span class="legend char animhanzi"><?= $count->animhanzi ?></span> = TODO: check from AnimHanzi | <span class="legend char kanji"><?= $count->kanjivg ?></span> = TODO: check from KanjiVG | <span class="legend char"><?= $count->missing ?></span> = TODO: missing / from scratch
+<span class="legend char ok"><?= $count->hanzivg ?></span> = implemented in HanziVG | <span class="legend char animhanzi"><?= $count->animhanzi ?></span> = TODO: check from AnimHanzi | <span class="legend char kanji"><?= $count->kanjivg ?></span> = TODO: check from KanjiVG | <span class="legend char"><?= $count->missing ?></span> = TODO: missing / from scratch | <span class="legend char wip"><?= $count->wip ?></span> = TODO: work in progress
 
 <?php
 print $body;

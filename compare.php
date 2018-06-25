@@ -54,7 +54,17 @@
 		.japanese {
 			font-family: "hiragino kaku gothic pro", "ms gothic", sans-serif;
 		}
+
+		.mdbg .char {
+			font-size: 48px;
+			line-height: 48px;
+		}
+
+		td {
+			text-align: center;
+		}
 	</style>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <?php
@@ -121,6 +131,16 @@ $filename = 'hanzi/' . $d . '.svg';
 if (is_file($filename)) {
 	print '<h1><a href="format.html?#' . $filename . '" target="_blank">HanziVG</a></h1>';
 	print '<img src="' . $filename . '" />';
+}
+
+$filename_w1 = 'hanzi_wip/' . $d . '.raw.svg';
+$filename_w2 = 'hanzi_wip/' . $d . '.svg';
+if (is_file($filename_w1)) {
+	print '<h1><a href="format.html?#' . $filename_w1 . '" target="_blank">HanziVG (WIP)</a></h1>';
+	print '<img src="' . $filename_w1 . '" />';
+} else if (is_file($filename_w2)) {
+	print '<h1><a href="format.html?#' . $filename_w2 . '" target="_blank">HanziVG (WIP)</a></h1>';
+	print '<img src="' . $filename_w2 . '" />';
 }
 
 $filename = 'animhanzi/' . $d . '.svg';
