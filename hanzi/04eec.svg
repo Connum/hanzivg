@@ -49,7 +49,7 @@ kvg:type CDATA #IMPLIED >
 		<path id="hvg:04eec-s1" kvg:type="㇒" d="M35.25,18.62c0.21,2-0.06,3.84-0.73,5.56C30.24,36.1,19,48.12,10,59.62"/>
 		<path id="hvg:04eec-s2" kvg:type="㇑" d="M27.91,42c0.92,0.92,1.25,2.38,1.25,3.5c0.03,10.67,0.17,32.06,0.22,43.37c0.01,2.49,0.02,4.52,0.02,5.88"/>
 	</g>
-	<g id="hvg:04eec-g2" kvg:element="门" kvg:radical="general">
+	<g id="hvg:04eec-g2" kvg:element="门" kvg:radical="general" kvg:position="right">
 		<path id="hvg:04eec-s3" kvg:type="㇔" d="m47.13 13.75c2.29 1.37 8.16 9.11 8.65 11.67"/>
 		<path id="hvg:04eec-s4" kvg:type="㇑" d="m46.76 29c0.52 0.76 0.66 2.46 0.66 4.04c0 16.29 -0.25 41.89 -0.25 62.84"/>
 		<path id="hvg:04eec-s5" kvg:type="㇆a" d="m61.5 17.83c8.23 -1.83 20.08 -4.66 24.5 -5.42c2.45 -0.42 3.68 0.83 3.68 5.17c0 2.33 0.06 70.25 0.06 73.58c0 11.08 -4.26 4.08 -6.01 1.58"/>
