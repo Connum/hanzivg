@@ -54,7 +54,7 @@ There's a lot to do and my available spare time (ok, I admit it - and motivation
 * Don't forget to add documantation so that this ends up more maintainable by volunteers than KanjiVG ;)
 
 See status.php to get startet and klick on any of the listed characters. Or see the status by HSK level in status_hsk.php.
-[The HSK level status page is also available online here](https://rawgit.com/Connum/hanzivg/master/status_hsk.html)
+[The HSK level status page is also available online here](http://htmlpreview.github.io/?https://github.com/Connum/hanzivg/blob/master/status_hsk.html)
 
 ### HSK1-6 characters known to be different from KanjiVG but not included in animHanzi:
 -
