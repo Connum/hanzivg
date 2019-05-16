@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8" />
   <title>Raw SVG formatter</title>
@@ -75,6 +76,7 @@
     #svg-holder svg .active path {
       stroke: #ff0000 !important;
     }
+
     #svg-holder svg text.active,
     #svg-holder svg .active text {
       fill: #ff0000 !important;
@@ -88,6 +90,7 @@
     #svg-holder svg .active *.highlighted {
       stroke: #00ff00 !important;
     }
+
     #svg-holder svg text.highlighted,
     #svg-holder svg .active.highlighted text,
     #svg-holder svg text.active.highlighted,
@@ -101,6 +104,7 @@
     .flex {
       display: flex;
     }
+
     .flex-half {
       width: 50%;
       flex-grow: 1;
@@ -126,7 +130,8 @@
       margin: 0;
     }
 
-    #config dt, #config dd {
+    #config dt,
+    #config dd {
       margin-bottom: 7px;
     }
 
@@ -137,22 +142,22 @@
     }
 
     #tree .tree-icon-group {
-      background-image: url('https://cdn.rawgit.com/Connum/hanzivg/4ab4d3ee/ico/ico_group.svg');
+      background-image: url('https://cdn.jsdelivr.net/gh/Connum/hanzivg@4ab4d3eea7aee333edf1de98ab50a449540138e0/ico/ico_group.svg');
       background-size: contain;
     }
 
     #tree .tree-icon-stroke {
-      background-image: url('https://cdn.rawgit.com/Connum/hanzivg/4ab4d3ee/ico/ico_stroke.svg');
+      background-image: url('https://cdn.jsdelivr.net/gh/Connum/hanzivg@4ab4d3eea7aee333edf1de98ab50a449540138e0/ico/ico_stroke.svg');
       background-size: contain;
     }
 
     #tree .tree-icon-group-num {
-      background-image: url('https://cdn.rawgit.com/Connum/hanzivg/4ab4d3ee/ico/ico_group_num.svg');
+      background-image: url('https://cdn.jsdelivr.net/gh/Connum/hanzivg@4ab4d3eea7aee333edf1de98ab50a449540138e0/ico/ico_group_num.svg');
       background-size: contain;
     }
 
     #tree .tree-icon-number {
-      background-image: url('https://cdn.rawgit.com/Connum/hanzivg/4ab4d3ee/ico/ico_number.svg');
+      background-image: url('https://cdn.jsdelivr.net/gh/Connum/hanzivg@4ab4d3eea7aee333edf1de98ab50a449540138e0/ico/ico_number.svg');
       background-size: contain;
     }
 
@@ -206,12 +211,15 @@
     #eventlog ol li.warn {
       background: #fffbd5;
     }
+
     #eventlog ol li.success {
       background: #dbffc5;
     }
+
     #eventlog ol li.info {
       background: #d5dbff;
     }
+
     #eventlog ol li.error {
       background: #ffc5c5;
     }
@@ -222,11 +230,16 @@
     }
   </style>
 </head>
+
 <body>
   <div id="app">
-    <p><strong>This tool will convert raw SVG files created from the template to final HanziVG SVG files and allow for creating and editing stroke order, groups and group metadata.<br>Exporting is not yet implemented.</strong></p>
+    <p><strong>This tool will convert raw SVG files created from the template to final HanziVG SVG files and allow for
+        creating and editing stroke order, groups and group metadata.<br>Exporting is not yet implemented.</strong></p>
     <p v-if="!node_data">Drag &amp; drop SVG in this window</p>
-    <p v-else><button @click="!preview ? playPreview() : stopPreview()">{{ !preview ? 'Play Preview' : 'Stop Preview'}}</button> <label><input type="checkbox" v-model="showStartingPoints"> show starting points</label> <button @click="exportSVG" :disabled="preview">Export</button></p>
+    <p v-else><button
+        @click="!preview ? playPreview() : stopPreview()">{{ !preview ? 'Play Preview' : 'Stop Preview'}}</button>
+      <label><input type="checkbox" v-model="showStartingPoints"> show starting points</label> <button
+        @click="exportSVG" :disabled="preview">Export</button></p>
     <main class="flex" v-show="node_data">
       <fieldset id="preview" class="flex-half">
         <legend>Preview</legend>
@@ -238,15 +251,20 @@
           <div id="tree" class="flex-half">
           </div>
           <div id="panel" class="flex-half" v-if="selected_node">
-            <button @click="addGroup" v-if="selected_node.tree.type==='path' || selected_node.tree.type==='g'">add group</button> 
-            <button @click="removeGroup" v-if="selected_node.tree.type==='g' && selected_node.preview.parentNode.parentNode.tagName !== 'svg'">remove group</button>
-            <a class="infolink" href="http://kanjivg.tagaini.net/format.html" target="_blank" title="format information" v-if="selected_node.preview.parentNode.tagName !== 'svg' && selected_node.tree.type !== 'text'">?</a>
+            <button @click="addGroup" v-if="selected_node.tree.type==='path' || selected_node.tree.type==='g'">add
+              group</button>
+            <button @click="removeGroup"
+              v-if="selected_node.tree.type==='g' && selected_node.preview.parentNode.parentNode.tagName !== 'svg'">remove
+              group</button>
+            <a class="infolink" href="http://kanjivg.tagaini.net/format.html" target="_blank" title="format information"
+              v-if="selected_node.preview.parentNode.tagName !== 'svg' && selected_node.tree.type !== 'text'">?</a>
             <dl>
               <template v-if="selected_node.preview.id">
                 <dt>ID:</dt>
                 <dd>{{selected_node.preview.id}}</dd>
               </template>
-              <template v-if="/^[kh]vg:Stroke(Paths|Numbers)_/.test(selected_node.tree.text) || selected_node.tree.type === 'text'">
+              <template
+                v-if="/^[kh]vg:Stroke(Paths|Numbers)_/.test(selected_node.tree.text) || selected_node.tree.type === 'text'">
                 <dt>character code:</dt>
                 <dd>{{charId}}</dd>
                 <dt>radical + strokes:</dt>
@@ -256,63 +274,82 @@
               </template>
               <template v-if="selected_node.tree.type == 'g'">
                 <dt>Element:</dt>
-                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:element')" @input="updateElAttr(selected_node, 'kvg:element', $event)"/></dd>
+                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:element')"
+                    @input="updateElAttr(selected_node, 'kvg:element', $event)" /></dd>
                 <dt>Original:</dt>
-                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:original')" @input="updateElAttr(selected_node, 'kvg:original', $event)"/></dd>
+                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:original')"
+                    @input="updateElAttr(selected_node, 'kvg:original', $event)" /></dd>
                 <dt>Position:</dt>
-                <dd><select :value="selected_node.preview.getAttribute('kvg:position')" @change="updateElAttr(selected_node, 'kvg:position', $event)">
-                  <option></option>
-                  <option>left</option>
-                  <option>right</option>
-                  <option>top</option>
-                  <option>bottom</option>
-                  <option>nyo</option>
-                  <option>tare</option>
-                  <option>kamae</option>
-                  <option>kamae1</option>
-                  <option>kamae2</option>
-                </select></dd>
+                <dd><select :value="selected_node.preview.getAttribute('kvg:position')"
+                    @change="updateElAttr(selected_node, 'kvg:position', $event)">
+                    <option></option>
+                    <option>left</option>
+                    <option>right</option>
+                    <option>top</option>
+                    <option>bottom</option>
+                    <option>nyo</option>
+                    <option>tare</option>
+                    <option>kamae</option>
+                    <option>kamae1</option>
+                    <option>kamae2</option>
+                  </select></dd>
                 <dt>Variant:</dt>
-                <dd><input type="checkbox" :checked="selected_node.preview.getAttribute('kvg:variant')" @input="updateElAttr(selected_node, 'kvg:variant', $event)"/></dd>
+                <dd><input type="checkbox" :checked="selected_node.preview.getAttribute('kvg:variant')"
+                    @input="updateElAttr(selected_node, 'kvg:variant', $event)" /></dd>
                 <dt>Partial:</dt>
-                <dd><input type="checkbox" :checked="selected_node.preview.getAttribute('kvg:partial')" @input="updateElAttr(selected_node, 'kvg:partial', $event)"/></dd>
+                <dd><input type="checkbox" :checked="selected_node.preview.getAttribute('kvg:partial')"
+                    @input="updateElAttr(selected_node, 'kvg:partial', $event)" /></dd>
                 <template v-if="selected_node.preview.getAttribute('kvg:part')">
-                <dt>Part:</dt>
-                <dd><input type="number" :value="selected_node.preview.getAttribute('kvg:part')" @input="updateElAttr(selected_node, 'kvg:part', $event)"/></dd>
+                  <dt>Part:</dt>
+                  <dd><input type="number" :value="selected_node.preview.getAttribute('kvg:part')"
+                      @input="updateElAttr(selected_node, 'kvg:part', $event)" /></dd>
                 </template>
                 <dt>Number:</dt>
-                <dd><input type="number" :value="selected_node.preview.getAttribute('kvg:number')" @input="updateElAttr(selected_node, 'kvg:number', $event)"/></dd>
+                <dd><input type="number" :value="selected_node.preview.getAttribute('kvg:number')"
+                    @input="updateElAttr(selected_node, 'kvg:number', $event)" /></dd>
                 <dt>Radical:</dt>
-                <dd><select :value="selected_node.preview.getAttribute('kvg:radical')" @change="updateElAttr(selected_node, 'kvg:radical', $event)">
-                  <option></option>
-                  <option>general</option>
-                  <option>nelson</option>
-                  <option>tradit</option>
-                </select></dd>
+                <dd><select :value="selected_node.preview.getAttribute('kvg:radical')"
+                    @change="updateElAttr(selected_node, 'kvg:radical', $event)">
+                    <option></option>
+                    <option>general</option>
+                    <option>nelson</option>
+                    <option>tradit</option>
+                  </select></dd>
                 <dt>Phon:</dt>
-                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:phon')" @input="updateElAttr(selected_node, 'kvg:phon', $event)"/></dd>
+                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:phon')"
+                    @input="updateElAttr(selected_node, 'kvg:phon', $event)" /></dd>
                 <dt>tradForm:</dt>
-                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:tradForm')" @input="updateElAttr(selected_node, 'kvg:tradForm', $event)"/></dd>
+                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:tradForm')"
+                    @input="updateElAttr(selected_node, 'kvg:tradForm', $event)" /></dd>
                 <dt>radicalForm:</dt>
-                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:radicalForm')" @input="updateElAttr(selected_node, 'kvg:radicalForm', $event)"/></dd>
+                <dd><input type="text" :value="selected_node.preview.getAttribute('kvg:radicalForm')"
+                    @input="updateElAttr(selected_node, 'kvg:radicalForm', $event)" /></dd>
               </template>
               <template v-if="selected_node.tree.type == 'path'">
                 <dt>Type:</dt>
                 <dd>
-                  <select :value="selected_node.preview.getAttribute('kvg:type') ? selected_node.preview.getAttribute('kvg:type')[0] : ''" @change="updateElAttr(selected_node, 'kvg:type', $event), $event.target.nextElementSibling.value = $event.target.value">
+                  <select
+                    :value="selected_node.preview.getAttribute('kvg:type') ? selected_node.preview.getAttribute('kvg:type')[0] : ''"
+                    @change="updateElAttr(selected_node, 'kvg:type', $event), $event.target.nextElementSibling.value = $event.target.value">
                     <option v-for="s in strokeTypes">{{ s }}</option>
                   </select>
-                  <input type="text" :value="selected_node.preview.getAttribute('kvg:type')" @input="updateElAttr(selected_node, 'kvg:type', $event)"/></dd>
+                  <input type="text" :value="selected_node.preview.getAttribute('kvg:type')"
+                    @input="updateElAttr(selected_node, 'kvg:type', $event)" /></dd>
               </template>
             </dl>
           </div>
         </div>
       </fieldset>
     </main>
-    <fieldset id="eventlog" v-show="node_data"><legend>Event Log</legend>
+    <fieldset id="eventlog" v-show="node_data">
+      <legend>Event Log</legend>
       <ol>
         <li v-for="(event, eix) in eventLog" :class="event.type || 'warn'" v-html="" :key="eix">
-          <template v-if="event.context === 'test' && event.type === 'error'">TEST FAILED: </template><template v-if="event.elements && event.elements.length">[</template><template v-for="(el, elix) in event.elements" v-if="el"><span class="highlighter" @click="logClick(el)" @mouseover="logHoverStart(el)" @mouseout="logHoverEnd(el)">#{{el.id}}</span><template v-if="elix < event.elements.length - 1">, </template></template><template v-if="event.elements && event.elements.length">]:<br></template>
+          <template v-if="event.context === 'test' && event.type === 'error'">TEST FAILED: </template><template
+            v-if="event.elements && event.elements.length">[</template><template v-for="(el, elix) in event.elements"
+            v-if="el"><span class="highlighter" @click="logClick(el)" @mouseover="logHoverStart(el)"
+              @mouseout="logHoverEnd(el)">#{{el.id}}</span><template v-if="elix < event.elements.length - 1">,
+            </template></template><template v-if="event.elements && event.elements.length">]:<br></template>
           <span v-html="event.message"></span></li>
       </ol>
     </fieldset>
@@ -322,31 +359,31 @@
      * the following two functions have been taken from
      * https://stackoverflow.com/questions/21647928/javascript-unicode-string-to-hex/26375459#answer-21648161
      */
-    String.prototype.hexEncode = function(){
-        var hex, i;
+    String.prototype.hexEncode = function () {
+      var hex, i;
 
-        var result = "";
-        for (i=0; i<this.length; i++) {
-            hex = this.charCodeAt(i).toString(16);
-            result += ("000"+hex).slice(-4);
-        }
+      var result = "";
+      for (i = 0; i < this.length; i++) {
+        hex = this.charCodeAt(i).toString(16);
+        result += ("000" + hex).slice(-4);
+      }
 
-        return result
+      return result
     }
-    String.prototype.hexDecode = function(){
-        var j;
-        var hexes = this.match(/.{1,4}/g) || [];
-        var back = "";
-        for(j = 0; j<hexes.length; j++) {
-            back += String.fromCharCode(parseInt(hexes[j], 16));
-        }
+    String.prototype.hexDecode = function () {
+      var j;
+      var hexes = this.match(/.{1,4}/g) || [];
+      var back = "";
+      for (j = 0; j < hexes.length; j++) {
+        back += String.fromCharCode(parseInt(hexes[j], 16));
+      }
 
-        return back;
+      return back;
     }
 
     var app = new Vue({
       el: '#app',
-      data: function() {
+      data: function () {
         return {
           isDirty: false,
           charId: 'XXXXX',
@@ -370,56 +407,56 @@
       methods: {
         runTests: window.HANZIVG_runTests
           ?
-            (ev) => {
-              if (ev) {
+          (ev) => {
+            if (ev) {
+              this.logEvent({
+                message: 'running tests...',
+                type: 'info'
+              })
+            }
+            var svg = $('#svg-holder svg').first()[0];
+            window.HANZIVG_runTests(svg, app);
+            if (ev) {
+              if (svg.errorCount === 0) {
                 this.logEvent({
-                  message: 'running tests...',
-                  type: 'info'
+                  message: 'Tests finished without any issues.',
+                  type: 'success'
+                })
+              } else {
+                this.logEvent({
+                  message: 'There are still ' + svg.errorCount + ' issues',
+                  type: 'error'
                 })
               }
-              var svg = $('#svg-holder svg').first()[0];
-              window.HANZIVG_runTests(svg, app);
-              if (ev) {
-                if (svg.errorCount === 0) {
-                  this.logEvent({
-                    message: 'Tests finished without any issues.',
-                    type: 'success'
-                  })
-                } else {
-                  this.logEvent({
-                    message: 'There are still ' + svg.errorCount + ' issues',
-                    type: 'error'
-                  })
-                }
-              }
             }
+          }
           :
-            function() {
-              this.logEvent({
-                message: 'Global function runTests() not available! Automatic testing not possible.',
-                type: 'error'
-              });
-            }
-          ,
-        logEvent: function(data) {
+          function () {
+            this.logEvent({
+              message: 'Global function runTests() not available! Automatic testing not possible.',
+              type: 'error'
+            });
+          }
+        ,
+        logEvent: function (data) {
           this.eventLog.push(data);
-          this.$nextTick(function() {
+          this.$nextTick(function () {
             var lastLog = document.querySelector('#eventlog li:last-child');
             if (lastLog) {
               lastLog.scrollIntoView();
             }
           });
         },
-        logHoverStart :function(node) {
+        logHoverStart: function (node) {
           node.classList.add('highlighted');
         },
-        logHoverEnd :function(node) {
+        logHoverEnd: function (node) {
           node.classList.remove('highlighted');
         },
-        logClick :function(node) {
+        logClick: function (node) {
           var $jstree = $('#tree').jstree();
           var that = this;
-          this.getFlatJsTree().each(function() {
+          this.getFlatJsTree().each(function () {
             if (this.data.svgNode === node) {
               $jstree.open_node(this);
               that.$nextTick(() => {
@@ -431,13 +468,13 @@
           });
 
         },
-        calcRadicalStrokes: function() {
+        calcRadicalStrokes: function () {
           var $svg = $('#svg-holder svg').first(),
             radicalsByType = {
               _other: []
             },
             totalStrokes = $svg.find('path').length,
-            radicals = $svg.find('g').filter(function() {
+            radicals = $svg.find('g').filter(function () {
               var isRadical = this.hasAttribute('kvg:radical');
               if (isRadical) {
                 var radicalType = this.getAttribute('kvg:radical');
@@ -452,20 +489,20 @@
                 }
               }
               return this.hasAttribute('kvg:radical');
-          });
-          var radicalGroup = (radicalsByType.general && radicalsByType.general.length ? radicalsByType.general[0] : (radicalsByType.tradit && radicalsByType.tradit.length ? radicalsByType.tradit[0] : (radicalsByType._other && radicalsByType._other.length ? radicalsByType._other[0]: null)));
+            });
+          var radicalGroup = (radicalsByType.general && radicalsByType.general.length ? radicalsByType.general[0] : (radicalsByType.tradit && radicalsByType.tradit.length ? radicalsByType.tradit[0] : (radicalsByType._other && radicalsByType._other.length ? radicalsByType._other[0] : null)));
           if (radicalGroup) {
             var radical = radicalGroup.getAttribute('kvg:element'),
-                radicalOriginal = radicalGroup.getAttribute('kvg:original'),
-                radicalStrokes = $(radicalGroup).find('path').length;
+              radicalOriginal = radicalGroup.getAttribute('kvg:original'),
+              radicalStrokes = $(radicalGroup).find('path').length;
             if (radicalGroup.hasAttribute('kvg:number') || radicalGroup.hasAttribute('kvg:part')) {
-              var additionalGroups = radicals.filter(function() {
+              var additionalGroups = radicals.filter(function () {
                 return this != radicalGroup && this.getAttribute('kvg:element') === radical && this.getAttribute('kvg:number') === radicalGroup.getAttribute('kvg:number');
               });
               radicalStrokes += (additionalGroups.find('path').length);
             }
           }
-          return (radicalOriginal ? radicalOriginal + '/' : '') +(radical || '?') + ' + ' + (totalStrokes - (radicalStrokes || 0));
+          return (radicalOriginal ? radicalOriginal + '/' : '') + (radical || '?') + ' + ' + (totalStrokes - (radicalStrokes || 0));
         },
         onDragLeave: function () {
           document.documentElement.classList.remove('dropover')
@@ -503,14 +540,14 @@
           this.onDragLeave()
         },
         onFileLoaded: function (ev) {
-          this.handleInput((new DOMParser()).parseFromString(ev.target.result,'image/svg+xml'));
+          this.handleInput((new DOMParser()).parseFromString(ev.target.result, 'image/svg+xml'));
         },
         handleInput: function (xml) {
           var $tree = $('#tree')
           var that = this;
 
           var holder = document.getElementById('svg-holder'),
-              $holder = $(holder);
+            $holder = $(holder);
 
           $holder.find('svg').remove();
           holder.appendChild(xml.children[0])
@@ -544,23 +581,23 @@
 
           // clean styles
           var fixed = false;
-          $svg.find('text, path').each(function() {
+          $svg.find('text, path').each(function () {
             var svgNode = this;
             if (svgNode.hasAttribute('style')) {
               svgNode.removeAttribute('style');
-              that.logEvent({message: 'FIX: removed style attribute', element: svgNode});
+              that.logEvent({ message: 'FIX: removed style attribute', element: svgNode });
               fixed = true;
             }
             if (svgNode.tagName === 'text' && svgNode.hasAttribute('id')) {
               svgNode.removeAttribute('id')
-              that.logEvent({message: 'FIX: removed id attribute', element: svgNode});
+              that.logEvent({ message: 'FIX: removed id attribute', element: svgNode });
               fixed = true;
             }
-            $(svgNode.attributes).each(function(k, attr) {
+            $(svgNode.attributes).each(function (k, attr) {
               if (/:/.test(attr.name) && !/^kvg:/.test(attr.name)) {
                 svgNode.removeAttribute(attr.name);
                 if (attr.name != 'xmlns:kvg') {
-                  that.logEvent({message: 'FIX: removed ' + attr.name + ' attribute', element: svgNode});
+                  that.logEvent({ message: 'FIX: removed ' + attr.name + ' attribute', element: svgNode });
                   fixed = true;
                 }
               }
@@ -568,41 +605,41 @@
             if (svgNode.tagName === 'path') {
               var pathStart = svgNode.getAttribute('d').match(/^[M]\s*([\d\.]+)[ ,]([\d\.]+)[a-z\s]/i),
                 startPoint = that.svgEl('circle');
-                startPoint.setAttribute('cx', pathStart[1]);
-                startPoint.setAttribute('cy', pathStart[2]);
-                startPoint.setAttribute('r', '1.5');
-                startPoint.setAttribute('fill', '#ff00ff');
-                startPoint.setAttribute('stroke', 'none');
+              startPoint.setAttribute('cx', pathStart[1]);
+              startPoint.setAttribute('cy', pathStart[2]);
+              startPoint.setAttribute('r', '1.5');
+              startPoint.setAttribute('fill', '#ff00ff');
+              startPoint.setAttribute('stroke', 'none');
               strokeStarts.appendChild(startPoint);
             }
           });
 
-          $svg.find('[id]').each(function() {
+          $svg.find('[id]').each(function () {
             if (!(new RegExp('^[hk]vg:(StrokePaths_|StrokeNumbers_)?' + that.charId)).test(this.id)) {
               var newId = this.id.replace(/^[hk]vg:(StrokePaths_|StrokeNumbers_)?[0-9a-fX]{5}/, 'hvg:$1' + that.charId);
-              that.logEvent({message: 'FIX: id "' + this.id + '" did not match character code, renamed to "' + newId + '"', element: this});
+              that.logEvent({ message: 'FIX: id "' + this.id + '" did not match character code, renamed to "' + newId + '"', element: this });
               fixed = true; // trigger renaming
               this.id = newId;
             }
 
             var allEls = Array.from($svg.find(this.tagName + ':not(svg > g, svg > g > g)')),
-                elIdx = allEls.indexOf(this);
+              elIdx = allEls.indexOf(this);
             if (elIdx >= 0 && !(new RegExp('-[^d]+' + (elIdx + 1) + '$')).test(this.getAttribute('id'))) {
               var oldId = this.id,
-                  newId = this.id.replace(/-([^\d]+)\d+$/, '-$1' + (elIdx+1));
+                newId = this.id.replace(/-([^\d]+)\d+$/, '-$1' + (elIdx + 1));
               this.id = newId;
-              that.logEvent({message: 'FIX: id did not match node position, renamed id "' + oldId + '" to "' + newId + '"', element: this});
+              that.logEvent({ message: 'FIX: id did not match node position, renamed id "' + oldId + '" to "' + newId + '"', element: this });
               fixed = true
             }
           });
 
-          $svg.find('[id^="kvg:StrokeNumbers_"], [id^="hvg:StrokeNumbers_"]').each(function() {
+          $svg.find('[id^="kvg:StrokeNumbers_"], [id^="hvg:StrokeNumbers_"]').each(function () {
             var sa = this.getAttribute('style');
             newStyle = sa.replace(/(font-size:)([^;]+)/, '$18');
             if (newStyle != sa) {
               this.setAttribute('style', newStyle);
               fixed = true;
-              that.logEvent({message: 'FIX: corrected font-size property on StrokeNumbers group', element: this});
+              that.logEvent({ message: 'FIX: corrected font-size property on StrokeNumbers group', element: this });
             }
           });
 
@@ -617,7 +654,7 @@
             stroke: 0
           };
 
-          if($tree.hasClass('jstree')) {
+          if ($tree.hasClass('jstree')) {
             $tree.jstree("destroy")
           }
           $tree.jstree({
@@ -659,36 +696,36 @@
                 icon: 'tree-icon-group-num'
               }
             }
-          }).on('hover_node.jstree', function(e, data) {
+          }).on('hover_node.jstree', function (e, data) {
             data.node.data.svgNode.classList.add('highlighted');
-          }).on('dehover_node.jstree', function(e, data) {
+          }).on('dehover_node.jstree', function (e, data) {
             data.node.data.svgNode.classList.remove('highlighted');
-          }).on('select_node.jstree', function(e, data) {
+          }).on('select_node.jstree', function (e, data) {
             $('#svg-holder .active').removeClass('active');
             data.node.data.svgNode.classList.add('active');
             that.selected_node = {
               preview: data.node.data.svgNode,
               tree: data.node
             };
-          }).on('deselect_node.jstree', function(e, data) {
+          }).on('deselect_node.jstree', function (e, data) {
             data.node.data.svgNode.classList.remove('active');
             that.selected_node = null;
-          }).on('move_node.jstree', function(e, data) {
+          }).on('move_node.jstree', function (e, data) {
             var $jstree = $tree.jstree();
             // $(data.parent.data.svgNode)
             // $(data.node.data.svgNode).insertAfter()
             var parent = $jstree.get_node(data.parent),
-                p_parent = parent.data.svgNode,
-                p_node = data.node.data.svgNode;
+              p_parent = parent.data.svgNode,
+              p_node = data.node.data.svgNode;
             if (data.position === 0) {
               p_parent.prepend(p_node);
             } else {
               $('#preview .highlighted').removeClass('highlighted');
-              $(p_node).insertAfter(p_parent.children[data.position-1]);
+              $(p_node).insertAfter(p_parent.children[data.position - 1]);
             }
 
             $jstree.open_node(parent);
-            
+
             if (data.node.type !== 'text') {
               that.reorderGroups();
               that.reorderStrokes();
@@ -696,16 +733,16 @@
               that.reorderNumbers();
             }
           }).on('delete_node.jstree', function (e, data) {
-              e, data.node.data.svgNode.remove();
+            e, data.node.data.svgNode.remove();
           });
 
           // open and select main character node
           var $jstree = $tree.jstree(),
-              $treenodes = $jstree.get_json();
+            $treenodes = $jstree.get_json();
           $jstree.open_node($treenodes[0]);
           if ($treenodes[0].children.length) {
-              $jstree.open_node($treenodes[0].children[0]);
-              $jstree.select_node($treenodes[0].children[0]);
+            $jstree.open_node($treenodes[0].children[0]);
+            $jstree.select_node($treenodes[0].children[0]);
           }
 
           this.$nextTick(() => {
@@ -746,8 +783,8 @@
           label += this.getLabelSuffix(xmlNode)
 
           var treeNode = {
-            text: firstChild && firstChild.nodeType === 3 ? 
-                    firstChild.textContent : label,
+            text: firstChild && firstChild.nodeType === 3 ?
+              firstChild.textContent : label,
             data: { svgNode: xmlNode },
             type: /^[kh]vg:StrokeNumbers/.test(xmlNode.id) ? '_numbers' : (/^[kh]vg:StrokePaths/.test(xmlNode.id) ? '_strokes' : xmlNode.tagName),
             children: [...xmlNode.children].filter(function (childNode) {
@@ -764,15 +801,15 @@
         makeDirty() {
           this.isDirty = true;
           var that = this,
-              kvgIds = $('#preview svg [id^="kvg:"]');
+            kvgIds = $('#preview svg [id^="kvg:"]');
           if (kvgIds.length) {
-            kvgIds.each(function() {
+            kvgIds.each(function () {
               this.id = this.id
                 .replace(/^kvg:/, 'hvg:')
                 .replace(new RegExp(that.charId + '-(VtLst|HyougaiKaisho|KaishoVt3|HzFst|Insatsu|MidFst|KaishoVtLst|Kaisho|Jinmei|Hyougai|KaishoVt4)'), that.charId);
             });
             var $jstree = $('#tree').jstree();
-            this.getFlatJsTree().each(function(index, value) {
+            this.getFlatJsTree().each(function (index, value) {
               if (this.type == 'text' || !/^kvg:/.test(this.text)) return true;
               $jstree.rename_node(this,
                 this.text
@@ -791,7 +828,7 @@
           if (!val) {
             el.preview.removeAttribute(attr, val);
           } else {
-            el.preview.setAttribute(attr, val);            
+            el.preview.setAttribute(attr, val);
           }
 
           if (attr === 'kvg:element' || attr === 'kvg:type') {
@@ -804,10 +841,10 @@
         addGroup() {
           this.makeDirty();
           var $tree = $('#tree'),
-              t_node = this.selected_node.tree,
-              p_node = this.selected_node.preview,
-              $jstree = $tree.jstree();
-          
+            t_node = this.selected_node.tree,
+            p_node = this.selected_node.preview,
+            $jstree = $tree.jstree();
+
           var newPreviewGroup = this.svgEl('g');
 
           if (t_node.type == 'g') {
@@ -835,22 +872,22 @@
           $jstree.open_node([t_node, newTreeGroup]);
           $jstree.deselect_node(t_node);
           $jstree.select_node(newTreeGroup);
-          
+
           this.reorderGroups();
         },
         removeGroup() {
           this.makeDirty();
           var $tree = $('#tree'),
-              $jstree = $tree.jstree(),
-              t_node = this.selected_node.tree,
-              t_parent = $jstree.get_node(t_node.parent),
-              p_node = this.selected_node.preview,
-              $p_node = $(p_node);
-          
+            $jstree = $tree.jstree(),
+            t_node = this.selected_node.tree,
+            t_parent = $jstree.get_node(t_node.parent),
+            p_node = this.selected_node.preview,
+            $p_node = $(p_node);
+
           this.selected_node = null;
           if (t_node.children.length) {
             var firstChild = $jstree.get_node(t_node.children[0]);
-            $jstree.move_node(t_node.children.slice(0), t_parent, $.inArray(t_node.id, t_parent.children));            
+            $jstree.move_node(t_node.children.slice(0), t_parent, $.inArray(t_node.id, t_parent.children));
             $jstree.select_node(firstChild);
           }
           $jstree.delete_node(t_node);
@@ -859,7 +896,7 @@
         },
         getFlatJsTree() {
           var $tree = $('#tree'),
-              $jstree = $tree.jstree();
+            $jstree = $tree.jstree();
           return $($jstree.get_json($tree, {
             flat: true
           }));
@@ -867,13 +904,13 @@
         reorderGroups() {
           this.makeDirty();
           var $tree = $('#tree'),
-              $jstree = $tree.jstree(),
-              groupIndex = 0,
-              that = this;
+            $jstree = $tree.jstree(),
+            groupIndex = 0,
+            that = this;
 
-          this.getFlatJsTree().each(function(index, value) {
+          this.getFlatJsTree().each(function (index, value) {
             var node = $jstree.get_node(this.id),
-                p_node = node.data.svgNode;
+              p_node = node.data.svgNode;
             if (node.type != 'g' || p_node.parentNode.tagName === 'svg' || p_node.id === 'hvg:' + that.charId) {
               return true;
             }
@@ -886,13 +923,13 @@
         reorderStrokes() {
           this.makeDirty();
           var $tree = $('#tree'),
-              $jstree = $tree.jstree(),
-              strokeIndex = 0,
-              that = this;
+            $jstree = $tree.jstree(),
+            strokeIndex = 0,
+            that = this;
 
-          this.getFlatJsTree().each(function(index, value) {
+          this.getFlatJsTree().each(function (index, value) {
             var node = $jstree.get_node(this.id),
-                p_node = node.data.svgNode;
+              p_node = node.data.svgNode;
             if (node.type != 'path') {
               return true;
             }
@@ -905,13 +942,13 @@
         reorderNumbers() {
           this.makeDirty();
           var $tree = $('#tree'),
-              $jstree = $tree.jstree(),
-              numberIndex = 0,
-              that = this;
+            $jstree = $tree.jstree(),
+            numberIndex = 0,
+            that = this;
 
-          this.getFlatJsTree().each(function(index, value) {
+          this.getFlatJsTree().each(function (index, value) {
             var node = $jstree.get_node(this.id),
-                p_node = node.data.svgNode;
+              p_node = node.data.svgNode;
             if (node.type != 'text') {
               return true;
             }
@@ -932,26 +969,28 @@
         playPreview() {
           this.preview = true;
           var $svg = $('#svg-holder svg').first(),
-              $nums = $svg.find('[id^="kvg:StrokeNumbers_' + this.charId +'"], [id^="hvg:StrokeNumbers_' + this.charId + '"]').find('text');
+            $nums = $svg.find('[id^="kvg:StrokeNumbers_' + this.charId + '"], [id^="hvg:StrokeNumbers_' + this.charId + '"]').find('text');
           $svg.find('.active, .highlighted').removeClass('active highlighted');
           for (var i = 0; i <= $nums.length; i++) {
             this.previewTimeouts.push(
-              window.setTimeout(((i) => {return () => {
-                if (!this.preview) return;
-                if (i >= $nums.length) {
-                  this.stopPreview();
-                  return;
+              window.setTimeout(((i) => {
+                return () => {
+                  if (!this.preview) return;
+                  if (i >= $nums.length) {
+                    this.stopPreview();
+                    return;
+                  }
+                  $svg.find('.highlighted').removeClass('highlighted');
+                  $nums.eq(i).add($svg.find('path').eq(i)).addClass('highlighted');
                 }
-                $svg.find('.highlighted').removeClass('highlighted');
-                $nums.eq(i).add($svg.find('path').eq(i)).addClass('highlighted');
-              }})(i),
-              i*800)
+              })(i),
+                i * 800)
             );
           }
         },
         stopPreview() {
           this.preview = false;
-          $(this.previewTimeouts).each(function() {
+          $(this.previewTimeouts).each(function () {
             window.clearTimeout(this);
           });
           var $svg = $('#svg-holder svg').first();
@@ -959,40 +998,40 @@
         },
         exportSVG() {
           var padding = '\t',
-              indent = 0,
-              realIndent = 0,
-              lastIndent = 0,
-              lastWasStrokes = false,
-              openTags = [],
-              output = '',
-              $svg = $('#svg-holder svg').first(),
-              $activeEl = $svg.find('.active');
-          $svg.find('g,path,text').removeAttr('xmlns:kvg class').each(function() {
+            indent = 0,
+            realIndent = 0,
+            lastIndent = 0,
+            lastWasStrokes = false,
+            openTags = [],
+            output = '',
+            $svg = $('#svg-holder svg').first(),
+            $activeEl = $svg.find('.active');
+          $svg.find('g,path,text').removeAttr('xmlns:kvg class').each(function () {
             var line = '',
-                isStrokes = !!$(this).parents('[id^="kvg:StrokePaths_"],[id^="hvg:StrokePaths_"]').length;
+              isStrokes = !!$(this).parents('[id^="kvg:StrokePaths_"],[id^="hvg:StrokePaths_"]').length;
             indent = $(this).parentsUntil('svg').length;
 
-            realIndent = isStrokes ? indent-1 : indent;
+            realIndent = isStrokes ? indent - 1 : indent;
 
             if (lastIndent > indent) {
               var l = lastIndent - indent;
               for (var i = 0; i < l; i++) {
-                var endIndent = lastIndent-i-1;
+                var endIndent = lastIndent - i - 1;
                 if (isStrokes || lastWasStrokes) endIndent--;
                 line += padding.repeat(Math.max(0, endIndent)) + '</' + openTags.shift() + '>\r\n';
               }
             }
-            
+
             line += padding.repeat(Math.max(0, realIndent));
 
             line += '<' + this.tagName;
-            $(this.attributes).each(function() {
+            $(this.attributes).each(function () {
               line += ' ' + this.name + '="' + this.value + '"';
             });
 
             if (this.tagName == 'path') {
               line += '/>';
-            } else if(this.tagName == 'text') {
+            } else if (this.tagName == 'text') {
               line += '>' + this.textContent + '</' + this.tagName + '>';
             } else {
               line += '>';
@@ -1006,11 +1045,11 @@
           });
 
           if (openTags.length) {
-              var l = openTags.length;
-              for (var i = 0; i < l; i++) {
-                realIndent--;
-                output += padding.repeat(Math.max(0, realIndent)) + '</' + openTags.shift() + '>\r\n';
-              }
+            var l = openTags.length;
+            for (var i = 0; i < l; i++) {
+              realIndent--;
+              output += padding.repeat(Math.max(0, realIndent)) + '</' + openTags.shift() + '>\r\n';
+            }
           }
 
           output = `<?xml version="1.0" encoding="UTF-8"?>
@@ -1058,23 +1097,23 @@ xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
 kvg:type CDATA #IMPLIED >
 ]>
 <svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">\r\n`
-          + output + '</svg>\r\n';
+            + output + '</svg>\r\n';
 
-          saveAs(new Blob([output], {type: 'image/svg+xml'}), this.charId + '.svg');
+          saveAs(new Blob([output], { type: 'image/svg+xml' }), this.charId + '.svg');
 
           $activeEl.addClass('active');
         },
-        loadFromHash: function() {
+        loadFromHash: function () {
           // load file from hash via ajax
           if (location.hash && location.hash.length && (!this.isDirty || confirm('Unsaved changes will be lost! Continue?'))) {
-            var filename = location.hash.replace('#','');
+            var filename = location.hash.replace('#', '');
             $.get(filename).done((res) => {
               this.isDirty = false;
               // mark animHanzi files as dirty in order to force namespace renaming
               if (/^animhanzi\//.test(filename)) {
-                this.$nextTick(function() {
+                this.$nextTick(function () {
                   this.logEvent({
-                    message:'Renaming <code>kvg:</code> namespace in id attributes to <code>hvg:</code> in files imported from AnimHanzi',
+                    message: 'Renaming <code>kvg:</code> namespace in id attributes to <code>hvg:</code> in files imported from AnimHanzi',
                     type: 'warn'
                   });
                   this.makeDirty();
@@ -1099,11 +1138,11 @@ kvg:type CDATA #IMPLIED >
         document.addEventListener('dragover', this.onDragOver)
         document.addEventListener('dragleave', this.onDragLeave)
         document.addEventListener('drop', this.onDrop)
-        
+
         window.addEventListener('hashchange', this.loadFromHash)
 
         var that = this;
-        window.onbeforeunload = function() {
+        window.onbeforeunload = function () {
           if (that.isDirty) {
             return 'Unsaved changes will be lost! Continue?';
           }
@@ -1119,7 +1158,7 @@ kvg:type CDATA #IMPLIED >
         window.removeEventListener('hashchange', this.loadFromHash)
       },
       watch: {
-        isDirty: function(val, oldVal) {
+        isDirty: function (val, oldVal) {
           if (!oldVal && !!val) {
             this.logEvent({
               message: 'Changes have been made to the input SVG. You should export this file to apply the fixes.',
@@ -1131,4 +1170,5 @@ kvg:type CDATA #IMPLIED >
     }); 
   </script>
 </body>
+
 </html>
