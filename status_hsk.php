@@ -109,12 +109,15 @@ function uniord($s) {
 }
 
 $totalchars = 0;
+$totalcharsHSK = 0;
 
 foreach ($hsk as $n => $charstring) {
 	$chars = preg_split('//u', $charstring, -1, PREG_SPLIT_NO_EMPTY);
 	$charcount = count($chars);
+	$totalchars+= $charcount;
 
 	$thisCount = (object)array(
+		'total' => 0,
 		'hanzivg' => 0,
 		'animhanzi' => 0,
 		'kanjivg' => 0,
@@ -124,6 +127,7 @@ foreach ($hsk as $n => $charstring) {
 	$thisTodoCount = 0;
 
 	if (is_numeric($n)) {
+		$totalcharsHSK+= $charcount;
 		print '<hr><h2>HSK ' . ($n+1) . ' (' . $charcount . ')</h2>';
 	} else {
 		print '<hr><h2>' . $n . '</h2>';
@@ -174,7 +178,7 @@ foreach ($hsk as $n => $charstring) {
 	}
 	?>
 <p>
-<span class="legend char ok"><?= $thisCount->hanzivg ?></span> <span class="legend char animhanzi"><?= $thisCount->animhanzi ?></span> <span class="legend char kanji"><?= $thisCount->kanjivg ?></span> <span class="legend char"><?= $thisCount->missing ?></span> <span class="legend char wip"><?= $thisCount->wip ?></span> | TODO: <?= $thisTodoCount ?>
+<span class="legend char ok"><?= $thisCount->hanzivg ?></span> <span class="legend char animhanzi"><?= $thisCount->animhanzi ?></span> <span class="legend char kanji"><?= $thisCount->kanjivg ?></span> <span class="legend char"><?= $thisCount->missing ?></span> <span class="legend char wip"><?= $thisCount->wip ?></span> | TODO: <?= $thisTodoCount ?> | <?= round(($charcount - $thisTodoCount) / $charcount * 100, 2) ?>% done
 </p>
 <?php
 }
@@ -184,6 +188,10 @@ $body = ob_get_clean();
 <span class="legend char ok"><?= $count->hanzivg ?></span> = implemented in HanziVG | <span class="legend char animhanzi"><?= $count->animhanzi ?></span> = TODO: check from AnimHanzi | <span class="legend char kanji"><?= $count->kanjivg ?></span> = TODO: check from KanjiVG | <span class="legend char"><?= $count->missing ?></span> = TODO: missing / from scratch | <span class="legend char wip"><?= $count->wip ?></span> = TODO: work in progress
 
 <?php
+
+print '<p>overall progess (HSK): ' . $count->hanzivg . ' / ' . $totalcharsHSK . '(' . round($count->hanzivg / $totalcharsHSK * 100, 2) . '%)</p>';
+print '<p>overall progess (all): ' . $count->hanzivg . ' / ' . $totalchars . '(' . round($count->hanzivg / $totalchars * 100, 2) . '%)</p>';
+
 print $body;
 ?>
 <script type="text/javascript">
