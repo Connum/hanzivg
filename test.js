@@ -125,6 +125,48 @@
 			'Number group using wrong font size'
 		);
 
+		/*testIf(svg,
+			function() {
+				var gs = svg.querySelectorAll('g[id^="hvg:StrokePaths_"] g, g[id^="kvg:StrokePaths_"] g');
+				
+				var top = 0,
+					bottom = 0;
+				for (var i = gs.length - 1; i >= 0; i--) {
+					var g = gs[i],
+						p = g.getAttribute('kvg:position');
+					if (p && p === 'top') {
+						top++;
+					} else if (p && p === 'bottom') {
+						bottom++;
+					}
+				}
+
+				return top === bottom;
+			},
+			'Position top/bottom count does not match'
+		);*/
+
+		testIf(svg,
+			function() {
+				var gs = svg.querySelectorAll('g[id^="hvg:StrokePaths_"] g, g[id^="kvg:StrokePaths_"] g');
+				
+				var left = 0,
+					right = 0;
+				for (var i = gs.length - 1; i >= 0; i--) {
+					var g = gs[i],
+						p = g.getAttribute('kvg:position');
+					if (p && p === 'left') {
+						left++;
+					} else if (p && p === 'right') {
+						right++;
+					}
+				}
+
+				return left === right;
+			},
+			'Position left/right count does not match'
+		);
+
 		testIf(svg,
 			function() {
 				var sn = svg.querySelector('g[id^="hvg:StrokeNumbers_"], g[id^="kvg:StrokeNumbers_"]');
@@ -200,6 +242,23 @@
 				return att && att.indexOf('亅') >= 0
 			},
 			'char "亅" is used in <code>kvg:type</code> but should only be used as <code>kvg:element</code>. Should use "㇚" instead'
+		);
+
+		
+		testElements(svg,
+			function(el) {
+				var att = el.getAttribute('kvg:element');
+				return att && att.indexOf('㇑') >= 0
+			},
+			'char "㇑" is used in <code>kvg:element</code> but should only be used as <code>kvg:type</code>. Should use "丨" instead'
+		);
+		
+		testElements(svg,
+			function(el) {
+				var att = el.getAttribute('kvg:type');
+				return att && att.indexOf('丨') >= 0
+			},
+			'char "丨" is used in <code>kvg:type</code> but should only be used as <code>kvg:element</code>. Should use "㇑" instead'
 		);
 
 		testElements(svg,
