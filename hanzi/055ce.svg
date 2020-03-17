@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 HanziVG repository contributors
+This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
+and AnimHanzi Copyright (C) 2016 François Mizessyn.
+This work is distributed under the conditions of the Creative Commons
+Attribution-Share Alike 3.0 Licence. This means you are free:
+* to Share - to copy, distribute and transmit the work
+* to Remix - to adapt the work
+
+Under the following conditions:
+* Attribution. You must attribute the work by stating your use of HanziVG in
+  your own copyright header and linking to animHanzi's website
+  (https://github.com/Connum/HanziVG)
+* Attribution. You must attribute the work by stating your use of animHanzi in
+  your own copyright header and linking to animHanzi's website
+  (http://gooo.free.fr/animHanzi/)
+* Attribution. You must attribute the work by stating your use of KanjiVG in
+  your own copyright header and linking to KanjiVG's website
+  (http://kanjivg.tagaini.net)
+* Share Alike. If you alter, transform, or build upon this work, you may
+  distribute the resulting work only under the same or similar license to this
+  one.
+
+See http://creativecommons.org/licenses/by-sa/3.0/ for more details.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+<!ATTLIST g
+xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
+kvg:element CDATA #IMPLIED
+kvg:variant CDATA #IMPLIED
+kvg:partial CDATA #IMPLIED
+kvg:original CDATA #IMPLIED
+kvg:part CDATA #IMPLIED
+kvg:number CDATA #IMPLIED
+kvg:tradForm CDATA #IMPLIED
+kvg:radicalForm CDATA #IMPLIED
+kvg:position CDATA #IMPLIED
+kvg:radical CDATA #IMPLIED
+kvg:phon CDATA #IMPLIED >
+<!ATTLIST path
+xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
+kvg:type CDATA #IMPLIED >
+]>
+<svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
+<g id="hvg:StrokePaths_055ce" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round">
+<g style="stroke-linecap:round;stroke-linejoin:round" id="hvg:055ce" kvg:element="嗎" kvg:radical="general">
+	<g kvg:radical="general" kvg:position="left" kvg:element="口" id="hvg:055ce-g1">
+		<path id="hvg:055ce-s1" d="m 14.086864,35.679025 c 0.962474,0.615983 1.924691,1.231802 3.309834,5.579501 1.385142,4.3477 3.194592,12.432472 5.003726,20.515838" kvg:type="㇑"/>
+		<path id="hvg:055ce-s2" d="m 16.28072,37.988347 c 3.316076,-1.257822 6.69824,-2.540711 9.443247,-3.596434 2.745008,-1.055723 4.914246,-1.907924 6.649447,-2.195567 1.735201,-0.287643 3.036953,-0.01964 3.079104,3.28858 0.04215,3.308215 -1.197353,9.738147 -2.429213,16.128421" kvg:type="㇕"/>
+		<path id="hvg:055ce-s3" d="m 20.783898,54.5 c 1.820692,-0.542334 3.61913,-1.078038 6.370472,-1.690108 2.751342,-0.61207 6.524389,-1.312223 10.256647,-2.004807" kvg:type="㇐"/>
+	</g>
+	<g kvg:position="right" kvg:element="馬" id="hvg:055ce-g2">
+		<path id="hvg:055ce-s4" d="m 50.920551,17.204449 c 2.812829,-0.154128 5.620402,-0.307967 8.371879,-0.596613 2.751476,-0.288646 5.446693,-0.71218 8.563553,-1.308631 3.116859,-0.596452 6.659303,-1.366548 9.757222,-2.136242 3.097918,-0.769694 5.754511,-1.539721 8.409041,-2.30915" kvg:type="㇐"/>
+		<path id="hvg:055ce-s5" d="m 46.994703,12.932203 c 0.981373,0.863609 1.924503,1.693563 2.800495,2.530632 0.875992,0.837068 1.70266,1.703101 1.856641,8.30358 0.15398,6.600478 -0.346359,18.955004 -0.711885,25.594275 -0.365527,6.639271 -0.59644,7.562922 -0.827666,8.487827" kvg:type="㇑"/>
+		<path id="hvg:055ce-s6" d="M 59.695975,30.944915 C 66.940479,29.4806 74.168881,28.01954 81.403602,26.557203" kvg:type="㇐"/>
+		<path id="hvg:055ce-s7" d="m 59.23411,42.260593 c 7.312654,-1.392887 14.549878,-2.771406 21.823093,-4.15678" kvg:type="㇐"/>
+		<path id="hvg:055ce-s8" d="m 67.663136,15.356991 c 0.615689,0.846574 1.231508,1.693325 1.751151,2.405429 0.519644,0.712105 0.942931,1.289314 0.962199,7.063835 0.01927,5.774522 -0.365504,16.740508 -0.750427,27.710821" kvg:type="㇑"/>
+		<path id="hvg:055ce-s9" d="m 50.112288,57.848517 c 2.695402,-0.80862 5.389611,-1.616883 8.219289,-2.439166 2.829679,-0.822282 5.868764,-1.67946 7.77376,-2.160458 1.904997,-0.480999 2.713579,-0.596511 4.503845,-0.869004 1.790266,-0.272493 4.483401,-0.689739 7.177526,-1.110079 2.694125,-0.420339 5.426992,-0.84979 7.447352,-1.138397 2.02036,-0.288607 3.368029,-0.442626 4.771919,-0.154096 1.403891,0.288529 2.867656,1.020411 3.771791,1.751282 0.904135,0.73087 1.250628,1.462355 0.42621,8.063958 -0.824418,6.601603 -2.831624,19.146637 -4.736692,26.324727 -1.905069,7.178091 -3.79045,9.102751 -6.686621,8.380604 -2.896171,-0.722146 -6.880859,-4.087853 -10.845286,-7.436447" kvg:type="㇆"/>
+		<path id="hvg:055ce-s10" d="m 35.563559,65.238347 c -0.153894,2.693155 -0.307849,5.387364 -0.557996,7.523741 -0.250146,2.136377 -0.596409,3.713797 -1.270169,5.542756 -0.673759,1.82896 -1.673727,3.905817 -2.675013,5.98541" kvg:type="㇒"/>
+		<path id="hvg:055ce-s11" d="m 46.994703,66.854873 c 1.924255,3.271233 3.848691,6.542773 5.773306,9.814618" kvg:type="㇔"/>
+		<path id="hvg:055ce-s12" d="m 59.580509,65.007415 c 1.73182,2.809397 3.463811,5.619072 5.195974,8.429026" kvg:type="㇔"/>
+		<path id="hvg:055ce-s13" d="m 69.856992,63.275424 c 3.213704,3.48474 6.389085,6.927924 9.583686,10.391949" kvg:type="㇔"/>
+	</g>
+</g>
+</g>
+<g id="hvg:StrokeNumbers_055ce" style="font-size:8;fill:#808080">
+	<text y="35.076687" x="8.2995195">1</text>
+	<text x="10.294854" y="43.481918">2</text>
+	<text y="58.051041" x="13.853086">3</text>
+	<text y="21.273802" x="43.59211">4</text>
+	<text x="39.844975" y="12.223601">5</text>
+	<text x="53.211021" y="33.434959">6</text>
+	<text y="45.001381" x="53.39653">7</text>
+	<text x="61.839153" y="14.037238">8</text>
+	<text y="58.622982" x="42.891109">9</text>
+	<text x="25.053711" y="64.660629">10</text>
+	<text y="65.872726" x="37.646313">11</text>
+	<text x="50.176083" y="64.363464">12</text>
+	<text y="62.091362" x="61.173382">13</text>
+</g>
+</svg>
