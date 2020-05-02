@@ -170,7 +170,8 @@
 		testIf(svg,
 			function() {
 				var sn = svg.querySelector('g[id^="hvg:StrokeNumbers_"], g[id^="kvg:StrokeNumbers_"]');
-				return sn && /fill:#808080$/.test(sn.getAttribute('style'));
+				var sa = sn.getAttribute('style');
+				return sn && sa && /fill:#808080$/.test(sa);
 			},
 			'Number group using wrong fill style'
 		);
