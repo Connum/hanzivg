@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2020 HanziVG repository contributors
+This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
+and AnimHanzi Copyright (C) 2016 François Mizessyn.
+This work is distributed under the conditions of the Creative Commons
+Attribution-Share Alike 3.0 Licence. This means you are free:
+* to Share - to copy, distribute and transmit the work
+* to Remix - to adapt the work
+
+Under the following conditions:
+* Attribution. You must attribute the work by stating your use of HanziVG in
+  your own copyright header and linking to animHanzi's website
+  (https://github.com/Connum/HanziVG)
+* Attribution. You must attribute the work by stating your use of animHanzi in
+  your own copyright header and linking to animHanzi's website
+  (http://gooo.free.fr/animHanzi/)
+* Attribution. You must attribute the work by stating your use of KanjiVG in
+  your own copyright header and linking to KanjiVG's website
+  (http://kanjivg.tagaini.net)
+* Share Alike. If you alter, transform, or build upon this work, you may
+  distribute the resulting work only under the same or similar license to this
+  one.
+
+See http://creativecommons.org/licenses/by-sa/3.0/ for more details.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+<!ATTLIST g
+xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
+kvg:element CDATA #IMPLIED
+kvg:variant CDATA #IMPLIED
+kvg:partial CDATA #IMPLIED
+kvg:original CDATA #IMPLIED
+kvg:part CDATA #IMPLIED
+kvg:number CDATA #IMPLIED
+kvg:tradForm CDATA #IMPLIED
+kvg:radicalForm CDATA #IMPLIED
+kvg:position CDATA #IMPLIED
+kvg:radical CDATA #IMPLIED
+kvg:phon CDATA #IMPLIED >
+<!ATTLIST path
+xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
+kvg:type CDATA #IMPLIED >
+]>
+<svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
+<g id="hvg:StrokePaths_094a2" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round">
+<g id="hvg:094a2" kvg:element="钢">
+	<g id="hvg:094a2-g1" kvg:element="钅" kvg:radical="general" kvg:radicalForm="釒" kvg:tradForm="金" kvg:position="left">
+		<path id="hvg:094a2-s1" d="m 38.210732,13.636463 c 0,0 8.817861,4.898812 -25.473821,44.089307" kvg:type="㇀"/>
+		<path id="hvg:094a2-s2" d="m 31.810911,34.351165 c 0,0 11.315678,-0.230932 17.435381,-2.540254" kvg:type="㇐"/>
+		<path id="hvg:094a2-s3" d="m 25.344809,49.419491 c 0,0 14.895128,-2.944385 21.245763,-5.946504" kvg:type="㇐"/>
+		<path id="hvg:094a2-s4" d="m 22.697828,64.910694 c 0,0 17.635723,-3.265875 24.330765,-6.531749" kvg:type="㇐"/>
+		<path id="hvg:094a2-s5" d="m 33.638508,48.254734 c 0,0 5.388693,32.658745 -2.286112,41.313312 0,0 2.775993,-5.878574 16.492666,-15.023022" kvg:type="㇙"/>
+	</g>
+	<g id="hvg:094a2-g2" kvg:element="冈" kvg:position="right">
+		<g id="hvg:094a2-g3" kvg:element="冂">
+			<path id="hvg:094a2-s6" d="m 56.989511,30.12913 c 0,0 4.735518,22.207947 -1.959525,55.029986" kvg:type="㇑"/>
+			<path id="hvg:094a2-s7" d="m 57.479392,33.558298 c 0,0 31.189102,-6.368455 34.291683,-5.062105 3.10258,1.306349 0,63.847847 0,63.847847 0,0 0.163293,-2.122819 -10.614093,-7.02163" kvg:type="㇆"/>
+		</g>
+		<g id="hvg:094a2-g4" kvg:element="乂">
+			<path id="hvg:094a2-s8" d="m 81.156982,39.110285 c 0,0 -0.653175,17.96231 -18.125603,33.31192" kvg:type="㇀"/>
+			<path id="hvg:094a2-s9" d="m 64.990903,47.928146 c 0,0 18.125604,18.288897 19.758541,25.637115" kvg:type="㇏"/>
+		</g>
+	</g>
+</g>
+</g>
+<g id="hvg:StrokeNumbers_094a2" style="font-size:8;fill:#808080">
+	<text y="18.498461" x="28.37785">1</text>
+	<text x="24.132214" y="34.501247">2</text>
+	<text y="56.382607" x="20.539751">3</text>
+	<text x="16.294113" y="68.629639">4</text>
+	<text y="44.952049" x="31.317137">5</text>
+	<text x="51.238972" y="27.806208">6</text>
+	<text y="39.400063" x="50.095917">7</text>
+	<text x="77.692558" y="38.746887">8</text>
+	<text y="46.74828" x="62.832829">9</text>
+</g>
+</svg>
