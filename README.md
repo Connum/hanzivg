@@ -35,12 +35,17 @@ Speaking of variants: The handwriting form should be preferred (xxxxx-Kaisho in 
 * AnimHanzi by François Mizessyn http://gooo.free.fr/animHanzi/
   released under [Creative Commons Attribution-Share Alike 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
 * Any (online) dictionaries with stroke order diagrams, especially [MDBG](https://www.mdbg.net/chinese/dictionary?cdqchi=), which offers decomposition of characters as a reference.
+* Information on character composition and radical position: https://www.saporedicina.com/english/chinese-radicals/
 
 ## TODO
 
 There's a lot to do and my available spare time (ok, I admit it - and motivation) for such projects is very fluctuating. So pull requests are of course more than welcome.
 
 * Take a look at all those KanjiVG scripts to see if there's something really useful that we can adopt
+* Make a decision on radical position names (see ["A word on radical positions"](#a-word-on-radical-positions) below)
+* Visualize character composition in the formatter, similar to mdbg
+* Check composition/radical position for existing characters
+* Build index files (JSON?) for radical usage (characters including a given radical, etc.)
 * KanjiVG
 
   1. Write scripts to make it easier to check which Kanji can be used
@@ -50,7 +55,6 @@ There's a lot to do and my available spare time (ok, I admit it - and motivation
 
   1. Collect all AnimHanzi files, verify and move them to /hanzi, completing meta information where necessary
   2. Verify the AnimHanzi files, make adaptions where needed. Component groups seem not to be as complete as for the KanjiVG files, and there are some other errors regarding stroke count or order, so: *Don't just copy the files over, **do** verify and correct them if necessary!* And don't forget to change the ids (not the attributes) to :hvg (the format.html tool will do that automatically)!
-* Make an adapted version of the [kanji-colorize](https://github.com/cayennes/kanji-colorize) Anki addon
 * Don't forget to add documantation so that this ends up more maintainable by volunteers than KanjiVG ;)
 
 See status.php to get startet and klick on any of the listed characters. Or see the status by HSK level in status_hsk.php.
@@ -72,6 +76,15 @@ See status.php to get startet and klick on any of the listed characters. Or see 
 9. Then you can hit the **Export** button and save the new file to the */hanzi* folder. Delete the raw file from the */hanzi_wip* if you created it or got it from there.
 10. run test.php to see if there's anything wrong with your created char, and if there is, please try to fix it.
 11. Create a pull request!
+
+## A word on radical positions
+
+We have to make a decision on whether to use the Japanese names for the radical positions (nyo, tare, kamae) from KanjiVG, Chinese names (see https://www.saporedicina.com/english/chinese-radicals/), or English names. I tend dowards the latter, as we already have left/right and top/bottom, and we could also differentiate outside/inside for the different components. On the other hand, we'd loose compatibility to KanjiVG in that regard. Input welcome!
+
+Here's the meaning of the currently used Japanese names:
+* Tare: to the left and top, e.g. 厂 or 广
+* Nyo: to the left and bottom, e.g. 辶
+* Kamae: enclosing, e.g. 匚 or 囗 (not sure about the different variants, though)
 
 # Licence
 
