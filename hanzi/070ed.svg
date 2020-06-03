@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (C) 2018 HanziVG repository contributors
+Copyright (C) 2020 HanziVG repository contributors
 This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
 and AnimHanzi Copyright (C) 2016 François Mizessyn.
 This work is distributed under the conditions of the Creative Commons
@@ -44,7 +44,7 @@ kvg:type CDATA #IMPLIED >
 ]>
 <svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
 <g id="hvg:StrokePaths_070ed" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<g id="hvg:070ed" kvg:element="热" kvg:position="top" kvg:phon="热">
+<g id="hvg:070ed" kvg:element="热" kvg:phon="热">
 	<g id="hvg:070ed-g1" kvg:element="执" kvg:position="top">
 		<g id="hvg:070ed-g2" kvg:element="扌" kvg:variant="true" kvg:original="手" kvg:position="left">
 			<path id="hvg:070ed-s1" kvg:type="㇐" d="M15,27.66c2.22,0.14,1.33,0.14,3.73,0.14c4.54,0,18.66-1.82,28.43-2.9"/>

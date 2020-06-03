@@ -45,7 +45,7 @@ kvg:type CDATA #IMPLIED >
 <svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
 <g id="hvg:StrokePaths_04e25" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
 <g id="hvg:04e25" kvg:element="严">
-	<g id="hvg:04e25-g1" kvg:element="亚" kvg:position="top">
+	<g id="hvg:04e25-g1" kvg:element="亚">
 		<g id="hvg:04e25-g2" kvg:element="一" kvg:position="top" kvg:radical="general">
 			<path id="hvg:04e25-s1" kvg:type="㇐" d="m24.51 23.09c2.64 1.11 5.94 0.76 8.67 0.43c10.35 -1.25 36.29 -3.76 49.67 -4.48c2.52 -0.13 5.21 -0.03 7.67 0.59"/>
 		</g>

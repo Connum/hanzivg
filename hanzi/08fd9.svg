@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (C) 2018 HanziVG repository contributors
+Copyright (C) 2020 HanziVG repository contributors
 This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
 and AnimHanzi Copyright (C) 2016 François Mizessyn.
 This work is distributed under the conditions of the Creative Commons
@@ -43,32 +43,32 @@ xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
 kvg:type CDATA #IMPLIED >
 ]>
 <svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
-<g id="hvg:StrokePaths_08fd9" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;">
-<g id="hvg:08fd9" kvg:element="这">
-	<g id="hvg:08fd9-g1" kvg:element="文" kvg:position="top">
-		<g id="hvg:08fd9-g2" kvg:element="亠" kvg:position="top">
-			<path id="hvg:08fd9-s1" kvg:type="㇑a" d="M65.11,16c0.57,0.47,1.5,2.27,1.5,3.2c0,3.68-0.02,9.28-0.08,11.92"/>
-			<path id="hvg:08fd9-s2" kvg:type="㇐" d="M41.76,33.04c0.91,0.06,2.63,0.38,3.52,0.35c7.42-0.32,35.86-4.03,45.58-4.22c1.5-0.03,2.27,0.03,3.39,0.44"/>
+<g style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;" id="hvg:StrokePaths_08fd9">
+<g kvg:element="这" id="hvg:08fd9">
+	<g kvg:position="right" kvg:element="文" id="hvg:08fd9-g1">
+		<g kvg:position="top" kvg:element="亠" id="hvg:08fd9-g2">
+			<path d="m 63.03161,16.461864 c 2.410343,3.066686 3.214416,3.524132 6.846907,8.769365" kvg:type="㇑a" id="hvg:08fd9-s1"/>
+			<path d="M41.76,33.04c0.91,0.06,2.63,0.38,3.52,0.35c7.42-0.32,35.86-4.03,45.58-4.22c1.5-0.03,2.27,0.03,3.39,0.44" kvg:type="㇐" id="hvg:08fd9-s2"/>
 		</g>
-		<g id="hvg:08fd9-g3" kvg:element="乂" kvg:position="bottom">
-			<path id="hvg:08fd9-s3" kvg:type="㇒" d="M82.06,29.74c0.44,1.26,0.66,2.55-0.24,4.01C70.29,52.65,58.49,65.44,38.71,76"/>
-			<path id="hvg:08fd9-s4" kvg:type="㇏" d="M54.04,35.32C64,47.25,72.75,61.5,90.57,69.27c2.35,1.23,3.86,1.42,5.79,1.55"/>
+		<g kvg:position="bottom" kvg:element="乂" id="hvg:08fd9-g3">
+			<path d="M82.06,29.74c0.44,1.26,0.66,2.55-0.24,4.01C70.29,52.65,58.49,65.44,38.71,76" kvg:type="㇒" id="hvg:08fd9-s3"/>
+			<path d="M54.04,35.32C64,47.25,72.75,61.5,90.57,69.27c2.35,1.23,3.86,1.42,5.79,1.55" kvg:type="㇏" id="hvg:08fd9-s4"/>
 		</g>
 	</g>
-	<g id="hvg:08fd9-g4" kvg:element="⻌" kvg:original="辶" kvg:position="nyo" kvg:radical="tradit">
-		<path id="hvg:08fd9-s5" kvg:type="㇔" d="M20.38,19c3.84,1.83,9.92,7.53,10.88,10.38"/>
-		<path id="hvg:08fd9-s6" kvg:type="㇋" d="M13,50.75c2.25,0.62,4.16,0.22,6.3-0.48c2.8-0.92,8.29-2.82,9.45-3.27c2.25-0.88,3.4,0.45,2.25,2.75c-7.38,14.75-7.62,8.75,0.25,19c1.02,1.33,0.68,2.67-0.75,4C28.62,74.5,23.12,79,20.25,81.5"/>
-		<path id="hvg:08fd9-s7" kvg:type="㇏a" d="M15.5,83.5c3-0.5,9-1.75,13.5-0.75s30.32,7.71,34.75,9c12,3.5,19.12,4.5,28,4"/>
+	<g kvg:radical="tradit" kvg:position="left" kvg:original="辶" kvg:element="⻌" id="hvg:08fd9-g4">
+		<path d="M20.38,19c3.84,1.83,9.92,7.53,10.88,10.38" kvg:type="㇔" id="hvg:08fd9-s5"/>
+		<path d="M13,50.75c2.25,0.62,4.16,0.22,6.3-0.48c2.8-0.92,8.29-2.82,9.45-3.27c2.25-0.88,3.4,0.45,2.25,2.75c-7.38,14.75-7.62,8.75,0.25,19c1.02,1.33,0.68,2.67-0.75,4C28.62,74.5,23.12,79,20.25,81.5" kvg:type="㇋" id="hvg:08fd9-s6"/>
+		<path d="M15.5,83.5c3-0.5,9-1.75,13.5-0.75s30.32,7.71,34.75,9c12,3.5,19.12,4.5,28,4" kvg:type="㇏a" id="hvg:08fd9-s7"/>
 	</g>
 </g>
 </g>
-<g id="hvg:StrokeNumbers_08fd9" style="font-size:8;fill:#808080">
+<g style="font-size:8;fill:#808080" id="hvg:StrokeNumbers_08fd9">
 	<text transform="matrix(1 0 0 1 58.50 12.50)">1</text>
 	<text transform="matrix(1 0 0 1 36.50 29.50)">2</text>
 	<text transform="matrix(1 0 0 1 80.44 25.98)">3</text>
-	<text transform="matrix(1 0 0 1 40.50 50.16)">4</text>
-	<text transform="matrix(1 0 0 1 10.50 15.58)">5</text>
-	<text transform="matrix(1 0 0 1 8.50 44.01)">6</text>
-	<text transform="matrix(1 0 0 1 5.50 78.50)">7</text>
+	<text y="45.310425" x="46.735168">4</text>
+	<text y="16.965593" x="12.116526">5</text>
+	<text y="47.704914" x="5.9597459">6</text>
+	<text y="84.735168" x="5.7309322">7</text>
 </g>
 </svg>

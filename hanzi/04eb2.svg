@@ -45,8 +45,8 @@ kvg:type CDATA #IMPLIED >
 <svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
 <g style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;" id="hvg:StrokePaths_04eb2">
 <g kvg:element="亲" id="hvg:04eb2">
-	<g kvg:element="立" id="hvg:04eb2-g1">
-		<g kvg:position="top" kvg:element="亠" id="hvg:04eb2-g2" kvg:radical="general">
+	<g kvg:element="立" id="hvg:04eb2-g1" kvg:position="top">
+		<g kvg:element="亠" id="hvg:04eb2-g2" kvg:radical="general">
 			<path d="m 49.240713,14.81635 c 4.583451,4.417988 6.365518,7.041307 6.365518,7.041307" kvg:type="㇔" id="hvg:04eb2-s1"/>
 			<path d="m23.64 29.19c2.24 0.11 4.9 0.15 7.1 0.03c10.76 -0.6 31.26 -2.6 44.04 -3.22c3.72 -0.18 6.48 -0.25 8.54 0.02" kvg:type="㇐" id="hvg:04eb2-s2"/>
 		</g>
@@ -54,7 +54,7 @@ kvg:type CDATA #IMPLIED >
 		<path d="m 71.86,30.75 c -1.399318,4.292108 -3.336366,7.906554 -5.763056,11.106944" kvg:type="㇒" id="hvg:04eb2-s4"/>
 		<path d="m15.84 48.45c4.16 0.3 6.58 0.33 11.08 0.03c14.58 -0.98 42.08 -3.98 56.74 -4.49c2.86 -0.1 6.9 -0.04 8.34 0.01" kvg:type="㇐" id="hvg:04eb2-s5"/>
 	</g>
-	<g kvg:element="朩" id="hvg:04eb2-g3">
+	<g kvg:element="朩" id="hvg:04eb2-g3" kvg:position="bottom">
 		<path d="m17.52 62.95c1.54 0.23 4.96 0.59 9 0.34c14.74 -0.91 37.14 -3.05 52.2 -4.48c4.02 -0.38 6.28 -0.3 8.28 -0.3" kvg:type="㇐" id="hvg:04eb2-s6"/>
 		<path d="m 53.066469,51.326587 c 1.028521,8.088462 0.615619,35.510596 -0.16964,47.153175 0,0 -3.255531,-4.33949 -8.480931,-5.645841" kvg:type="㇚" id="hvg:04eb2-s7"/>
 		<path d="m38.12 75.19c0 0.48 -0.56 1.09 -0.89 1.4c-4.2 4.08 -12.56 8.85 -19.74 11.04" kvg:type="㇒" id="hvg:04eb2-s8"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (C) 2018 HanziVG repository contributors
+Copyright (C) 2020 HanziVG repository contributors
 This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
 and AnimHanzi Copyright (C) 2016 François Mizessyn.
 This work is distributed under the conditions of the Creative Commons
@@ -48,17 +48,17 @@ kvg:type CDATA #IMPLIED >
 	<g kvg:phon="哥" kvg:position="left" kvg:element="哥" id="hvg:06b4c-g1">
 		<g kvg:element="可" id="hvg:06b4c-g2" kvg:position="top" kvg:number="1">
 			<g kvg:number="1" kvg:element="丁" id="hvg:06b4c-g3">
-				<g kvg:element="一" id="hvg:06b4c-g4" kvg:number="1">
+				<g kvg:element="一" id="hvg:06b4c-g4" kvg:number="1" kvg:position="top">
 					<path d="M12.87,22.32c1.62,0.38,4.57,0.57,6.21,0.38c8.42-0.95,18.04-2.45,27.39-3.16c2.68-0.2,4.32,0.18,5.67,0.37" kvg:type="㇐" id="hvg:06b4c-s1"/>
 				</g>
 			</g>
-			<g kvg:element="口" id="hvg:06b4c-g5" kvg:number="1">
+			<g kvg:element="口" id="hvg:06b4c-g5" kvg:number="1" kvg:position="left">
 				<path d="M16.65,32.85c0.56,0.41,0.88,0.96,0.97,1.65c0.62,2.03,1.31,5.53,1.85,8.42c0.19,1,0.35,1.96,0.49,2.84" kvg:type="㇑" id="hvg:06b4c-s2"/>
 				<path d="M18.75,34.28c4.65-0.96,11.62-2.38,14.17-2.62c1.1-0.1,1.76,0.61,1.6,1.22c-0.5,1.92-1.31,5.39-1.98,7.88" kvg:type="㇕b" id="hvg:06b4c-s3"/>
 				<path d="M20.83,43.36c2.68-0.24,5.82-0.99,9.42-1.31c1.15-0.1,2.32-0.21,3.49-0.33" kvg:type="㇐b" id="hvg:06b4c-s4"/>
 			</g>
-			<g kvg:number="1" kvg:position="bottom" kvg:element="丁" id="hvg:06b4c-g6">
-				<g kvg:variant="true" kvg:element="亅" id="hvg:06b4c-g7" kvg:number="1">
+			<g kvg:number="1" kvg:position="right" kvg:element="丁" id="hvg:06b4c-g6">
+				<g kvg:variant="true" kvg:element="亅" id="hvg:06b4c-g7" kvg:number="1" kvg:position="bottom">
 					<path d="m 44,21.37 c 0.03,0.26 0.98,1.35 1.01,3 0.12,5.81 0.06,14.91 -0.02,20.39" kvg:type="㇑/㇚" id="hvg:06b4c-s5"/>
 				</g>
 			</g>

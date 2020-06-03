@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (C) 2018 HanziVG repository contributors
+Copyright (C) 2020 HanziVG repository contributors
 This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
 and AnimHanzi Copyright (C) 2016 François Mizessyn.
 This work is distributed under the conditions of the Creative Commons
@@ -44,16 +44,14 @@ kvg:type CDATA #IMPLIED >
 ]>
 <svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
 <g style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;" id="hvg:StrokePaths_07535">
-<g kvg:element="电" id="hvg:07535">
-	<g kvg:phon="申V" kvg:position="bottom" id="hvg:07535-g1">
-		<g kvg:element="曰" id="hvg:07535-g2" kvg:radical="general">
-			<path d="M21.5,29.62c1.19,1.19,1.94,2.25,2.19,3.96c1.29,9.01,2.73,19.81,4.19,32.77c0.17,1.48,0.33,2.99,0.5,4.53" kvg:type="㇑" id="hvg:07535-s1"/>
-			<path d="M24.6,31.18c17.65-1.68,45.19-3.9,56.93-4.59c4.55-0.27,6.58,1.68,5.96,5.94c-1,6.91-3.3,19.86-5.18,29.76c-0.35,1.83-0.68,3.56-0.99,5.12" kvg:type="㇕a" id="hvg:07535-s2"/>
-			<path d="m 34.901392,49.603175 c 15.47,-2.146469 24.033684,-3.319882 40.867334,-4.68635" kvg:type="㇐a" id="hvg:07535-s3"/>
-			<path d="M29.44,67.56c12.93-0.94,34.43-2.56,51.27-3" kvg:type="㇐a" id="hvg:07535-s4"/>
-		</g>
-		<path d="M53.42,12.62c1.08,1.13,1.45,2.8,1.45,4.78c0,4.85-0.1,12.75-0.1,63.85c0,12.75,1.48,14.5,15.5,14.5c19.23,0,20.18-2.75,20.18-10.82" kvg:type="㇟" id="hvg:07535-s5"/>
+<g kvg:element="电" id="hvg:07535" kvg:tradForm="電">
+	<g kvg:element="曰" id="hvg:07535-g1" kvg:radical="general">
+		<path d="M21.5,29.62c1.19,1.19,1.94,2.25,2.19,3.96c1.29,9.01,2.73,19.81,4.19,32.77c0.17,1.48,0.33,2.99,0.5,4.53" kvg:type="㇑" id="hvg:07535-s1"/>
+		<path d="M24.6,31.18c17.65-1.68,45.19-3.9,56.93-4.59c4.55-0.27,6.58,1.68,5.96,5.94c-1,6.91-3.3,19.86-5.18,29.76c-0.35,1.83-0.68,3.56-0.99,5.12" kvg:type="㇕a" id="hvg:07535-s2"/>
+		<path d="m 34.901392,49.603175 c 15.47,-2.146469 24.033684,-3.319882 40.867334,-4.68635" kvg:type="㇐a" id="hvg:07535-s3"/>
+		<path d="M29.44,67.56c12.93-0.94,34.43-2.56,51.27-3" kvg:type="㇐a" id="hvg:07535-s4"/>
 	</g>
+	<path d="M53.42,12.62c1.08,1.13,1.45,2.8,1.45,4.78c0,4.85-0.1,12.75-0.1,63.85c0,12.75,1.48,14.5,15.5,14.5c19.23,0,20.18-2.75,20.18-10.82" kvg:type="㇟" id="hvg:07535-s5"/>
 </g>
 </g>
 <g style="font-size:8;fill:#808080" id="hvg:StrokeNumbers_07535">

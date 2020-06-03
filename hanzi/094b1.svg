@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (C) 2018 HanziVG repository contributors
+Copyright (C) 2020 HanziVG repository contributors
 This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
 and AnimHanzi Copyright (C) 2016 François Mizessyn.
 This work is distributed under the conditions of the Creative Commons
@@ -53,7 +53,7 @@ kvg:type CDATA #IMPLIED >
 		<path id="hvg:094b1-s5" d="m30.35 45.35c1.29 0.82 0.25 0.55 1.29 3.3c0 4.57 0.64 34.26 -1.36 47.23c-1.95 -0.65 5 -7.68 13.88 -13.78" kvg:type="㇙"/>
 	</g>
 	<g id="hvg:094b1-g2" kvg:element="戋" kvg:variant="true" kvg:original="戔" kvg:position="right">
-		<g id="hvg:094b1-g3" kvg:element="一" kvg:position="bottom">
+		<g id="hvg:094b1-g3" kvg:element="一">
 			<path id="hvg:094b1-s6" kvg:type="㇐" d="M49.07,33.1c1.92,0.74,4.57,0.56,6.56,0.18c6.16-1.17,14.45-3.34,23.36-4.21c1.67-0.25,3.59-0.58,5.26-0.07"/>
 		</g>
 		<g id="hvg:094b1-g4" kvg:element="戈">
