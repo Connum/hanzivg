@@ -125,7 +125,7 @@
 			'Number group using wrong font size'
 		);
 
-		/*testIf(svg,
+		testIf(svg,
 			function() {
 				var gs = svg.querySelectorAll('g[id^="hvg:StrokePaths_"] g, g[id^="kvg:StrokePaths_"] g');
 				
@@ -144,7 +144,7 @@
 				return top === bottom;
 			},
 			'Position top/bottom count does not match'
-		);*/
+		);
 
 		testIf(svg,
 			function() {
