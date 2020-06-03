@@ -83,7 +83,7 @@ We have to make a decision on whether to use the Japanese names for the radical 
 
 Here's the meaning of the currently used Japanese names:
 * Tare: to the left and top, e.g. 厂 or 广
-* Nyo: to the left and bottom, e.g. 辶
+* Nyo: to the left and bottom, e.g. 辶 (it seems that Chinese uses left/right for this, but I need to look into this or someone with more expertise)
 * Kamae: enclosing, e.g. 匚 or 囗 (not sure about the different variants, though)
 
 # Licence
