@@ -181,7 +181,7 @@
 				return el.matches('g[id^="hvg:StrokePaths_"] > g:first-child:last-child,g[id^="kvg:StrokePaths_"] > g:first-child:last-child')
 						&& el.hasAttribute('kvg:element');
 			},
-			'Missing whole caracter group as only child of StrokePaths root group'
+			'Missing whole character group as only child of StrokePaths root group'
 		);
 
 		testNoElements(svg,
