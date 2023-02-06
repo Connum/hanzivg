@@ -21,7 +21,7 @@
 	$h = $_GET['hanzi'];
 	$d = substr("00000" . dechex(uniord($h)),-5);
 
-	if (isset($_GET['movefrom'])) {+
+	if (isset($_GET['movefrom'])) {
 		$moveFile = $_GET['movefrom'] . '/' . $d . '.svg';
 		if (is_file($moveFile)) {
 			rename($moveFile, 'hanzi/' . $d . '.svg');
@@ -130,10 +130,13 @@ print '<p>' . $d . '</p>';
 echo preg_replace('@href="@', 'target="_blank" href="https://www.mdbg.net/chinese/', file_get_contents('https://www.mdbg.net/chinese/dictionary-ajax?c=cdcd&i=' . $h));
 print '</div>';
 */
+$exists = false;
+
 $filename = 'hanzi/' . $d . '.svg';
 if (is_file($filename)) {
 	print '<h1><a href="format.html?#' . $filename . '" target="_blank">HanziVG</a></h1>';
 	print '<img src="' . $filename . '" />';
+	$exists = true;
 }
 
 $filename_w1 = 'hanzi_wip/' . $d . '.raw.svg';
@@ -141,15 +144,18 @@ $filename_w2 = 'hanzi_wip/' . $d . '.svg';
 if (is_file($filename_w1)) {
 	print '<h1><a href="format.html?#' . $filename_w1 . '" target="_blank">HanziVG (WIP)</a></h1>';
 	print '<img src="' . $filename_w1 . '" />';
+	$exists = true;
 } else if (is_file($filename_w2)) {
 	print '<h1><a href="format.html?#' . $filename_w2 . '" target="_blank">HanziVG (WIP)</a></h1>';
 	print '<img src="' . $filename_w2 . '" />';
+	$exists = true;
 }
 
 $filename = 'animhanzi/' . $d . '.svg';
 if (is_file($filename)) {
 	print '<h1><a href="format.html?#' . $filename . '" target="_blank">AnimHanzi</a></h1>';
 	print '<img src="' . $filename . '" />';
+	$exists = true;
 }
 
 $filename = 'kanji/' . $d . '.svg';
@@ -170,6 +176,14 @@ if (is_file($filename)) {
 	}
 
 	print '</tr></table>';
+	$exists = true;
+}
+
+if ( ! $exists ) {
+	$template_content = file_get_contents('template.svg');
+	$template_content = str_replace( 'XXXXX', $d, str_replace( '镇', $h, $template_content ) );
+	echo '<a href="data:image/svg+xml;base64,' . base64_encode( $template_content ) . '" download="' . $d . '.raw.svg">save template</a>';
+	$exists = true;
 }
 
 print '<h2>Simplified</h2><p class="char simplified">' . $h . '</p>';
