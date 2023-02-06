@@ -616,6 +616,7 @@
           
           $svg.find('defs,metadata').each(function () {
             that.logEvent({ message: 'FIX: removed &lt;' + this.tagName.toLowerCase() + '&gt; element', element: this });
+            fixed = true;
           });
 
           $svg.find('[id]').each(function () {
@@ -656,6 +657,17 @@
               fixed = true;
               that.logEvent({ message: 'FIX: corrected font-size property on StrokeNumbers group', element: this });
             }
+
+            const textNodes = this.querySelectorAll('text');
+            textNodes.forEach(function (child) {
+              let textNum = (Array.prototype.indexOf.call(textNodes, child) + 1).toString();
+              let numNow = child.textContent.trim();
+              if ( textNum != numNow ) {
+                that.logEvent({ message: 'FIX: stroke number did not match text node order, changed "' + numNow + '" to "' + textNum + '"', element: this });
+                fixed = true;
+                child.textContent = textNum;
+              }
+            });
           });
 
           if (fixed) {
