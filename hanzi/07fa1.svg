@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2020 HanziVG repository contributors
+This work makes an extensive use of kanjiVG Copyright (C) 2009/2010/2011 Ulrich Apel
+and AnimHanzi Copyright (C) 2016 François Mizessyn.
+This work is distributed under the conditions of the Creative Commons
+Attribution-Share Alike 3.0 Licence. This means you are free:
+* to Share - to copy, distribute and transmit the work
+* to Remix - to adapt the work
+
+Under the following conditions:
+* Attribution. You must attribute the work by stating your use of HanziVG in
+  your own copyright header and linking to animHanzi's website
+  (https://github.com/Connum/HanziVG)
+* Attribution. You must attribute the work by stating your use of animHanzi in
+  your own copyright header and linking to animHanzi's website
+  (http://gooo.free.fr/animHanzi/)
+* Attribution. You must attribute the work by stating your use of KanjiVG in
+  your own copyright header and linking to KanjiVG's website
+  (http://kanjivg.tagaini.net)
+* Share Alike. If you alter, transform, or build upon this work, you may
+  distribute the resulting work only under the same or similar license to this
+  one.
+
+See http://creativecommons.org/licenses/by-sa/3.0/ for more details.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+<!ATTLIST g
+xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
+kvg:element CDATA #IMPLIED
+kvg:variant CDATA #IMPLIED
+kvg:partial CDATA #IMPLIED
+kvg:original CDATA #IMPLIED
+kvg:part CDATA #IMPLIED
+kvg:number CDATA #IMPLIED
+kvg:tradForm CDATA #IMPLIED
+kvg:radicalForm CDATA #IMPLIED
+kvg:position CDATA #IMPLIED
+kvg:radical CDATA #IMPLIED
+kvg:phon CDATA #IMPLIED >
+<!ATTLIST path
+xmlns:kvg CDATA #FIXED "http://kanjivg.tagaini.net"
+kvg:type CDATA #IMPLIED >
+]>
+<svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
+<g id="hvg:StrokePaths_07fa1" style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round">
+<g id="hvg:07fa1" kvg:element="羡">
+	<g id="hvg:07fa1-g1" kvg:element="羊" kvg:position="top" kvg:radical="general">
+		<path id="hvg:07fa1-s1" d="m 30.136653,13.855932 c 0,0 7.38983,3.233051 9.583686,6.927966" kvg:type="㇔"/>
+		<path id="hvg:07fa1-s2" d="m 64.776483,8.082627 c 0,0 -0.808263,2.540254 -13.047669,13.509534" kvg:type="㇒"/>
+		<path id="hvg:07fa1-s3" d="m 30.944915,30.367585 c 0,0 29.32839,-3.810382 32.676907,-4.965043" kvg:type="㇐"/>
+		<path id="hvg:07fa1-s4" d="m 33.831568,40.182203 c 0,0 16.742585,-0.115466 25.056144,-3.233051" kvg:type="㇐"/>
+		<path id="hvg:07fa1-s5" d="m 46.763771,28.520127 c 0,0 0.923729,11.315678 0.115466,20.322034" kvg:type="㇑"/>
+		<path id="hvg:07fa1-s6" d="m 24.016949,52.652542 c 0,0 35.56356,-6.466101 48.264831,-5.31144" kvg:type="㇐"/>
+	</g>
+	<g id="hvg:07fa1-g2" kvg:element="次" kvg:position="bottom">
+		<g id="hvg:07fa1-g3" kvg:position="left" kvg:element="冫" kvg:original="二">
+			<path id="hvg:07fa1-s7" d="m 21.245763,60.388771 c 0,0 6.235169,1.847458 9.930084,8.082627" kvg:type="㇔"/>
+			<path id="hvg:07fa1-s8" d="m 18.474576,96.991525 c 0,0 1.962924,-8.775423 15.010594,-19.860169" kvg:type="㇀"/>
+		</g>
+		<g id="hvg:07fa1-g4" kvg:element="欠" kvg:position="right">
+			<path id="hvg:07fa1-s9" d="m 51.036017,54.153602 c 0,0 -5.773305,17.088983 -11.200212,20.552966" kvg:type="㇒"/>
+			<path id="hvg:07fa1-s10" d="m 52.883475,64.430085 c 0,0 34.524364,-10.738348 17.435381,3.002118" kvg:type="㇖a"/>
+			<path id="hvg:07fa1-s11" d="m 56.001059,72.050847 c 0,0 -3.579449,20.783899 -19.513771,27.134534" kvg:type="㇒"/>
+			<path id="hvg:07fa1-s12" d="m 55.308263,79.556144 c 0,0 18.35911,20.091102 31.637712,19.629237" kvg:type="㇏"/>
+		</g>
+	</g>
+</g>
+</g>
+<g id="hvg:StrokeNumbers_07fa1" style="font-size:8;fill:#808080">
+	<text y="16.257118" x="24.572033">1</text>
+	<text x="54.477753" y="10.714746">2</text>
+	<text y="28.727459" x="27.112286">3</text>
+	<text x="28.266947" y="39.003941">4</text>
+	<text y="25.263475" x="43.85487">5</text>
+	<text x="18.68326" y="49.626823">6</text>
+	<text y="62.328094" x="14.064616">7</text>
+	<text x="12.040439" y="100.51579">8</text>
+	<text y="59.672379" x="42.122879">9</text>
+	<text x="58.172665" y="58.979584">10</text>
+	<text y="74.682968" x="46.395123">11</text>
+	<text x="62.329445" y="82.765594">12</text>
+</g>
+</svg>
