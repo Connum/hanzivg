@@ -182,7 +182,7 @@ if (is_file($filename)) {
 if ( ! $exists ) {
 	$template_content = file_get_contents('template.svg');
 	$template_content = str_replace( 'XXXXX', $d, str_replace( '镇', $h, $template_content ) );
-	echo '<a href="data:image/svg+xml;base64,' . base64_encode( $template_content ) . '" download="' . $d . '.raw.svg">save template</a>';
+	echo '<a href="data:image/svg+xml;base64,' . base64_encode( $template_content ) . '" download="' . $d . '.raw.svg">save template</a> =&gt; <a href="format.html">format</a>';
 	$exists = true;
 }
 
