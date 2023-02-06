@@ -85,9 +85,12 @@ $fields = array(
 	'searchKey' => $h
 );
 
+$fields_string = '';
+
 //url-ify the data for the POST
 foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-rtrim($fields_string, '&');
+$fields_string = rtrim($fields_string, '&');
+
 
 //open connection
 $ch = curl_init();
@@ -99,13 +102,13 @@ curl_setopt($ch,CURLOPT_POST, count($fields));
 curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 	'Accept: application/json, text/javascript, */*; q=0.01',
-	'Accept-Encoding: gzip, deflate, br',
 	'Accept-Language: de,en-US;q=0.7,en;q=0.3',
 	'Cache-Control: no-cache',
 	'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
 	'Pragma: no-cache',
+	'Origin: https://dictionary.writtenchinese.com',
 	'Referer: https://dictionary.writtenchinese.com/',
-	'User-Agent: Mozilla/5.0 (Windows NT 10.0; …) Gecko/20100101 Firefox/60.0',
+	'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
 	'X-Requested-With: XMLHttpRequest',
 ));
 
@@ -114,7 +117,7 @@ $result = json_decode(curl_exec($ch));
 
 //close connection
 curl_close($ch);
-if (count($result->signCh)) {
+if ($result && count($result->signCh)) {
 	$wcId = $result->signCh[0]->pinyinsort . '/' . $result->signCh[0]->id;
 }
 
