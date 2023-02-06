@@ -174,11 +174,17 @@ foreach ($hsk as $n => $charstring) {
 			$thisTodoCount++;
 		}
 
+		$thisCount->animhanzi_hours = round( $thisCount->animhanzi * 10 / 60, 2);
+		$thisCount->kanjivg_hours = round( $thisCount->kanjivg * 20 / 60, 2);
+		$thisCount->missing_hours = round( $thisCount->missing * 30 / 60, 2);
+
+		$thisCount->total_hours = $thisCount->animhanzi_hours + $thisCount->kanjivg_hours + $thisCount->missing_hours;
+
 		print '<span class="char' . ($class) . '">' . $char .'</span>';
 	}
 	?>
 <p>
-<span class="legend char ok"><?= $thisCount->hanzivg ?></span> <span class="legend char animhanzi"><?= $thisCount->animhanzi ?></span> <span class="legend char kanji"><?= $thisCount->kanjivg ?></span> <span class="legend char"><?= $thisCount->missing ?></span> <span class="legend char wip"><?= $thisCount->wip ?></span> | TODO: <?= $thisTodoCount ?> | <?= round(($charcount - $thisTodoCount) / $charcount * 100, 2) ?>% done
+<span class="legend char ok"><?= $thisCount->hanzivg ?></span> <span class="legend char animhanzi"><?= $thisCount->animhanzi . ( $thisCount->animhanzi_hours ? "(≈" . $thisCount->animhanzi_hours . "h)" : '' ) ?></span> <span class="legend char kanji"><?= $thisCount->kanjivg . (  $thisCount->kanjivg_hours ? "(≈" . $thisCount->kanjivg_hours . "h)" : '' ) ?></span> <span class="legend char"><?= $thisCount->missing . ( $thisCount->missing_hours ? "(≈" . $thisCount->missing_hours . "h)" : '' ) ?></span> <span class="legend char wip"><?= $thisCount->wip ?></span> | TODO: <?= $thisTodoCount ?> <?= ( $thisCount->total_hours ? "(≈" . $thisCount->total_hours . "h)" : '' ) ?> | <?= round(($charcount - $thisTodoCount) / $charcount * 100, 2) ?>% done
 </p>
 <?php
 }
