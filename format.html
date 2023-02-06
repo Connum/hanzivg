@@ -613,6 +613,10 @@
               strokeStarts.appendChild(startPoint);
             }
           });
+          
+          $svg.find('defs,metadata').each(function () {
+            that.logEvent({ message: 'FIX: removed &lt;' + this.tagName.toLowerCase() + '&gt; element', element: this });
+          });
 
           $svg.find('[id]').each(function () {
             if (!(new RegExp('^[hk]vg:(StrokePaths_|StrokeNumbers_)?' + that.charId)).test(this.id)) {
