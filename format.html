@@ -620,7 +620,14 @@
 
           $svg.find('[id]').each(function () {
             if (!(new RegExp('^[hk]vg:(StrokePaths_|StrokeNumbers_)?' + that.charId)).test(this.id)) {
-              var newId = this.id.replace(/^[hk]vg:(StrokePaths_|StrokeNumbers_)?[0-9a-fX]{5}/, 'hvg:$1' + that.charId);
+              var newId = this.id;
+              if ( /^path\d+$/.test( this.id ) ) {
+                if ( this.parentElement.hasAttribute('kvg:element') ) {
+                  newId = 'kvg:' + that.charId + '-s' + ( Array.prototype.indexOf.call(this.parentNode.children, this) + 1 );
+                }
+              } else {
+                newId = this.id.replace(/^[hk]vg:(StrokePaths_|StrokeNumbers_)?[0-9a-fX]{5}/, 'hvg:$1' + that.charId);
+              }
               that.logEvent({ message: 'FIX: id "' + this.id + '" did not match character code, renamed to "' + newId + '"', element: this });
               fixed = true; // trigger renaming
               this.id = newId;
