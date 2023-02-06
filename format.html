@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <title>Raw SVG formatter</title>
-  <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
-  <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/jstree@3.3.5/dist/themes/default/style.min.css">
-  <script src="https://unpkg.com/jstree@3.3.5/dist/jstree.js"></script>
-  <script src="https://unpkg.com/filesaver.js@1.3.4/FileSaver.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jstree@3.3.14/dist/themes/default/style.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jstree@3.3.14/dist/jstree.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/filesaver.js@1.3.4/FileSaver.js"></script>
   <script src="test.js"></script>
   <style type="text/css">
     * {
@@ -900,8 +900,8 @@
         },
         getFlatJsTree() {
           var $tree = $('#tree'),
-            $jstree = $tree.jstree();
-          return $($jstree.get_json($tree, {
+            $jstree = $tree.jstree(true);
+          return $($jstree.get_json('#', {
             flat: true
           }));
         },
