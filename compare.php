@@ -18,8 +18,13 @@
 	    return unpack('V', iconv('UTF-8', 'UCS-4LE', $s))[1];
 	}
 
-	$h = $_GET['hanzi'];
-	$d = substr("00000" . dechex(uniord($h)),-5);
+	$h = $_GET['hanzi'] ?? '';
+	if ( isset( $_GET['d'] ) ) {
+		$d = $_GET['d'];
+		$h = unichr(hexdec($d));
+	} else {
+		$d = substr("00000" . dechex(uniord($h)),-5);
+	}
 
 	if (isset($_GET['movefrom'])) {
 		$moveFile = $_GET['movefrom'] . '/' . $d . '.svg';
@@ -28,7 +33,7 @@
 		}
 	}
 
-	if (empty($h)) {
+	if ( empty($h) ) {
 		header("Location:status.php"); exit;
 	}
 ?>
