@@ -256,7 +256,7 @@
             <button @click="removeGroup"
               v-if="selected_node.tree.type==='g' && selected_node.preview.parentNode.parentNode.tagName !== 'svg'">remove
               group</button>
-            <a class="infolink" href="http://kanjivg.tagaini.net/format.html" target="_blank" title="format information"
+            <a class="infolink" href="http://kanjivg.tagaini.net/svg-format.html" target="_blank" title="format information"
               v-if="selected_node.preview.parentNode.tagName !== 'svg' && selected_node.tree.type !== 'text'">?</a>
             <dl>
               <template v-if="selected_node.preview.id">
