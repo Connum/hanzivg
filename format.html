@@ -804,14 +804,21 @@
                 }
               });
             });
+
+            const hoverHandler = (ev, mode = true) => {
+              if ( this.preview ) return;
+              el.classList[mode ? 'add' : 'remove']('highlighted');
+              const $jstree = $('#tree').jstree();
+              const treeNode = this.getFlatJsTree(true).find(t => {
+                return t.data.svgNode == el;
+              });
+              if ( treeNode ) {
+                $jstree[mode ? 'hover_node' : 'dehover_node'](treeNode);
+              }
+            };
             
-            el.addEventListener('mouseover', (ev) => {
-              el.classList.add('highlighted');
-            });
-            
-            el.addEventListener('mouseout', (ev) => {
-              el.classList.remove('highlighted');
-            });
+            el.addEventListener('mouseover', (ev) => hoverHandler( ev, true ));
+            el.addEventListener('mouseout', (ev) => hoverHandler( ev, false ));
           });
 
           this.$nextTick(() => {
@@ -971,12 +978,13 @@
 
           this.reorderGroups();
         },
-        getFlatJsTree() {
+        getFlatJsTree(raw = false) {
           var $tree = $('#tree'),
             $jstree = $tree.jstree(true);
-          return $($jstree.get_json('#', {
+          const json = $jstree.get_json('#', {
             flat: true
-          }));
+          });
+          return raw ? json : $(json);
         },
         reorderGroups() {
           this.makeDirty();
