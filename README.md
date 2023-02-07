@@ -69,14 +69,16 @@ You should check out the repository to a (local) server where you can run the PH
 You can use *status_hsk.php* or *status.php* and click on a character that is not yet done (i.e. is not green).
 This will bring you to *compare.php* for the selected character.
 
+Alternatively, the static version of the HSK status page at https://connum.github.io/hanzivg/status_hsk.html will lead you to the *format.html* for each character, or download the template for missing files respectively.
+
 ### preparation
 
-You should now be on the *compare.php* page for a selected character.
+You should now be on the *compare.php* page for a selected character (or on *format.html* via the static HSK status page).
 
-1. For files from **KanjiVG**, click on the KanjiVG link to open the character in format.html
+1. For files from **KanjiVG**, click on the KanjiVG link to open the character in *format.html* (if not already opened via the static status page)
    * if there are no validation errors logged and all the metadata (radical, groups, ...) seems fine, you can copy the file to HanziVG as-it-is, using the lik "copy to HanziVG" below the character on compare.php
    * otherwise, fix any issues (including any that can't be auto-fixed, loading the file into format.html again afterwards) and proceed with the section "[adding metadata and finalizing](#adding-metadata-and-finalizing)" below
-2. For files from **AnimHanzi**, click on the AnimHanzi link to open the character in format.html
+2. For files from **AnimHanzi**, click on the AnimHanzi link to open the character in *format.html* (if not already opened via the static status page)
    * fix any issues (including any that can't be auto-fixed, loading the file into format.html again afterwards) and proceed with the section "[adding metadata and finalizing](#adding-metadata-and-finalizing)" below
 3. For files that need to be **created from-scratch**, click the link "save template" to download an SVG template and open it in your favoured SVG editor. Proceed with the section "[editing the template](#editing-the-template)" below.
    

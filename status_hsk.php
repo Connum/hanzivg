@@ -201,21 +201,63 @@ print '<p>overall progess (all): ' . $count->hanzivg . ' / ' . $totalchars . '('
 print $body;
 ?>
 <script type="text/javascript">
-	if (!/(htmlpreview\.github\.io|rawgit\.com)/.test(window.location.host)) {
-		var chars = document.getElementsByClassName('char');
-		for (var i = 0; i < chars.length; i++) {
-			var char = chars[i];
-			if(char.classList.contains('legend')) continue;
-			char.classList.add('clickable');
-			char.addEventListener('click', function(ev) {
-				var active = document.querySelector('.active');
-				if (active) {
-					active.classList.remove('active');					
-				}
-				ev.target.classList.add('active');
-				window.open('compare.php?hanzi=' + ev.target.textContent);
-			});
+	function uniord(s) {
+		let b = [];
+		for (let i = 0; i < s.length; i++) {
+			let charCode = s.codePointAt(i);
+			b.push(charCode & 0xff);
+			b.push((charCode >> 8) & 0xff);
+			b.push((charCode >> 16) & 0xff);
+			b.push((charCode >> 24) & 0xff);
 		}
+		let view = new DataView(new Uint8Array(b).buffer);
+		let result = view.getUint32(0, false).toString(16);
+		result = result.substr(6) + result.substr(4, 2) + result.substr(2, 2) + result.substr(0, 2);
+		result = result.replace(/^0+/, '');
+		return result.padStart(5, '0');
+	}
+
+	var chars = document.getElementsByClassName('char');
+	for (var i = 0; i < chars.length; i++) {
+		var char = chars[i];
+		if(char.classList.contains('legend')) continue;
+		char.classList.add('clickable');
+		char.addEventListener('click', function(ev) {
+			var active = document.querySelector('.active');
+			if (active) {
+				active.classList.remove('active');					
+			}
+			ev.target.classList.add('active');
+			let url = 'compare.php?hanzi=' + ev.target.textContent;
+			if(/\.html$/.test((new URL(window.location.href)).pathname)) {
+				const char = ev.target.textContent.trim();
+				const codepoint = uniord(char);
+				const filename = `${codepoint}.svg`;
+				let folder = 'hanzi';
+				if ( ev.target.classList.contains('animhanzi') ) {
+					folder = 'animhanzi';
+				} else if ( ev.target.classList.contains('kanji') ) {
+					folder = 'kanji';
+				} else if ( ev.target.classList.contains('ok') ) {
+					folder = 'hanzi';
+				} else if ( ev.target.classList.contains('wip') ) {
+					folder = 'hanzi_wip';
+				} else {
+					window.fetch( 'template.svg' ).then(async (result) => {
+						const tplContent = await result.text('utf-8');
+						let link = document.createElement('a');
+						link.download = filename;
+						link.href = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(tplContent.replaceAll('镇', char).replaceAll('XXXXX', codepoint))))}`;
+						document.body.appendChild(link);
+						link.click();
+						document.body.removeChild(link);
+					});
+					return;
+				}
+				url = `format.html#${folder}/${filename}`;
+			}
+			window.open(url);
+		});
 	}
 </script>
 </body>
