@@ -83,12 +83,30 @@
       stroke: none !important;
     }
 
+    #svg-holder svg .highlighted-part,
+    #svg-holder svg .highlighted-part path,
+    #svg-holder svg .active.highlighted-part path,
+    #svg-holder svg .active.highlighted-part,
+    #svg-holder svg .active *.highlighted-part {
+      stroke: #0000ff !important;
+    }
+
     #svg-holder svg .highlighted,
     #svg-holder svg .highlighted path,
     #svg-holder svg .active.highlighted path,
     #svg-holder svg .active.highlighted,
     #svg-holder svg .active *.highlighted {
       stroke: #00ff00 !important;
+    }
+
+    #svg-holder svg text.highlighted-part,
+    #svg-holder svg .active.highlighted-part text,
+    #svg-holder svg text.active.highlighted-part,
+    #svg-holder svg .highlighted-part text,
+    #svg-holder svg .active text.highlighted-part,
+    #svg-holder svg .active.highlighted-part text {
+      fill: #0000ff !important;
+      stroke: none !important;
     }
 
     #svg-holder svg text.highlighted,
@@ -746,8 +764,22 @@
             }
           }).on('hover_node.jstree', function (e, data) {
             data.node.data.svgNode.classList.add('highlighted');
+            const kvgNumber = data.node.data.svgNode.getAttribute('kvg:number');
+            if ( kvgNumber !== null ) {
+              const parts = Array.from(document.querySelectorAll(`#svg-holder g`)).filter(g => {
+                return g !== data.node.data.svgNode && g.getAttribute('kvg:number') === kvgNumber;
+              });
+              parts.forEach(part => part.classList.add('highlighted-part'));
+            }
           }).on('dehover_node.jstree', function (e, data) {
             data.node.data.svgNode.classList.remove('highlighted');
+            const kvgNumber = data.node.data.svgNode.getAttribute('kvg:number');
+            if ( kvgNumber !== null ) {
+              const parts = Array.from(document.querySelectorAll(`#svg-holder g`)).filter(g => {
+                return g !== data.node.data.svgNode && g.getAttribute('kvg:number') === kvgNumber;
+              });
+              parts.forEach(part => part.classList.remove('highlighted-part'));
+            }
           }).on('select_node.jstree', function (e, data) {
             $('#svg-holder .active').removeClass('active');
             data.node.data.svgNode.classList.add('active');
