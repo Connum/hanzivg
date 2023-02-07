@@ -80,7 +80,7 @@
 		}
 	}
 
-	function runTests(svg, ctx) {
+	function runTests(svg, ctx, cb = null) {
 		svg.errorCount = 0;
 		var charId = ctx ? ctx.charId : svg.parentNode.parentNode.dataset.charid;
 
@@ -326,6 +326,10 @@
 			},
 			'id attribute is not the first attribute'
 		);*/
+
+		if ( typeof cb === 'function' ) {
+			cb();
+		}
 	}
 
 	// when run in test.php

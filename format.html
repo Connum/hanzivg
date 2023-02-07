@@ -239,7 +239,8 @@
     <p v-else><button
         @click="!preview ? playPreview() : stopPreview()">{{ !preview ? 'Play Preview' : 'Stop Preview'}}</button>
       <label><input type="checkbox" v-model="showStartingPoints"> show starting points</label> <button
-        @click="exportSVG" :disabled="preview">Export</button></p>
+      @click="runTests" :disabled="preview || testsRunning">run tests again</button> <button
+        @click="exportSVG" :disabled="preview || testsRunning">Export</button></p>
     <main class="flex" v-show="node_data">
       <fieldset id="preview" class="flex-half">
         <legend>Preview</legend>
@@ -407,6 +408,7 @@
             '㇔', '㇐', '㇑', '㇒', '㇏', '㇀', '㇖', '㇚', '㇂', '㇙', '㇕', '㇗', '㇛', '㇜', '㇇', '㇄', '㇆', '㇟', '㇊', '㇉', '㇋', '㇌', '㇈', '㇅', '㇞', ']'
           ],
           preview: false,
+          testsRunning: false,
           previewTimeouts: [],
           showStartingPoints: true,
           eventLog: []
@@ -417,28 +419,31 @@
       methods: {
         runTests: window.HANZIVG_runTests
           ?
-          (ev) => {
+          function(ev) {
             if (ev) {
+              this.testsRunning = true;
               this.logEvent({
                 message: 'running tests...',
                 type: 'info'
               })
             }
             var svg = $('#svg-holder svg').first()[0];
-            window.HANZIVG_runTests(svg, app);
-            if (ev) {
-              if (svg.errorCount === 0) {
-                this.logEvent({
-                  message: 'Tests finished without any issues.',
-                  type: 'success'
-                })
-              } else {
-                this.logEvent({
-                  message: 'There are still ' + svg.errorCount + ' issues',
-                  type: 'error'
-                })
+            window.HANZIVG_runTests(svg, app, (() => {
+              if (ev) {
+                if (svg.errorCount === 0) {
+                  this.logEvent({
+                    message: 'Tests finished without any issues.',
+                    type: 'success'
+                  })
+                } else {
+                  this.logEvent({
+                    message: 'There are still ' + svg.errorCount + ' issues',
+                    type: 'error'
+                  })
+                }
               }
-            }
+              this.testsRunning = false;
+            }).bind(this));
           }
           :
           function () {
