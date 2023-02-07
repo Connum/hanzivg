@@ -336,6 +336,16 @@
                   <input type="text" :value="selected_node.preview.getAttribute('kvg:type')"
                     @input="updateElAttr(selected_node, 'kvg:type', $event)" /></dd>
               </template>
+              <template v-if="selected_node.tree.type == 'text'">
+                <dt>X:</dt>
+                <dd>
+                  <input type="number" step="0.1" :value="getTransformValue(selected_node.preview, 'e')"
+                    @input="updateTransform(selected_node.preview, 'e', $event)" /></dd>
+                <dt>Y:</dt>
+                <dd>
+                  <input type="number" step="0.1" :value="getTransformValue(selected_node.preview, 'f')"
+                    @input="updateTransform(selected_node.preview, 'f', $event)" /></dd>
+              </template>
             </dl>
           </div>
         </div>
@@ -490,7 +500,7 @@
               }
               return this.hasAttribute('kvg:radical');
             });
-          var radicalGroup = (radicalsByType.general && radicalsByType.general.length ? radicalsByType.general[0] : (radicalsByType.tradit && radicalsByType.tradit.length ? radicalsByType.tradit[0] : (radicalsByType._other && radicalsByType._other.length ? radicalsByType._other[0] : null)));
+          var radicalGroup = (radicalsByType.general && radicalsByType.general.length ? radicalsByType.general[0] : (radicalsByType._other && radicalsByType._other.length ? radicalsByType._other[0] : (radicalsByType.tradit && radicalsByType.tradit.length ? radicalsByType.tradit[0] : null)));
           if (radicalGroup) {
             var radical = radicalGroup.getAttribute('kvg:element'),
               radicalOriginal = radicalGroup.getAttribute('kvg:original'),
@@ -861,6 +871,14 @@
           if (attr === 'kvg:element' || attr === 'kvg:type') {
             $('#tree').jstree('rename_node', el.tree, el.preview.id + this.getLabelSuffix(el.preview));
           }
+        },
+        getTransformValue( el, index ) {
+          return el.transform.baseVal[0].matrix?.[index] || '';
+        },
+        updateTransform( el, index, event) {
+          const matrix = el.transform.baseVal.consolidate().matrix;
+          matrix[index] = parseFloat(event.target.value);
+          el.setAttribute('transform', new WebKitCSSMatrix([matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f]).toString());
         },
         svgEl(tag) {
           return document.createElementNS('http://www.w3.org/2000/svg', tag);
