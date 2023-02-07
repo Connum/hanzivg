@@ -782,6 +782,33 @@
             $jstree.select_node($treenodes[0].children[0]);
           }
 
+          document.querySelectorAll('#svg-holder [id*="StrokePaths_"] path, #svg-holder [id*="StrokeNumbers_"] text').forEach(el => {
+            const $jstree = $('#tree').jstree();
+            const flatTree = this.getFlatJsTree();
+            const that = this;
+            el.addEventListener('click', (ev) => {
+              const node = ev.target;
+              flatTree.each(function () {
+                if (this.data.svgNode === node) {
+                  $jstree.open_node(this);
+                  that.$nextTick(() => {
+                    $jstree.select_node(this);
+                  })
+                } else {
+                  $jstree.deselect_node(this);
+                }
+              });
+            });
+            
+            el.addEventListener('mouseover', (ev) => {
+              el.classList.add('highlighted');
+            });
+            
+            el.addEventListener('mouseout', (ev) => {
+              el.classList.remove('highlighted');
+            });
+          });
+
           this.$nextTick(() => {
             this.runTests();
             var testErrors = $svg[0].errorCount && $svg[0].errorCount > 0;
