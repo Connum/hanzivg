@@ -64,18 +64,41 @@ See status.php to get startet and klick on any of the listed characters. Or see 
 -
 
 ## How to create a new character
-1. Open the *template.svg* in your favoured SVG editor
-2. Change the orange character of the background layer to the character you want to create. This layer uses the font [CNstrokeorder](http://rtega.be/chmn/index.php?subpage=68). Please try to use this font, and if it doesn't contain the character, use a similiar handwritten-looking font instead, trying to match the same character size. This layer is only used as a template for drawing upon and can be deleted before saving.
-3. Use the bezier tool to draw the lines. Use the correct stroke direction (important!) and order (will save time later because you don't have to rearrange them). You CAN use a stroke width of 3px and round joins and caps in order to see what the final result will look like, but you don't have to. The styles will be corrected later anyway.
-4. Copy and paste the number that is placed as a reference on the top outside of the viewbox. Again, if you do this in the correct order of the numbers, you won't have to spend much time to correct the order later.
-5. Delete the reference number and stroke as well es the orange template character.
-6. Save the file with the correct file name (unicode of the char as 5 digit hex number, padded with 0 if necessary), e.g. *09547.svg*. If you only want to contribute the stroke order for this char without the grouping/radical information, that's totally fine! Just save it in the */hanzi_wip* folder with .raw.svg as the extension, e.g. *09547.raw.svg* and add it to the list inside the *README.md* in that folder. Create a pull request! Otherwise, proceed:
 
-7. Open *format.html* in your browser (modern browsers like Chrome and Firefox are required). Drag and drop your file into the browser window.
-8. You will see a tree structure of the strokes and numbers and you can add new groups and meta information. Try to make the information as complete as possible. You can also change the order of numbers and strokes via drag&drop. Make sure that the order of strokes and numbers is correct. You can hover over the strokes/numbers in the tree structure to have them highlighted as a visual aid.
-9. Then you can hit the **Export** button and save the new file to the */hanzi* folder. Delete the raw file from the */hanzi_wip* if you created it or got it from there.
-10. run test.php to see if there's anything wrong with your created char, and if there is, please try to fix it.
-11. Create a pull request!
+You should check out the repository to a (local) server where you can run the PHP scripts.
+You can use *status_hsk.php* or *status.php* and click on a character that is not yet done (i.e. is not green).
+This will bring you to *compare.php* for the selected character.
+
+### preparation
+
+You should now be on the *compare.php* page for a selected character.
+
+1. For files from **KanjiVG**, click on the KanjiVG link to open the character in format.html
+   * if there are no validation errors logged and all the metadata (radical, groups, ...) seems fine, you can copy the file to HanziVG as-it-is, using the lik "copy to HanziVG" below the character on compare.php
+   * otherwise, fix any issues (including any that can't be auto-fixed, loading the file into format.html again afterwards) and proceed with the section "[adding metadata and finalizing](#adding-metadata-and-finalizing)" below
+2. For files from **AnimHanzi**, click on the AnimHanzi link to open the character in format.html
+   * fix any issues (including any that can't be auto-fixed, loading the file into format.html again afterwards) and proceed with the section "[adding metadata and finalizing](#adding-metadata-and-finalizing)" below
+3. For files that need to be **created from-scratch**, click the link "save template" to download an SVG template and open it in your favoured SVG editor. Proceed with the section "[editing the template](#editing-the-template)" below.
+   
+### editing the template
+**(only when creating from-scratch or needing to fix/change strokes in an SVG)**
+
+1. The orange background layer uses the font [CNstrokeorder](http://rtega.be/chmn/index.php?subpage=68). Please try to use this font, and if it doesn't contain the character, use a similar handwritten-looking font instead, trying to match the same character size. This layer is only used as a template for drawing upon and can be deleted before saving.
+2. Use the bezier tool to draw the lines. Use the correct stroke direction (important!) and order (will save time later because you don't have to rearrange them). You CAN use a stroke width of 3px and round joins and caps in order to see what the final result will look like, but you don't have to. The styles will be corrected later anyway.
+3. Copy and paste the number that is placed as a reference on the top outside of the viewbox. Again, if you do this in the correct order of the numbers, you won't have to spend much time to correct the order later.
+4. Delete the reference number and stroke as well es the orange template character.
+5. Make sure that all strokes are in the stroke group and all numbers are in the number group!
+6. Save the file with the correct file name (unicode of the char as 5 digit hex number, padded with 0 if necessary), e.g. *09547.svg*. If you only want to contribute the stroke order for this char without the grouping/radical information, that's totally fine! Just save it in the */hanzi_wip* folder with .raw.svg as the extension, e.g. *09547.raw.svg* and add it to the list inside the *README.md* in that folder. Create a pull request! Otherwise, proceed with the section "[adding metadata and finalizing](#adding-metadata-and-finalizing)" below
+
+## adding metadata and finalizing
+
+1. Open *format.html* in your browser and drag&drop your file into the browser window if you haven't already opened a character by clicking on it on a status page
+2. You will see a tree structure of the strokes and numbers and you can add new groups and meta information. Try to make the information as complete as possible. You can also change the order of numbers and strokes via drag&drop. Make sure that the order of strokes and numbers is correct. You can hover over the strokes/numbers in the tree structure to have them highlighted as a visual aid in the preview, and vice versa.
+3. compare.php offers several links on top that open resources directly for the displayed character, to cross-check stroke order (sometimes one source differs from the others) and radicals. MDBG is especially helpful for the character deconstruction
+4. The formatter will try to find and fix any issues with the file by itself. Not all issues can by fixed automatically, though. Please make sure to run the tests again before finally exporting the file.
+5. Then you can hit the **Export** button and save the new file to the */hanzi* folder. Delete the raw file from the */hanzi_wip* if you created it or got it from there, also removing it from the README in that folder if applicable.
+6. run test.php to make sure again that there's not anything wrong with your created char or any others, and if there is, please try to fix it. This will also delete any residue files left from copying over from the KanjiVG or AnimHanzi folders.
+7. Create a pull request!
 
 ## A word on radical positions
 
