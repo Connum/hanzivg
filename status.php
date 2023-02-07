@@ -14,6 +14,9 @@
 			color: orange;
 		}
 		.kanji {
+			color: #999;
+		}
+		.missing {
 			color: red;
 		}
 	</style>
@@ -86,7 +89,7 @@ foreach ($codeBlocks as $block) {
 			$class = 'kanji';
 		} else {
 			continue;
-			$class = '';
+			$class = 'missing';
 		}
 
 		print '<span class="' . $class . '">' . mb_convert_encoding('&#' . $i . ';', 'UTF-8', 'HTML-ENTITIES') . ' (' . $d . ')' . '</span> | ';
