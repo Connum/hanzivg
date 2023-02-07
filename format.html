@@ -238,9 +238,15 @@
     <p v-if="!node_data">Drag &amp; drop SVG in this window</p>
     <p v-else><button
         @click="!preview ? playPreview() : stopPreview()">{{ !preview ? 'Play Preview' : 'Stop Preview'}}</button>
-      <label><input type="checkbox" v-model="showStartingPoints"> show starting points</label> <button
-      @click="runTests" :disabled="preview || testsRunning">run tests again</button> <button
-        @click="exportSVG" :disabled="preview || testsRunning">Export</button></p>
+      | <label><input type="checkbox" v-model="showStartingPoints"> show starting points</label>
+      | <button
+      @click="runTests" :disabled="preview || testsRunning">run tests again</button>
+      | <button
+        @click="exportSVG" :disabled="preview || testsRunning">Export</button>
+      
+      | <a href="test.php" target="_blank">test.php</a>
+      | <a href="status_hsk.php" target="_blank">status_hsk.php</a>
+    </p>
     <main class="flex" v-show="node_data">
       <fieldset id="preview" class="flex-half">
         <legend>Preview</legend>
