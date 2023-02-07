@@ -122,7 +122,7 @@ $result = json_decode(curl_exec($ch));
 
 //close connection
 curl_close($ch);
-if ($result && count($result->signCh)) {
+if ($result && ! empty( $result->signCh ) && count($result->signCh)) {
 	$wcId = $result->signCh[0]->pinyinsort . '/' . $result->signCh[0]->id;
 }
 
